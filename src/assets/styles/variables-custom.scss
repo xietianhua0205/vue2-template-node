@@ -1,0 +1,115 @@
+@import "themes/default/variables-custom";
+//@import "themes/dark/variables-custom";
+
+//$page-head-background: $--color-primary; // 布局为top模式时开启
+//$page-head-background-light: rgba(255, 255, 255, .1); // 布局为top模式时开启
+//$page-head-color-icon: invert($--color-primary); // 布局为top模式时开启
+
+@mixin scroll($bg: $scroll-bg, $thumb: $scroll-thumb, $btn: $scroll-btn, $size: 8px) {
+  scrollbar-3dlight-color: $bg;
+  scrollbar-highlight-color: $bg;
+  scrollbar-face-color: $thumb;
+  scrollbar-arrow-color: $btn;
+  scrollbar-shadow-color: $thumb;
+  scrollbar-dark-shadow-color: $thumb;
+  scrollbar-base-color: $bg;
+  scrollbar-track-color: $bg;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-button {
+    background-color: $btn;
+    display: none;
+  }
+  &::-webkit-scrollbar-track {
+    background: $bg;
+    border-radius: $size / 2;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background: $bg;
+    border-radius: $size / 2;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: $size / 2;
+  }
+  &::-webkit-scrollbar-corner {
+    background: $bg;
+  }
+  &::-webkit-resizer {
+    background: $bg;
+  }
+}
+
+@mixin placeholder($color: #ccc) {
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin line-hidden {
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block
+}
+
+/* 仅适用-webkit- 内核浏览器  */
+@mixin wrap($row) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $row;
+  -webkit-box-orient: vertical;
+}
+
+/* mixin for multiline */
+@mixin multiline-ellipsis($lineCount: 2, $lineHeight: 1.2em, $bgColor: white) {
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+@mixin multiline-hidden($count: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $count;
+}
+
+@mixin text-gradient {
+  background-image: -webkit-linear-gradient(bottom, $--color-primary, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

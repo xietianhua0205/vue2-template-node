@@ -1,0 +1,20 @@
+$--color-primary: #00b38a !default;
+
+$--color-text-primary: #434343 !default;
+$--color-text-regular: #595959 !default;
+$--color-text-secondary: #8c8c8c !default;
+$--color-text-placeholder: #bfbfbf !default;
+
+$--border-color-base: #f0f0f0 !default;
+$--border-color-light: $--border-color-base !default;
+$--border-color-lighter: $--border-color-light !default;
+$--border-color-extra-light: $--border-color-lighter !default;
+
+$--icon-color: #d9d9d9 !default;
+$--color-white: #fff !default;
+$--color-black: #000 !default;
+$--background-color-base: #f5f5f5 !default;
+
+$--datepicker-inner-border-color: $--border-color-base;
+
+@import "~element-ui/packages/theme-chalk/src/common/var";

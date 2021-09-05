@@ -1,0 +1,19 @@
+@import "variables-custom";
+@import "../default/common";
+
+.el-date-editor .el-range-input {
+  background-color: $--color-white;
+  color: $--input-font-color;
+
+  &::placeholder {
+    color: $--input-placeholder-color;
+  }
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: $--background-color-base;
+}
+
+.page-container .page-main .page-main-left {
+  z-index: 0 !important;
+}

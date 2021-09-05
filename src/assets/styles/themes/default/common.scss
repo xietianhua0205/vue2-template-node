@@ -1,0 +1,88 @@
+@import "variables-custom";
+
+.flex-1 {
+  flex: 1;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 8px auto 0;
+
+  i {
+    font-size: 64px;
+    color: $--border-color-base;
+    margin-bottom: 8px;
+  }
+
+  a {
+    cursor: pointer;
+    color: $--color-primary;
+  }
+
+  span {
+    color: $--color-primary;
+  }
+
+  .tip {
+    color: $--color-info;
+  }
+}
+
+.textarea {
+  resize: none;
+  outline: none;
+}
+
+.highlight {
+  color: $--color-danger;
+}
+
+.highlight-primary {
+  color: $--color-primary;
+}
+
+.el-dialog__wrapper {
+  .el-dialog {
+    .el-dialog__body {
+      padding: $gap $gap-mini * 5 $gap-large;
+    }
+
+    .el-dialog__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .dialog-footer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &.dialog-mini .el-dialog {
+    width: 480px;
+  }
+
+  &.dialog-small .el-dialog {
+    width: 640px;
+  }
+
+  &.dialog-middle .el-dialog {
+    width: 720px;
+  }
+
+  &.dialog-large .el-dialog {
+    width: 960px;
+  }
+}
+
+.el-table {
+  .cell .el-link:not(:first-child) {
+    margin-left: $gap;
+  }
+}

@@ -1,0 +1,21 @@
+@import "variables-custom";
+@import "themes/default/common";
+//@import "themes/dark/common";
+
+.el-table--scrollable-y .el-table__body-wrapper {
+  @include scroll($size: 17px)
+}
+
+.body-main-center > .el-table.el-table--fit {
+  //border: 0;
+  //&:before {
+  //  display: none;
+  //}
+
+  margin: $gap;
+  width: calc(100% - #{$gap} * 2);
+
+  & > .el-table__fixed-right:before {
+    display: none;
+  }
+}
