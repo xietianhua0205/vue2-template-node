@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :visible.sync="isVisible"
+    :visible.sync="visible"
     @close="closeDialog"
     class='dialog-mini'
     title="修改密码">
@@ -10,8 +10,8 @@
       ref="editForm"
       v-if="form"
       @submit.native="$event.preventDefault()">
-      <el-form-item label="用户名" prop="userName">
-        <span>{{ form.userName }}</span>
+      <el-form-item label="用户名" prop="username">
+        <span>{{ form.username }}</span>
       </el-form-item>
       <el-form-item label="原密码" prop="oldPassword">
         <el-input
@@ -27,7 +27,7 @@
           type="password"
           v-model="form.newPassword"></el-input>
       </el-form-item>
-      <el-form-item class="item_pwdCheck" label="确认密码" prop="confirmPassword">
+      <el-form-item label="确认密码" prop="confirmPassword">
         <el-input
           placeholder="确认密码"
           type="password"
@@ -36,23 +36,18 @@
     </el-form>
     <div slot="footer">
       <el-button @click.native="closeDialog">取消</el-button>
-      <el-button @click.native="submit('editForm')" type="primary">确定</el-button>
+      <el-button @click.native="submit" type="primary">确定</el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
-
-import md5 from 'md5'
 import DialogMixin from '@/mixins/dialog'
 
 export default {
   name: 'PasswordReset',
   mixins: [DialogMixin],
   props: {
-    editData: {
-      type: Object
-    }
   },
   data () {
     return {
@@ -142,8 +137,8 @@ export default {
   methods: {
     initFormData (v) {
       this.form = {
-        userId: v?.userId,
-        userName: v?.userName,
+        id: v?.id,
+        username: v?.username,
         oldPassword: '',
         newPassword: '',
         confirmPassword: ''
@@ -151,11 +146,10 @@ export default {
     },
     doSubmit () {
       const data = {
-        oldPassword: md5(this.form.oldPassword),
-        newPassword: md5(this.form.newPassword),
-        userId: this.form.userId
+        originPassword: this.form.oldPassword,
+        password: this.form.newPassword
       }
-      this.$axios.post('/sso/user/password/check', data).then(() => {
+      this.$axios.put('/api/kguser/users/pwd', data).then(() => {
         this.handleSubmitSuccess()
       }, (error) => {
         this.$message.error(error.message)

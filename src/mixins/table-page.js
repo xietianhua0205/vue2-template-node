@@ -4,14 +4,6 @@ export default {
   mixins: [QueryPageMixin],
   data () {
     return {
-      data: [],
-      deleteDialogVisible: false,
-      editData: null,
-      loading: false,
-      page: {
-        total: 0
-      },
-      selection: [],
       query: {
         default: {
           pageNo: {
@@ -26,6 +18,13 @@ export default {
           },
           kw: ''
         }
+      },
+      tableData: {
+        selection: [],
+        data: [],
+        editData: null,
+        loading: false,
+        total: 0
       }
     }
   },
@@ -38,6 +37,7 @@ export default {
       this.updatePageURL()
     },
     getTableData () {
+      // TODO
     },
     goPage (page) {
       this.handlePageChange(page)
@@ -59,7 +59,7 @@ export default {
     },
     handleDelete (row) {
       this.editData = row
-      this.deleteDialogVisible = true
+      // TODO
     },
     search () {
       this.handlePageChange(1)

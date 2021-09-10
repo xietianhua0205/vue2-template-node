@@ -1,60 +1,56 @@
 export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    editData: {
-      type: Object
-    }
-  },
+  props: {},
   data () {
     return {
-      isVisible: false,
+      editData: null,
       form: null,
-      rules: {}
-    }
-  },
-  watch: {
-    visible: {
-      immediate: true,
-      handler (v) {
-        this.isVisible = v
-        if (v) {
-          this.initFormData(this.editData)
-        }
-      }
+      rules: {},
+      visible: false
     }
   },
   methods: {
-    initFormData (v) {
-      console.log(v)
-    },
-    closeDialog () {
-      this.cleanReset()
-      this.$emit('close')
-    },
-    handleSubmitSuccess () {
-      this.cleanReset()
-      this.$emit('success')
-    },
     cleanReset () {
       setTimeout(() => {
         this.initFormData()
-        // this.$refs.editForm?.resetFields()
+        if (this.$refs.editForm) {
+          this.$refs.editForm.resetFields()
+        }
       }, 300)
     },
-    submit (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.doSubmit()
-        } else {
-          return false
-        }
-      })
+    closeDialog () {
+      this.visible = false
+      this.cleanReset()
+      this.$emit('close')
     },
     doSubmit () {
-
+    },
+    handleSubmitSuccess () {
+      this.visible = false
+      this.cleanReset()
+      this.$emit('success')
+    },
+    initFormData (v) {
+      console.log(v)
+    },
+    open (v) {
+      this.editData = v
+      this.visible = true
+      if (this.editData) {
+        this.initFormData(this.editData)
+      }
+    },
+    submit () {
+      if (this.$refs.editForm) {
+        this.$refs.editForm.validate((valid) => {
+          if (valid) {
+            this.doSubmit()
+          } else {
+            return false
+          }
+        })
+      } else {
+        this.doSubmit()
+      }
     }
   }
 }

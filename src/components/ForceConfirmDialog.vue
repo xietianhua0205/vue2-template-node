@@ -23,10 +23,6 @@
 export default {
   name: 'ForceConfirmDialog',
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
     title: {
       type: String,
       required: true
@@ -34,19 +30,20 @@ export default {
   },
   data () {
     return {
-      confirmTitle: ''
+      confirmTitle: '',
+      visible: true
     }
   },
   methods: {
     closeDialog () {
+      this.visible = false
       this.confirmTitle = ''
       this.$emit('close')
-      this.$emit('update:visible', false)
     },
     handleDelete () {
+      this.visible = false
       this.confirmTitle = ''
       this.$emit('success')
-      this.$emit('update:visible', false)
     }
   }
 }

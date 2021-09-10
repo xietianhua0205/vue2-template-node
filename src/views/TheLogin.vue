@@ -25,11 +25,11 @@
                 type="password"
                 v-model="loginForm.password"
                 placeholder="请输入密码"
-                @keyup.enter.native="loginSubmit('loginForm')"
+                @keyup.enter.native="loginSubmit"
               ></el-input>
             </el-form-item>
           </el-form>
-          <el-button type="primary" class="login-btn" @click="loginSubmit('loginForm')">登录</el-button>
+          <el-button type="primary" class="login-btn" @click="loginSubmit">登录</el-button>
         </div>
       </div>
     </div>
@@ -87,12 +87,10 @@ export default {
         })
       }
     },
-    loginSubmit (formName) {
-      this.$refs[formName].validate((valid) => {
+    loginSubmit () {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.login()
-        } else {
-          return false
         }
       })
     }

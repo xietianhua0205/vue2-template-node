@@ -30,21 +30,17 @@
         </div>
         <el-dropdown-menu class="head-wrap-menu" :class="'the-layout-' + $config.layout" slot="dropdown">
           <el-dropdown-item command="pwd">
-            <!--                    <i class="iconfont icontuichudenglu"></i>-->
             <span>修改密码</span>
           </el-dropdown-item>
           <el-dropdown-item command="logout">
-            <!--                    <i class="iconfont icontuichudenglu"></i>-->
             <span>退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <password-reset
-        :visible="resetPwdDialog"
-        @close="closeResetPwdDialog"
         @success="resetPwdSuccess"
         v-if="user"
-        :edit-data="user">
+        ref="pwd">
       </password-reset>
     </template>
     <!--    <template slot="main">-->
@@ -94,7 +90,7 @@ import { reactiveMenuMixin } from '@plantdata/reactive-menu-item/src/mixins/reac
 import ReactiveMenuItem from '@plantdata/reactive-menu-item'
 import PasswordReset from '@/components/PasswordReset'
 import ThePage from '@/components/ThePage'
-import { setUser } from '@/utils/user'
+import { clearUser, setUser } from '@/utils/user'
 import menuDataAll from '@/menu'
 
 export default {
@@ -134,14 +130,11 @@ export default {
   },
   watch: {},
   methods: {
-    closeResetPwdDialog () {
-      this.resetPwdDialog = false
-    },
     goMoreMenu (v) {
       if (v === 'logout') {
         this.logout()
       } else if (v === 'pwd') {
-        this.resetPwdDialog = true
+        this.$refs.pwd.open(this.user)
       }
     },
     init () {
@@ -173,11 +166,8 @@ export default {
     logout () {
       this.goLogin()
     },
-    openResetPwdDialog () {
-      this.resetPwdDialog = true
-    },
     resetPwdSuccess () {
-      this.resetPwdDialog = false
+      clearUser()
       this.$message({
         message: '修改成功，请重新登录',
         type: 'success',
