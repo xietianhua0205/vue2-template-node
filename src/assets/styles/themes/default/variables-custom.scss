@@ -1,25 +1,25 @@
 @import "variables-defined";
 
-$divider: 1px solid $--border-color-base !default;
+$divider: 1px solid $--border-color-base !default; // 默认的边框
 
-$default-card-background: #fff !default;
-$default-card-box-shadow: 0 1px 2px $--border-color-base !default;
+$default-card-background: #fff !default; // 默认的卡片背景
+$default-card-box-shadow: 0 1px 2px $--border-color-base !default; // 默认的卡片阴影
 
-$gap: 16px !default;
+$gap: 16px !default; // 默认的间距
 $gap-xl: $gap * 2 !default;
 $gap-large: $gap * 1.5 !default;
 $gap-middle: $gap !default;
 $gap-small: $gap / 2 !default;
 $gap-mini: $gap / 4 !default;
 
-$scroll-bg: #f6f6f6 !default;
-$scroll-thumb: #999 !default;
-$scroll-btn: #999 !default;
+$scroll-bg: #f6f6f6 !default; // 滚动条背景色
+$scroll-thumb: #999 !default; // 滚动条滑块色
+$scroll-btn: #999 !default; // 滚动条按钮色
 
-$page-min-width: 1400px !default;
-$page-background: #f4f4f4 !default;
+$page-min-width: 1400px !default; // 最小页面宽度
+$page-background: #f4f4f4 !default; // 页面背景色
 
-$page-head-height: 48px !default;
+$page-head-height: 48px !default; // 页面顶部导航高度
 $page-head-background: #141414 !default;
 $page-head-background-light: mix($--color-white, $page-head-background, 20%) !default;
 $page-head-box-shadow: 0 1px 2px $--border-color-base !default;
@@ -27,13 +27,13 @@ $page-head-color-icon: $--color-primary !default;
 $page-head-color-primary: #fff !default;
 $page-head-color-regular: #d9d9d9 !default;
 
-$page-head-secondary-height: 40px !default;
+$page-head-secondary-height: 40px !default; // 页面顶部次级导航高度
 $page-head-secondary-background: #fff !default;
 $page-head-secondary-box-shadow: 0 1px 2px $--border-color-base !default;
 $page-head-secondary-color-primary: $--color-primary !default;
 $page-head-secondary-color-regular: $--color-text-regular !default;
 
-$page-left-width: 178px !default;
+$page-left-width: 178px !default; // 页面左侧导航宽度
 $page-left-background: #141414 !default;
 $page-left-background-light: mix($--color-white, $page-left-background, 20%) !default;
 $page-left-box-shadow: 1px 0 2px $--border-color-base !default;
@@ -41,14 +41,7 @@ $page-left-menu-height: 50px !default;
 $page-left-color-primary: $page-head-color-primary !default;
 $page-left-color-regular: $page-head-color-regular !default;
 
-$body-margin: 0 !default;
-$body-header-height: 48px !default;
+$body-margin: 0 !default; // 页面内容间距
+$body-header-height: 48px !default; // 页面内容面包屑条高度
 $body-main-margin: 16px !default;
 $body-main-gap: 16px !default;
-
-//$font-mini: $--font-size-extra-small !default; // TODO
-//$font-small: $--font-size-small !default; // TODO
-//$font-middle: $--font-size-base !default; // TODO
-//$font-large: $--font-size-medium !default; // TODO
-//$font-xl: $--font-size-large !default; // TODO
-//$font-size: $--font-size-base !default; // TODO

@@ -108,8 +108,8 @@
   -webkit-line-clamp: $count;
 }
 
-@mixin text-gradient {
-  background-image: -webkit-linear-gradient(bottom, $--color-primary, #fff);
+@mixin text-gradient($start: $--color-primary, $end: #fff, $direction: bottom) {
+  background-image: -webkit-linear-gradient($direction, $start, $end);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
