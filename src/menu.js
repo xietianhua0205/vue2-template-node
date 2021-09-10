@@ -25,7 +25,7 @@ export default [
           isDefault: true,
           icon: 'ic-system',
           route: {
-            name: 'demo',
+            name: 'demo1',
             params: [],
             query: []
           },
@@ -60,7 +60,7 @@ export default [
           isDefault: true,
           icon: 'ic-system',
           route: {
-            name: 'demo',
+            name: 'demo2',
             params: [],
             query: []
           },
