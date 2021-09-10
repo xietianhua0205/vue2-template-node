@@ -8,5 +8,8 @@ module.exports = {
   },
   '^/group1': {
     target: baseURL
+  },
+  '^/api': {
+    target: baseURL
   }
 }
