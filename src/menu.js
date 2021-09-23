@@ -317,5 +317,23 @@ export default [
       },
       boundary: true
     }
+  },
+  {
+    id: 3,
+    pid: 0,
+    name: 'Git',
+    enable: true,
+    checked: true,
+    type: 'menu',
+    order: 3,
+    config: {
+      isDefault: false,
+      icon: 'ic-git',
+      target: '_blank',
+      route: {
+        href: 'http://192.168.4.1/product/front/vue2-template'
+      },
+      boundary: true
+    }
   }
 ]
