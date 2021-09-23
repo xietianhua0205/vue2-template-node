@@ -113,8 +113,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.name === 'login') {
     clearUser()
-    next() // 本项目登录页面
-    // window.location.replace('/sso/login') // 产品登录页面
+    if (window.APP_CONFIG.isDev) {
+      next() // 本项目登录页面
+    } else {
+      window.location.replace('/sso/login') // 产品登录页面
+    }
   } else {
     if (isNavAllow({ id: to.name })) {
       next()

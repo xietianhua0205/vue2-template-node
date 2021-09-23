@@ -38,7 +38,7 @@ export default {
       // 'http://127.0.0.1/mapbox/style/satellite/style.json'
       // 'http://127.0.0.1/mapbox/style/dark/style.json'
       const query = this.$route.query || {}
-      const style = query.style || location.origin + '/mapbox/style/dark/style.json'
+      const style = query.style || 'http://192.169.4.71/mapbox/style/dark/style.json'
       this.mapLocal = new PdMapboxLocal({
         container: this.$refs.mapboxLocal, // container ID
         style, // style URL

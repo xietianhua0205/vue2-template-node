@@ -83,6 +83,7 @@ export default {
     enter (user) {
       // setUser(user)
       window.APP_CONFIG.token = 'bearer ' + user.access_token
+      localStorage.setItem('dtt', window.APP_CONFIG.token)
       if (this.$route.query.redirect) {
         this.$router.replace({
           path: this.$route.query.redirect
