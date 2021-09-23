@@ -64,7 +64,7 @@
 import PageContent from '@/components/PageContent'
 
 export default {
-  name: 'PageContentDemo',
+  name: 'TheSlotDemo',
   components: {
     PageContent
   },

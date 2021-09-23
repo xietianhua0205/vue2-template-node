@@ -23,18 +23,19 @@
 export default {
   name: 'ForceConfirmDialog',
   props: {
-    title: {
-      type: String,
-      required: true
-    }
   },
   data () {
     return {
       confirmTitle: '',
-      visible: true
+      title: '',
+      visible: false
     }
   },
   methods: {
+    open (title) {
+      this.title = title
+      this.visible = true
+    },
     closeDialog () {
       this.visible = false
       this.confirmTitle = ''

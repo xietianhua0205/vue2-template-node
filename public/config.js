@@ -580,6 +580,8 @@
     pageSlot: layoutMap[layout].pageSlot,
     element: layoutMap[layout].element,
     monaco: themeMap[theme].monaco,
-    echartsTheme: themeMap[theme].echartsTheme
+    echartsTheme: themeMap[theme].echartsTheme,
+    kgName: 's60zc4ni_graph_default',
+    APK: 'c6046efc0f4741ad84aed43d3f8c964f'
   }
 })()

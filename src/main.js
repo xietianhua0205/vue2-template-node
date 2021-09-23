@@ -3,9 +3,18 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
-import * as monaco from 'monaco-editor'
 import { createAxios } from './axios'
 import { addDirectives } from './directives'
+// monaco
+import * as monaco from 'monaco-editor'
+// quill
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+// ol
+import 'ol/ol.css'
+// mapbox
+import 'mapbox-gl/dist/mapbox-gl.css'
+
 import './assets/styles/element-variables.scss'
 import './assets/styles/common.scss'
 import './assets/icon/iconfont.css'

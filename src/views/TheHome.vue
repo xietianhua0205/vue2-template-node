@@ -49,6 +49,7 @@
     <template :slot="$config.slot.navSecondary" v-if="$config.slot.navSecondary">
       <el-menu
         :collapse="false"
+        v-if="menuDataFilter.length"
         :mode="$config.slot.navSecondary ==='header-secondary' ? 'horizontal' : 'vertical'"
         :class="{'nav-border': $config.navProps.border,
          'the-top-secondary-nav': $config.slot.navSecondary ==='header-secondary',

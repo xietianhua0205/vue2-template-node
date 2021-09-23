@@ -12,7 +12,7 @@ export default {
             map: 'p'
           },
           pageSize: {
-            value: 10,
+            value: 15,
             type: 'number',
             map: 's'
           },
@@ -31,7 +31,7 @@ export default {
   methods: {
     deleteResultHandler () {
       this.$message.success('删除成功')
-      if (this.data.length === 1 && this.page.pageNo > 1) {
+      if (this.tableData.data.length === 1 && this.query.pageNo > 1) {
         this.query.pageNo--
       }
       this.updatePageURL()
@@ -55,10 +55,10 @@ export default {
       this.updatePageURL()
     },
     handleSelectionChange (v) {
-      this.selection = v.map(v => v.id)
+      this.tableData.selection = v.map(v => v.id)
     },
     handleDelete (row) {
-      this.editData = row
+      this.tableData.editData = row
       // TODO
     },
     search () {

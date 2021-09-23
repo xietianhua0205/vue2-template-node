@@ -145,6 +145,7 @@ export default {
 
     .page-main-right {
       flex: 1;
+      width: 500px;
     }
   }
 
