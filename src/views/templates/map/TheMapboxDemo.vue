@@ -38,13 +38,14 @@ export default {
       mapboxgl.accessToken = 'pk.eyJ1IjoiamlhbmdydW4wMDIiLCJhIjoiY2tocHQza3h6MDB0MjJxbXR6c2QzZDVrZSJ9.PkNM-hkYusSgOmsU0HPVOw'
       const query = this.$route.query || {}
       const style = query.style || 'mapbox://styles/mapbox/streets-v11'
+      mapboxgl.config.SESSION_PATH = '/map-sessions/v1' // 由于跟离线版本冲突，必须加上此代码，不同时存在在线地图和离线地图时可以忽略这两行代码
+      mapboxgl.config.API_URL = 'https://api.mapbox.com' // 由于跟离线版本冲突，必须加上此代码，不同时存在在线地图和离线地图时可以忽略这两行代码
       this.map = new mapboxgl.Map({
         container: this.$refs.mapbox,
         style,
         center: [121, 31],
         zoom: 7
       })
-      console.log(this.map)
     }
   }
 }

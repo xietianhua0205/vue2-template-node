@@ -7,7 +7,7 @@
       <el-link href="https://www.mapbox.com/" target="_blank">官网</el-link>
     </template>
     <template slot="main-right">
-      <div class="mapbox" ref="mapbox"></div>
+      <div class="mapbox" ref="mapboxLocal"></div>
     </template>
   </page-content>
 </template>
@@ -40,7 +40,7 @@ export default {
       const query = this.$route.query || {}
       const style = query.style || 'http://127.0.0.1/mapbox/style/dark/style.json'
       this.mapLocal = new PdMapboxLocal({
-        container: this.$refs.mapbox, // container ID
+        container: this.$refs.mapboxLocal, // container ID
         style, // style URL
         center: [121, 31], // starting position [lng, lat]
         zoom: 7
