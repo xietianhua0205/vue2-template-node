@@ -14,5 +14,11 @@ module.exports = {
   },
   '^/api': {
     target: baseURL
+  },
+  '^/oauth/token': {
+    target: baseURL
+  },
+  '^/mapbox': {
+    target: 'http://192.169.4.71'
   }
 }

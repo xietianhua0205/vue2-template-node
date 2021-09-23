@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="main">
       <div class="gray-box">
-        <div><img src="../assets/logo.png" alt="" class="logo"></div>
+        <div><img src="../assets/logo.svg" alt="" class="logo"></div>
         <p>私有化登录</p>
       </div>
       <div class="white-box">
@@ -16,6 +16,7 @@
             ref="loginForm"
             class="login-form"
             key="loginForm"
+            size="middle"
             @submit.native="$event.preventDefault()">
             <el-form-item prop="username" label="用户名">
               <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
@@ -37,7 +38,9 @@
 </template>
 
 <script>
-import { setUser } from '@/utils/user'
+import qs from 'qs'
+// import { setUser } from '@/utils/user'
+import '@/utils/login'
 
 export default {
   name: 'TheLogin',
@@ -65,10 +68,12 @@ export default {
   },
   methods: {
     login () {
+      const { form, headers } = window.APD_TK
+      form.password = this.loginForm.password
+      form.username = this.loginForm.username
       this.inLoginLoading = true
-      return this.$axios.post('/', {
-        password: this.loginForm.password,
-        username: this.loginForm.username
+      return this.$axios.post('/oauth/token', qs.stringify(form), {
+        headers
       }).then((user) => {
         this.enter(user)
       }).finally(() => {
@@ -76,7 +81,8 @@ export default {
       })
     },
     enter (user) {
-      setUser(user)
+      // setUser(user)
+      window.APP_CONFIG.token = 'bearer ' + user.access_token
       if (this.$route.query.redirect) {
         this.$router.replace({
           path: this.$route.query.redirect
@@ -168,6 +174,10 @@ export default {
 
         .login-form {
           margin-top: 16px;
+        }
+
+        .el-form-item {
+          padding-top: $gap-xl;
         }
 
         .login-btn {

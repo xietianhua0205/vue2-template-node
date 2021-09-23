@@ -14,7 +14,7 @@ export function createAxios (scope, app) {
   })
 
   axios.interceptors.request.use(function (settings) {
-    if (window.APP_CONFIG.ENV === 'development' && !exUrl.find(url => url === settings.url)) {
+    if (window.APP_CONFIG.token && !exUrl.find(url => url === settings.url)) {
       settings.headers.authorization = settings.headers.authorization || window.APP_CONFIG.token
     }
     return settings
@@ -26,6 +26,8 @@ export function createAxios (scope, app) {
     let errorInfo = ''
     if (response.headers['content-disposition']?.indexOf('attachment;') === 0) {
       return response
+    } else if (response.config.url === '/oauth/token') {
+      return response.data
     } else {
       const data = response.data
       if (data.errCode === 200 || data.errCode === 0 || data.ErrorCode === 0) {
