@@ -14,17 +14,6 @@ export default {
 }
 </script>
 
-<style lang="less">
-// ndk 样式
-@import "~@/assets/styles/graph";
-</style>
-
-<style lang="less">
-// sdk 样式
-@import "~@plantdata/sdk/src/index";
-@import "~@zc/netchart/netchart";
-</style>
-
 <style lang="scss">
 @import "~@/assets/styles/variables-custom";
 
