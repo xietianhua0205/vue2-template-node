@@ -1,4 +1,5 @@
-import moment from 'moment'
+// import moment from 'moment'
+import * as moment from 'dayjs'
 
 export function addDirectives (Vue) {
   Vue.directive('dateFormat', {

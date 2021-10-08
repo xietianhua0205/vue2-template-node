@@ -1,8 +1,8 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 import ElementUI from 'element-ui'
 
-_.forEach(window.APP_CONFIG.element, (item, key) => {
-  _.forEach(item, (it, prop) => {
+window.APP_CONFIG.element.forEach((item, key) => {
+  item.forEach((it, prop) => {
     ElementUI[_.upperFirst(key)].props[prop] = {
       default: item[prop]
     }
