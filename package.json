@@ -3,14 +3,14 @@
   "version": "2.0.1",
   "private": true,
   "scripts": {
-    "count-code": "node build/count ./src vue js less scss ts",
-    "getToken": "node build/getToken.js",
     "serve": "npm run getToken && vue-cli-service serve",
     "build": "vue-cli-service build && node build/infoCopy.js",
     "lint": "vue-cli-service lint",
+    "count-code": "node build/count ./src vue js less scss ts",
+    "getToken": "node build/getToken.js",
     "lintfix": "eslint --ext .js,.ts,.vue \"src\" --fix",
-    "server": "nodemon --watch build --watch server/data server/server.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "server": "nodemon --watch build --watch server/data server/server.js"
   },
   "dependencies": {
     "@plantdata/reactive-menu-item": "0.0.52",
@@ -52,6 +52,7 @@
     "nodemon": "^2.0.7",
     "request": "^2.88.2",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-lodash": "~0.1.4",
     "vue-template-compiler": "^2.6.11",
     "zlib": "^1.0.5"
   }
