@@ -27,7 +27,11 @@ export default {
     if (this.$config.configNsId) {
       this.getConfigFromKGSearch() // 不是必须的，没有加载配置也有默认配置
     } else {
-      this.updateThemeColor()
+      // 也可以从其他接口获取主题色, 或者直接初始化完成
+      // readFromSomeWhere().then((color) => {
+      //   this.updateThemeColor(color)
+      // })
+      this.inited = true
     }
   },
   methods: {
@@ -35,13 +39,13 @@ export default {
       setTimeout(() => { // 等待axios
         getConfig(this.$axios).then((config) => {
           Object.assign(this.$config, config)
-          this.updateThemeColor()
+          this.updateThemeColor(this.$config.primaryColor)
         })
       }, 0)
     },
-    updateThemeColor () {
+    updateThemeColor (color) {
       this.interval = setInterval(() => {
-        ThemeUtils.updateThemeColors(this.$config.primaryColor)
+        ThemeUtils.updateThemeColors(color)
       }, 0)
       this.inited = true
     }
