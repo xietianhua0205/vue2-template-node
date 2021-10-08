@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "count-code": "node build/count ./src vue js less scss ts",
@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@plantdata/reactive-menu-item": "0.0.51",
+    "@plantdata/reactive-menu-item": "0.0.52",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.5",
