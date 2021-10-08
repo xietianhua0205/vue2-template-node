@@ -1,0 +1,50 @@
+const { configNsId, configBaseURL = '', APPName } = window.APP_CONFIG || {}
+
+export function getConfig (axios) {
+  return new Promise(resolve => {
+    const nsId = configNsId
+    if (nsId) {
+      axios.get(configBaseURL + '/api/kg-search/index/' + nsId).then((d) => {
+        const configIndex = d.find(d => d.name === 'config')
+        if (configIndex) {
+          axios.post(configBaseURL + '/api/kg-search/search/page', {
+            limit: 999,
+            nsId,
+            skip: 1
+          }).then(a => {
+            const searchAPI = a.find(a => a.type === 2 && a.status === 1)
+            if (searchAPI) {
+              axios.post(configBaseURL + '/api/kg-search/search/', {
+                apk: searchAPI.apk,
+                from: 0,
+                index: [configIndex.indexName],
+                kw: '',
+                nsId,
+                size: 10,
+                queryFilter: [],
+                skipError: false
+              }).then(({ data }) => {
+                const item = data.result?.find(r => r.id === APPName)
+                if (item) {
+                  try {
+                    const config = JSON.parse(item.config)
+                    resolve(config)
+                  } catch (e) {
+                    console.error('配置解析失败')
+                  }
+                }
+                resolve({})
+              })
+            } else {
+              resolve({})
+            }
+          })
+        } else {
+          resolve({})
+        }
+      })
+    } else {
+      resolve({})
+    }
+  })
+}

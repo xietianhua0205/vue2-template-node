@@ -51,7 +51,8 @@ router.beforeEach((to, from, next) => {
     if (window.APP_CONFIG.isDev) {
       next() // 本项目登录页面
     } else {
-      window.location.replace('/sso/login') // 产品登录页面
+      window.location.reload()
+      // window.location.replace('/sso/login') // 产品登录页面
     }
   } else {
     if (isNavAllow({ id: to.name })) {
