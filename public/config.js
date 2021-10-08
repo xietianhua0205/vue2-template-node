@@ -572,6 +572,8 @@
   window.APP_CONFIG = {
     APPName: 'vue2-template',
     primaryColor: '#00b38a',
+    configNsId: null,
+    configBaseURL: '',
     tableMargin: [16, 16, 16, 16],
     theme: theme,
     layout: layout,

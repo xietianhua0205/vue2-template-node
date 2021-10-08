@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="'page-name-' + $route.name" v-if="inited">
     <router-view/>
   </div>
 </template>
@@ -7,14 +7,44 @@
 <script>
 
 import { ThemeUtils } from '@/utils/theme'
+import { getConfig } from '@/utils/config'
 
 export default {
   name: 'App',
   components: {},
+  data () {
+    return {
+      inited: false,
+      interval: null
+    }
+  },
+  beforeDestroy () {
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+  },
   created () {
-    setInterval(() => {
-      ThemeUtils.updateThemeColors('#ff9800')
-    }, 0)
+    if (this.$config.configNsId) {
+      this.getConfigFromKGSearch() // 不是必须的，没有加载配置也有默认配置
+    } else {
+      this.updateThemeColor()
+    }
+  },
+  methods: {
+    getConfigFromKGSearch () {
+      setTimeout(() => { // 等待axios
+        getConfig(this.$axios).then((config) => {
+          Object.assign(this.$config, config)
+          this.updateThemeColor()
+        })
+      }, 0)
+    },
+    updateThemeColor () {
+      this.interval = setInterval(() => {
+        ThemeUtils.updateThemeColors(this.$config.primaryColor)
+      }, 0)
+      this.inited = true
+    }
   }
 }
 </script>
