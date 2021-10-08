@@ -6,10 +6,15 @@
 
 <script>
 
+import { ThemeUtils } from '@/utils/theme'
+
 export default {
   name: 'App',
   components: {},
   created () {
+    setInterval(() => {
+      ThemeUtils.updateThemeColors('#ff9800')
+    }, 0)
   }
 }
 </script>
