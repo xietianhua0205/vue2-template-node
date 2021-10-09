@@ -50,9 +50,9 @@ router.beforeEach((to, from, next) => {
     clearUser()
     if (window.APP_CONFIG.isDev) {
       next() // 本项目登录页面
-    } else {
-      // top.location.reload()
-      top.location.replace('/sso/login') // 产品登录页面
+    } else { // 产品登录页面
+      // top.location.reload() // 配置gateway后有效
+      top.location.replace('/sso/login') // 未配置gateway时有效
     }
   } else {
     if (isNavAllow({ id: to.name })) {
