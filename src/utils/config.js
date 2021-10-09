@@ -12,7 +12,7 @@ export function getConfig (axios) {
             nsId,
             skip: 1
           }).then(a => {
-            const searchAPI = a.find(a => a.type === 2 && a.status === 1)
+            const searchAPI = a.find(a => a.type === 2 && a.status === 1) // 必须有一个启用的全文检索功能
             if (searchAPI) {
               axios.post(configBaseURL + '/api/kg-search/search/', {
                 apk: searchAPI.apk,
@@ -20,7 +20,7 @@ export function getConfig (axios) {
                 index: [configIndex.indexName],
                 kw: '',
                 nsId,
-                size: 10,
+                size: 100,
                 queryFilter: [],
                 skipError: false
               }).then(({ data }) => {
@@ -28,6 +28,11 @@ export function getConfig (axios) {
                 if (item) {
                   try {
                     const config = JSON.parse(item.config)
+                    if (item.style) {
+                      const styleTag = document.createElement('style')
+                      styleTag.innerText = item.style
+                      document.body.append(styleTag)
+                    }
                     resolve(config)
                   } catch (e) {
                     console.error('配置解析失败')
