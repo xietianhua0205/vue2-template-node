@@ -6,6 +6,9 @@
 #### OEM说明
 - 详见[OEM.md](./docs/OEM.md)
 
+#### 启用KG-SEARCH管理动态配置说明
+- 详见[启用KG-SEARCH管理动态配置说明.md](./docs/启用KG-SEARCH管理动态配置说明.md)
+
 #### 脚本说明
 - serve 启动开发
 - build 打包发布
@@ -18,10 +21,6 @@
 
 #### 依赖说明， 以下非必须，只做演示
 - @plantdata/reactive-menu-item 动态菜单
-- @plantdata/ndk 图谱可视化
-- less 图谱可视化暂只支持这个版本的less
-- monaco-editor 代码编辑器使用演示
-- echarts 主题定制演示
 
 #### 代理配置文件 (build/proxy.js)
 
@@ -43,6 +42,10 @@
 #### JS全局配置说明 (public/config.js)
 - APPName 应用名
 - primaryColor js代码中使用的主题色
+- logo LOGO地址
+- logoDisabled 关闭logo显示
+- configNsId KGSearch中存储动态配置的项目空间ID
+- configBaseURL 存储动态配置的KGSearch地址前缀
 - tableMargin PageContent.vue 中 main-table 的边距
 - layout 布局，值为layoutMap中的key
 - layoutMap 布局配置，配置不同布局slot的位置
@@ -93,6 +96,7 @@
 - dateFormat 格式化时间
 
 #### 内置混入 (src/mixins)
+- config.js 内置从KGSearch获取动态配置并更新主题色的混入
 - query-page.js 支持刷新页面保留分页、搜索条件
 - table-page.js 支持刷新页面保留分页、搜索条件的表格页面
 - slot.js 模板插槽变量、方法
@@ -104,13 +108,15 @@
 #### 内置工具类 (src/utils) 
 - common.js
     - listToTree 将列表结构的数据转为树形结构
+- theme.js
+    - 修改主题色的工具类
 - user.js
     - 存储在localStorage中的用户信息辅助工具类
     
 #### 内置页面 (src/views) 
 - TheHome.vue 应用框架模板，支持动态菜单、重置密码、获取用户信息等内容
 - TheLogin.vue 内置的登录页面，需按需设置登录接口，接入sso时不需要这个页面
-- PageContentDemo.vue 应用内容模板的案例、内含部分插槽效果示例
+- templates/TheSlotDemo.vue 应用内容模板的案例、内含部分插槽效果示例
 
 #### 其他文件说明
 - src/axios.js 支持自动显示接口返回错误、支持自动添加token、支持产品的接口返回结构
