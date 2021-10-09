@@ -2,7 +2,10 @@
   <the-page v-if="isLogin">
     <template slot="header-left">
       <div class="logo-container" @click="goHome">
-        <img src="../assets/logo.svg" :alt="'KGSearch'">
+        <template v-if="$config.logoDisabled !== true">
+          <img :src="$config.logo" :alt="$config.APPName" v-if="$config.logo">
+          <img src="../assets/logo.svg" :alt="$config.APPName" v-else>
+        </template>
       </div>
     </template>
     <template :slot="$config.layout === 'left' ? 'header-right-end' : 'header-right-start'">

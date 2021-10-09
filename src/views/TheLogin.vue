@@ -2,7 +2,12 @@
   <div class="login-container">
     <div class="main">
       <div class="gray-box">
-        <div><img src="../assets/logo.svg" alt="" class="logo"></div>
+        <div>
+          <template v-if="$config.logoDisabled !== true">
+            <img :src="$config.logo" :alt="$config.APPName" v-if="$config.logo">
+            <img src="../assets/logo.svg" :alt="$config.APPName" v-else>
+          </template>
+        </div>
         <p>私有化登录</p>
       </div>
       <div class="white-box">
