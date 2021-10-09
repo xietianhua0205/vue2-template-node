@@ -5,7 +5,7 @@ export function getConfig (axios) {
     const nsId = configNsId
     if (nsId) {
       axios.get(configBaseURL + '/api/kg-search/index/' + nsId).then((d) => {
-        const configIndex = d.find(d => d.name === 'config')
+        const configIndex = d.find(d => d.name === 'config') // 索引别名必须是config
         if (configIndex) {
           axios.post(configBaseURL + '/api/kg-search/search/page', {
             limit: 999,
@@ -24,7 +24,7 @@ export function getConfig (axios) {
                 queryFilter: [],
                 skipError: false
               }).then(({ data }) => {
-                const item = data.result?.find(r => r.id === APPName)
+                const item = data.result?.find(r => r.id === APPName) // 数据id必须和APPName相同
                 if (item) {
                   try {
                     const config = JSON.parse(item.config)
