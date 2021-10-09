@@ -6,50 +6,12 @@
 
 <script>
 
-import { ThemeUtils } from '@/utils/theme'
-import { getConfig } from '@/utils/config'
+import config from '@/mixins/config'
 
 export default {
   name: 'App',
   components: {},
-  data () {
-    return {
-      inited: false,
-      interval: null
-    }
-  },
-  beforeDestroy () {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-  },
-  created () {
-    if (this.$config.configNsId) {
-      this.getConfigFromKGSearch() // 不是必须的，没有加载配置也有默认配置
-    } else {
-      // 也可以从其他接口获取主题色, 或者直接初始化完成
-      // readFromSomeWhere().then((color) => {
-      //   this.updateThemeColor(color)
-      // })
-      this.inited = true
-    }
-  },
-  methods: {
-    getConfigFromKGSearch () {
-      setTimeout(() => { // 等待axios
-        getConfig(this.$axios).then((config) => {
-          Object.assign(this.$config, config)
-          this.updateThemeColor(this.$config.primaryColor)
-        })
-      }, 0)
-    },
-    updateThemeColor (color) {
-      this.interval = setInterval(() => {
-        ThemeUtils.updateThemeColors(color)
-      }, 0)
-      this.inited = true
-    }
-  }
+  mixins: [config]
 }
 </script>
 
