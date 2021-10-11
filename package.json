@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "scripts": {
     "serve": "npm run getToken && vue-cli-service serve",
