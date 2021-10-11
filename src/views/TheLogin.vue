@@ -4,8 +4,8 @@
       <div class="gray-box">
         <div>
           <template v-if="$config.logoDisabled !== true">
-            <img :src="$config.logo" :alt="$config.APPName" v-if="$config.logo">
-            <img src="../assets/logo.svg" :alt="$config.APPName" v-else>
+            <img :src="$config.logo" :alt="$config.APPName" v-if="$config.logo" class="logo">
+            <img src="../assets/logo.svg" :alt="$config.APPName" v-else class="logo">
           </template>
         </div>
         <p>私有化登录</p>

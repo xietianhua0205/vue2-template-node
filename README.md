@@ -7,7 +7,7 @@
 - 详见[OEM.md](./docs/OEM.md)
 
 #### 启用KG-SEARCH管理动态配置说明
-- 详见[启用KG-SEARCH管理动态配置说明.md](./docs/启用KG-SEARCH管理动态配置说明.md)
+- 详见[启用KG-SEARCH管理动态配置说明.md](docs/CONFIG.md)
 
 #### 脚本说明
 - serve 启动开发
