@@ -116,7 +116,9 @@ export class ThemeUtils {
   static updateStyleTag () {
     const styles = document.querySelectorAll('style:not([data-color="' + ThemeUtils.primaryColor + '"])')
     for (const item of styles) {
-      item.innerText = ThemeUtils.updateColorStr(item.innerText)
+      if (item.innerText) {
+        item.innerText = ThemeUtils.updateColorStr(item.innerText)
+      }
       item.setAttribute('data-color', ThemeUtils.primaryColor)
     }
   }

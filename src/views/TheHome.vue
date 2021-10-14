@@ -8,15 +8,13 @@
         </template>
       </div>
     </template>
-    <template :slot="$config.layout === 'left' ? 'header-right-end' : 'header-right-start'">
-
-    </template>
+    <template :slot="$config.layout === 'left' ? 'header-right-end' : 'header-right-start'"></template>
     <template :slot="$config.slot.navPrimary" v-if="$config.slot.navPrimary">
       <el-menu
         class="the-top-nav"
         mode="horizontal"
         :menu-trigger="$config.slot.navSecondary ? 'click' : 'hover'"
-        :class="{'nav-border': $config.navProps.border}"
+        :class="{'nav-border': $config.navProps.border, 'hide-only-child': $config.navProps.hideOnlyChild}"
         :default-active="activeTopIndex">
         <reactive-menu-item
           v-for="item of menuDataAllOrder"
@@ -252,6 +250,9 @@ export default {
     & > .el-menu-item.is-active {
       border-bottom: 0;
     }
+  }
+  &.hide-only-child>li:only-child {
+    display: none;
   }
 }
 

@@ -1,3 +1,4 @@
+// 由于本js不会经过babel转义，所有的语法都需要使用兼容性最好的语法，const，let等避免使用
 (function () {
   var themeMap = {
     light: {
@@ -6,9 +7,11 @@
     }
   }
   var theme = 'light'
+  var hideOnlyChild = true
   var layoutMap = {
     default: {
       navProps: {
+        hideOnlyChild: hideOnlyChild,
         border: true
       },
       slot: {
@@ -64,6 +67,7 @@
     },
     top: {
       navProps: {
+        hideOnlyChild: hideOnlyChild,
         border: false
       },
       slot: {
@@ -112,6 +116,7 @@
     },
     left: {
       navProps: {
+        hideOnlyChild: hideOnlyChild,
         border: true
       },
       slot: {
