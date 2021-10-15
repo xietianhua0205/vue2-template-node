@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
       // 2、刷新，302到登录页
       // top.location.reload() // 配置gateway后有效
       // 3、直接定位到登录页
-      // top.location.replace('/sso/login') // 未配置gateway时有效
+      // top.location.replace(window.MAGI_CONFIG.LOGIN_URL || '/sso/login?redirect=' + top.location.href) // 产品登录页面，配置gateway后有效
     }
   } else {
     if (isNavAllow({ id: to.name })) {
