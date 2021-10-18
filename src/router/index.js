@@ -50,15 +50,15 @@ router.beforeEach((to, from, next) => {
     clearUser()
     if (window.APP_CONFIG.isDev || window.APP_CONFIG.ENV === 'development') {
       next() // 本项目登录页面
-    } else { // 产品登录页面，以下3种选择一种，第三种无需服务器端额外配置，可以避免服务器配置问题引起的无限刷新当前页面问题，但登陆地址可能会有不同导致跳转失败
-      // 1、产品退出，302到登录页
-      const form = document.createElement('form')
-      form.action = '/logout'
-      form.method = 'POST'
-      document.body.appendChild(form)
-      form.submit()
+    } else { // 产品登录页面，根据标准的kggateway和nginx配置方式，使用第二种方式跳转
+      // // 1、产品退出，302到登录页
+      // const form = document.createElement('form')
+      // form.action = '/logout'
+      // form.method = 'POST'
+      // document.body.appendChild(form)
+      // form.submit()
       // 2、刷新，302到登录页
-      // top.location.reload() // 配置gateway后有效
+      top.location.reload() // 配置gateway后有效
       // 3、直接定位到登录页
       // top.location.replace(window.MAGI_CONFIG.LOGIN_URL || '/sso/login?redirect=' + top.location.href) // 产品登录页面，配置gateway后有效
     }

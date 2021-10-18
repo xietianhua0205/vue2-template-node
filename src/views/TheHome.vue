@@ -154,16 +154,16 @@ export default {
       this.$router.push({ name: 'home' })
     },
     goLogin () {
-      // 本项目登录页面
-      this.$router.replace({
-        name: 'login'
-      })
+      // // 本项目登录页面
+      // this.$router.replace({
+      //   name: 'login'
+      // })
       // 产品登录页面
-      // const form = document.createElement('form')
-      // form.action = '/logout'
-      // form.method = 'POST'
-      // document.body.appendChild(form)
-      // form.submit()
+      const form = document.createElement('form')
+      form.action = '/logout'
+      form.method = 'POST'
+      document.body.appendChild(form)
+      form.submit()
     },
     logout () {
       this.goLogin()
