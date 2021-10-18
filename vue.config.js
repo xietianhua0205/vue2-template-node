@@ -35,4 +35,20 @@ module.exports = {
       })
     ]
   }
+  // configureWebpack: config => {
+  //   config.module.rules.push(
+  //     {
+  //       test: path.resolve(__dirname, 'node_modules/leader-line/'),
+  //       use: [{
+  //         loader: 'skeleton-loader',
+  //         options: { procedure: content => `${content}export default LeaderLine` }
+  //       }]
+  //     }
+  //   )
+  //   config.devtool = process.env.NODE_ENV !== 'production' ? 'source-map' : ''
+  //   config.plugins.push(new BundleAnalyzerPlugin())
+  //   config.plugins.push(new CompressionWebpackPlugin({
+  //     threshold: 10240
+  //   }))
+  // }
 }
