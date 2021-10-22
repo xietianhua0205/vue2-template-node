@@ -1,5 +1,8 @@
 # APP NAME
 
+#### 部署配置说明
+- 详见[DEPLOY.md](./docs/DEPLOY.md)
+
 #### 定制主题说明
 - 详见[THEME.md](./docs/THEME.md)
 
