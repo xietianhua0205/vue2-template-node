@@ -1,20 +1,23 @@
 # APP NAME
 
+#### OEM说明
+- 详见[OEM.md](./docs/OEM.md)
+
 #### 部署配置说明
 - 详见[DEPLOY.md](./docs/DEPLOY.md)
 
-#### 定制主题说明
+#### 主题开发说明
 - 详见[THEME.md](./docs/THEME.md)
-
-#### OEM说明
-- 详见[OEM.md](./docs/OEM.md)
 
 #### 启用KG-SEARCH管理动态配置说明
 - 详见[启用KG-SEARCH管理动态配置说明.md](docs/CONFIG.md)
 
 #### 脚本说明
 - serve 启动开发
+- serve-layout-left 启动左侧布局调试
+- serve-layout-top 启动顶部布局调试
 - build 打包发布
+- build-report 打包并生成分析报告
 - getToken 手动获取plantdata产品用户token
 - count-code 代码量统计
 - lint 代码格式校验
@@ -37,10 +40,8 @@
     - dark 黑色主题文件夹，内部文件同默认主题，引入默认主题的配置，内部变量不覆盖时使用default的主题变量
         - ...
 - common.scss 引入主题中的common.scss，和主题无关的公共覆盖样式
-- element-variables.scss  element样式，建议不修改，不添加额外内容
-- graph.scss 引入主题中的graph.scss，和主题无关的图谱覆盖样式
+- graph.scss 引入主题中的graph.scss，和主题无关的图谱覆盖样式，无图谱时不需要
 - variables-custom.scss 引入主题中的variables-custom.scss
-- variables-defined.scss 引入主题中的variables-defined.scss
 
 #### JS全局配置说明 (public/config.js)
 - APPName 应用名
@@ -122,6 +123,7 @@
 - templates/TheSlotDemo.vue 应用内容模板的案例、内含部分插槽效果示例
 
 #### 其他文件说明
+- src/config.js 初始化配置
 - src/axios.js 支持自动显示接口返回错误、支持自动添加token、支持产品的接口返回结构
 - src/element-custom.js 应用element配置的工具类
 - src/menu.js 菜单配置

@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/assets/styles/variables-custom.scss";
+@import "~@/assets/styles/variables-custom";
 
 .tip-line {
   margin-bottom: $gap;

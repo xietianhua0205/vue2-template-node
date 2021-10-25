@@ -1,4 +1,30 @@
-# 主题定制
+# 主题开发
+
+### 定义
+- 在`public/config.js`的`themeMap`变量对应的主题中定义对应的配置，例如：
+```javascript
+    var themeMap = {
+        light: {
+          monaco: {}, // 浅色主题时monaco对应的配置
+          echartsTheme: {} // 浅色主题时echarts对应的配置
+        },
+        dark: {
+          monaco: {}, // 深色主题时monaco对应的配置
+          echartsTheme: {} // 深色主题时echarts对应的配置
+        }
+    }
+```
+- 在`public/config.js`的`window.APP_CONFIG`变量中定义选择主题的配置结果，例如：
+```javascript
+    window.APP_CONFIG = {
+        monaco: themeMap[theme].monaco,
+        echartsTheme: themeMap[theme].echartsTheme,
+    }
+```
+- 在实际场景中使用主题配置的结果
+```javascript
+  echarts.registerTheme('echartsTheme', this.$config.echartsTheme)
+```
 
 ### echarts 主题的使用
 #### 关于配置

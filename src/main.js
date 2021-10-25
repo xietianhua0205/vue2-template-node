@@ -6,7 +6,6 @@ import ElementUI from 'element-ui'
 import { createAxios } from './axios'
 import { addDirectives } from './directives'
 
-import './assets/styles/element-variables.scss'
 import './assets/styles/common.scss'
 import './assets/icon/iconfont.css'
 import './element-custom'

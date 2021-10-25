@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/assets/styles/variables-custom.scss";
+@import "~@/assets/styles/variables-custom";
 
 .image_content {
   display: flex;
