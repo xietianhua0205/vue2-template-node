@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "npm run getToken && vue-cli-service serve",
+    "serve-layout-left": "npm run getToken && vue-cli-service serve --mode layout.left",
+    "serve-layout-top": "npm run getToken && vue-cli-service serve --mode layout.top",
     "build": "vue-cli-service build && node build/infoCopy.js",
+    "build-report": "vue-cli-service build --report",
     "lint": "vue-cli-service lint",
     "count-code": "node build/count ./src vue js less scss ts",
     "getToken": "node build/getToken.js",

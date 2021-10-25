@@ -8,7 +8,7 @@
   }
   var theme = 'light'
   var hideOnlyChild = true
-  var layoutMap = {
+  var layoutMap = window.APP_LAYOUT_MAP = {
     default: {
       navProps: {
         hideOnlyChild: hideOnlyChild,

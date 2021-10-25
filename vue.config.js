@@ -1,4 +1,3 @@
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const proxy = require('./build/proxy')
 const config = require('./profile')
@@ -29,7 +28,6 @@ module.exports = {
   configureWebpack: {
     devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : '',
     plugins: [
-      // new BundleAnalyzerPlugin(),
       new CompressionWebpackPlugin({
         threshold: 10240
       })
@@ -46,7 +44,6 @@ module.exports = {
   //     }
   //   )
   //   config.devtool = process.env.NODE_ENV !== 'production' ? 'source-map' : ''
-  //   config.plugins.push(new BundleAnalyzerPlugin())
   //   config.plugins.push(new CompressionWebpackPlugin({
   //     threshold: 10240
   //   }))

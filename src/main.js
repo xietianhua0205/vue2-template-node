@@ -10,16 +10,15 @@ import './assets/styles/element-variables.scss'
 import './assets/styles/common.scss'
 import './assets/icon/iconfont.css'
 import './element-custom'
+import config from './config'
+
+Vue.prototype.$config = config
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 
 addDirectives(Vue)
-
-window.APP_CONFIG.ENV = process.env.NODE_ENV
-
-Vue.prototype.$config = window.APP_CONFIG
 
 const app = new Vue({
   router,
