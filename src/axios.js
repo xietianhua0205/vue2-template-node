@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 export function createAxios (scope, app) {
   window.APP_CONFIG.token = localStorage.getItem('dtt')
-  if (window.APP_CONFIG.ENV === 'development') {
+  if (window.APP_CONFIG.ENV === 'development' && !window.APP_CONFIG.token) {
     import('../build/token.json').then((e) => {
       window.APP_CONFIG.token = 'bearer ' + e.token
     })
