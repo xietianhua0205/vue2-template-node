@@ -56,7 +56,7 @@ export default {
                   this.$axios.post(configBaseURL + '/api/kg-search/search/', {
                     apk: searchAPI.apk,
                     from: 0,
-                    index: [configIndex.indexName],
+                    index: [nsId + '-' + configIndex.name],
                     kw: '',
                     nsId,
                     size: 100,
