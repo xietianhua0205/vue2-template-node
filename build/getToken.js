@@ -2,6 +2,7 @@ const request = require('request')
 const fs = require('fs')
 const path = require('path')
 const profile = require('../profile')
+const chalk = require('chalk')
 let moduleName = ''
 try {
   for (const item of JSON.parse(process.env.npm_config_argv).remain) {
@@ -30,7 +31,6 @@ var options = {
   method: 'POST',
   url: profile.baseURL + '/oauth/token',
   headers: {
-    'postman-token': 'd0f5362a-e088-8c91-a8ed-c76376820ef8',
     'cache-control': 'no-cache',
     'content-type': 'application/x-www-form-urlencoded'
   },
@@ -45,8 +45,8 @@ request(options, function (error, response, body) {
   if (data && data.access_token) {
     const token = { token: data.access_token }
     fs.writeFileSync(path.resolve(__dirname, 'token.json'), JSON.stringify((token), null, '   '))
-    console.log('token获取成功')
+    console.log(chalk.green('token获取成功'))
   } else {
-    console.error('token获取失败')
+    console.error(chalk.red('token获取失败'))
   }
 })

@@ -1,22 +1,25 @@
 import Axios from 'axios'
+import { getToken } from '@/utils/token'
 
-export function createAxios (scope, app) {
-  window.APP_CONFIG.token = localStorage.getItem('dtt')
-  if (window.APP_CONFIG.ENV === 'development' && !window.APP_CONFIG.token) {
-    import('../build/token.json').then((e) => {
-      window.APP_CONFIG.token = 'bearer ' + e.token
-    })
+export function createAxios (app, config) {
+  if (config.isDev) {
+    config.token = getToken()
+    if (!config.token) {
+      import('../build/token.json').then((e) => {
+        config.token = 'bearer ' + e.token
+      })
+    }
   }
 
-  const exUrl = []
+  const exUrl = ['/oauth/token']
 
   const axios = Axios.create({
     baseURL: ''
   })
 
   axios.interceptors.request.use(function (settings) {
-    if (window.APP_CONFIG.token && !exUrl.find(url => url === settings.url)) {
-      settings.headers.authorization = settings.headers.authorization || window.APP_CONFIG.token
+    if (config.token && !exUrl.find(url => url === settings.url)) {
+      settings.headers.authorization = settings.headers.authorization || config.token
     }
     return settings
   }, function (error) {
@@ -28,7 +31,21 @@ export function createAxios (scope, app) {
     if (response.headers['content-disposition']?.indexOf('attachment;') === 0) {
       return response
     } else if (response.config.url === '/oauth/token') {
-      return response.data
+      const data = response.data
+      if (data.message || data.ErrorInfo) {
+        errorInfo = data.message || data.ErrorInfo
+        if (data.data?.length) {
+          errorInfo += '：'
+          for (const item of data.data) {
+            errorInfo += item.path + ' ' + item.message + ';'
+          }
+        }
+        const error = new Error(`${data.errCode || data.ErrorCode}-/${errorInfo}`)
+        app.$message.error(errorInfo)
+        return Promise.reject(error)
+      } else {
+        return data
+      }
     } else {
       const data = response.data
       if (data.errCode === 200 || data.errCode === 0 || data.ErrorCode === 0) {
@@ -89,5 +106,5 @@ export function createAxios (scope, app) {
     return Promise.reject(error)
   })
 
-  scope.prototype.$axios = axios
+  return axios
 }

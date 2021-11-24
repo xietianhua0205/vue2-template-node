@@ -1,19 +1,28 @@
-const USER_KEY = window.APP_CONFIG.APPName + '-user'
+import { setItem, getItem, removeItem } from './localStorage'
+const USER_POSTFIX = 'user'
 
 function setUser (user) {
-  localStorage.setItem(USER_KEY, JSON.stringify(user))
+  if (user) {
+    setItem(USER_POSTFIX, JSON.stringify(user))
+  } else {
+    clearUser()
+  }
 }
 
 function getUser () {
-  const str = localStorage.getItem(USER_KEY)
+  const str = getItem(USER_POSTFIX)
   if (str && str !== 'undefined') {
-    return JSON.parse(str)
+    try {
+      return JSON.parse(str)
+    } catch (e) {
+      console.error(e)
+    }
   }
   return null
 }
 
 function clearUser () {
-  localStorage.removeItem(USER_KEY)
+  removeItem(USER_POSTFIX)
 }
 
 export { setUser, getUser, clearUser }

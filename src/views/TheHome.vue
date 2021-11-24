@@ -94,6 +94,7 @@ import PasswordReset from '@/components/PasswordReset'
 import ThePage from '@/components/ThePage'
 import { clearUser, setUser } from '@/utils/user'
 import menuDataAll from '@/menu'
+import { clearToken } from '@/utils/token'
 
 export default {
   name: 'TheHome',
@@ -153,20 +154,21 @@ export default {
     goHome () {
       this.$router.push({ name: 'home' })
     },
-    goLogin () {
-      // // 本项目登录页面
-      // this.$router.replace({
-      //   name: 'login'
-      // })
-      // 产品登录页面
-      const form = document.createElement('form')
-      form.action = '/logout'
-      form.method = 'POST'
-      document.body.appendChild(form)
-      form.submit()
-    },
     logout () {
-      this.goLogin()
+      if (this.$config.isDev) {
+        clearToken()
+        // 本项目登录页面
+        this.$router.replace({
+          name: 'login'
+        })
+      } else {
+        // 产品登录页面
+        const form = document.createElement('form')
+        form.action = '/logout'
+        form.method = 'POST'
+        document.body.appendChild(form)
+        form.submit()
+      }
     },
     resetPwdSuccess () {
       clearUser()
@@ -174,7 +176,7 @@ export default {
         message: '修改成功，请重新登录',
         type: 'success',
         onClose: () => {
-          this.goLogin()
+          this.logout()
         }
       })
     }

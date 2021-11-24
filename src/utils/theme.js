@@ -1,5 +1,5 @@
 export class ThemeUtils {
-  static originColor = window.APP_CONFIG?.primaryColor || '#00b38a'
+  static originColor = window.APP_PRIMARY_COLOR || '#00b38a'
   static customFiles = {}
   static originalColors = []
   static newColors = []

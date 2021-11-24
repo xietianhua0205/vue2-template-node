@@ -46,6 +46,7 @@
 import qs from 'qs'
 // import { setUser } from '@/utils/user'
 import '@/utils/login'
+import { setToken } from '@/utils/token'
 
 export default {
   name: 'TheLogin',
@@ -87,11 +88,13 @@ export default {
     },
     enter (user) {
       // setUser(user)
-      window.APP_CONFIG.token = 'bearer ' + user.access_token
-      localStorage.setItem('dtt', window.APP_CONFIG.token)
-      if (this.$route.query.redirect) {
+      const config = this.$config
+      config.token = 'bearer ' + user.access_token
+      setToken(config.token)
+      const redirect = this.$route.query.redirect
+      if (redirect) {
         this.$router.replace({
-          path: this.$route.query.redirect
+          path: redirect
         })
       } else {
         this.$router.replace({
