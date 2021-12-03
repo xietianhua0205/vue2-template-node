@@ -23,7 +23,7 @@ export default {
               rv = parseInt(rv)
               break
             case 'json':
-              rv = JSON.parse(rv)
+              rv = rv && JSON.parse(rv)
               break
           }
           this.$set(this.query, k, rv)
@@ -49,7 +49,11 @@ export default {
           if (settings[k] instanceof Object) {
             key = settings[k].map || k
           }
-          query[key] = this.query[k]
+          if (this.query[k]) {
+            query[key] = this.query[k] instanceof Object ? JSON.stringify(this.query[k]) : this.query[k].toString()
+          } else {
+            delete query[key]
+          }
         }
       })
       if (isReplace) {

@@ -1,10 +1,8 @@
 // 由于本js不会经过babel转义，所有的语法都需要使用兼容性最好的语法，const，let等避免使用
 (function () {
   var themeMap = {
-    light: {
-    },
-    dark: {
-    }
+    light: {},
+    dark: {}
   }
   var theme = 'light'
   var hideOnlyChild = true
@@ -195,8 +193,13 @@
     slot: layoutMap[layout].slot,
     pageSlot: layoutMap[layout].pageSlot,
     element: layoutMap[layout].element,
+    inputCharacterLimit: {
+      name: 50,
+      info: 255
+    },
     kgName: 's60zc4ni_graph_default',
     APK: 'c6046efc0f4741ad84aed43d3f8c964f',
-    isDev: false
+    isDev: false,
+    needLogin: false
   }
 })()

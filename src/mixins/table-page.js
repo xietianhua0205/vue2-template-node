@@ -12,7 +12,7 @@ export default {
             map: 'p'
           },
           pageSize: {
-            value: 15,
+            value: 20,
             type: 'number',
             map: 's'
           },

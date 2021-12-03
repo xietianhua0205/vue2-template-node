@@ -1,5 +1,5 @@
 <template>
-  <the-page v-if="isLogin">
+  <the-page v-if="isLogin || !$config.needLogin">
     <template slot="header-left">
       <div class="logo-container" @click="goHome">
         <template v-if="$config.logoDisabled !== true">
@@ -24,7 +24,7 @@
       </el-menu>
     </template>
     <template slot="header-right-end">
-      <el-dropdown @command="goMoreMenu">
+      <el-dropdown @command="goMoreMenu" v-if="$config.needLogin || user">
         <div class="head-wrap-button">
           <span>{{ nickName }}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -78,7 +78,7 @@
     <!--          </el-menu>-->
     <!--        </template>-->
     <template slot="main-right">
-      <router-view class="page-main-right" v-if="user"/>
+      <router-view class="page-main-right" v-if="user || !$config.needLogin"/>
       <div v-else></div>
     </template>
     <!--    <template slot="footer">-->
@@ -141,8 +141,10 @@ export default {
       }
     },
     init () {
-      this.getUser().then(() => {
-      })
+      if (this.$config.needLogin) {
+        this.getUser().then(() => {
+        })
+      }
     },
     getUser () {
       return this.$axios.get('/api/kguser/users/current/detail').then((user) => {
