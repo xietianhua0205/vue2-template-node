@@ -15,4 +15,21 @@ export function addDirectives (Vue) {
       el.innerHTML = valStr ? moment(valStr).format(format) : ''
     }
   })
+
+  Vue.directive('highlight', {
+    inserted: function (el, binding) {
+      const text = el.innerHTML.trim()
+      let kw = binding.value
+      if (kw && text) {
+        '.[]^*+?{}()|$'.split('').map((o) => {
+          kw = kw.replace(o, '\\' + o)
+        })
+        kw = kw.replace('\\', '\\\\')
+        const reg = new RegExp('(' + kw + ')', 'ig')
+        el.innerHTML = text.replace(reg, '<span class="highlight">$1</span>')
+      } else {
+        el.innerHTML = text
+      }
+    }
+  })
 }

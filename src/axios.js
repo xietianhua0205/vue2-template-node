@@ -1,4 +1,5 @@
 import Axios from 'axios'
+// import qs from 'qs'
 import { getToken } from '@/utils/token'
 
 export function createAxios (app, config) {
@@ -21,6 +22,22 @@ export function createAxios (app, config) {
     if (config.token && !exUrl.find(url => url === settings.url)) {
       settings.headers.authorization = settings.headers.authorization || config.token
     }
+    // if (settings.url.startsWith('/plantdata-sdk')) {
+    //   settings.baseURL = ''
+    //   if (settings.method === 'post') {
+    //     const keys = Object.keys(settings.data)
+    //     for (const key of keys) {
+    //       if (settings.data[key] instanceof Array) {
+    //         settings.data[key] = JSON.stringify(settings.data[key])
+    //       }
+    //     }
+    //     settings.data = qs.stringify(settings.data) // 转为formdata数据格式
+    //   }
+    //   settings.headers = settings.headers || {}
+    //   settings.headers.APK = settings.headers.APK || config.APK
+    //   settings.params = settings.params || {}
+    //   settings.params.kgName = settings.params.kgName || config.kgName
+    // }
     return settings
   }, function (error) {
     return Promise.reject(error)

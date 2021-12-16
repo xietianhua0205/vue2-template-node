@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "themes/default/variables-custom";
 //@import "themes/dark/variables-custom";
 
@@ -26,15 +27,15 @@
   }
   &::-webkit-scrollbar-track {
     background: $bg;
-    border-radius: $size / 2;
+    border-radius: math.div($size, 2);
   }
   &::-webkit-scrollbar-track-piece {
     background: $bg;
-    border-radius: $size / 2;
+    border-radius: math.div($size, 2);
   }
   &::-webkit-scrollbar-thumb {
     background: $thumb;
-    border-radius: $size / 2;
+    border-radius: math.div($size, 2);
   }
   &::-webkit-scrollbar-corner {
     background: $bg;

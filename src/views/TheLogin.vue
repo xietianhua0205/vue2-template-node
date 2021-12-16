@@ -98,7 +98,7 @@ export default {
         })
       } else {
         this.$router.replace({
-          name: 'home'
+          path: '/'
         })
       }
     },
@@ -159,7 +159,7 @@ export default {
     .white-box {
       width: 580px;
       height: 571px;
-      background-color: #ffffff;
+      background-color: $--color-white;
       position: absolute;
       top: 50%;
       left: 50%;

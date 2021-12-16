@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "./variables-defined";
 
 //$divider: 1px solid $--border-color-base !default;
@@ -9,8 +10,8 @@ $default-card-background: #000 !default;
 //$gap-xl: $gap * 2 !default;
 //$gap-large: $gap * 1.5 !default;
 //$gap-middle: $gap !default;
-//$gap-small: $gap / 2 !default;
-//$gap-mini: $gap / 4 !default;
+//$gap-small: math.div($gap, 2) !default;
+//$gap-mini: math.div($gap, 4) !default;
 
 $scroll-bg: #434343 !default;
 $scroll-thumb: #8c8c8c !default;

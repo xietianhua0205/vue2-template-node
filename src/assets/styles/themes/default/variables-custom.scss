@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "variables-defined";
 
 $divider: 1px solid $--border-color-base !default; // 默认的边框
@@ -9,8 +10,8 @@ $gap: 16px !default; // 默认的间距
 $gap-xl: $gap * 2 !default;
 $gap-large: $gap * 1.5 !default;
 $gap-middle: $gap !default;
-$gap-small: $gap / 2 !default;
-$gap-mini: $gap / 4 !default;
+$gap-small: math.div($gap, 2) !default;
+$gap-mini: math.div($gap, 4) !default;
 
 $scroll-bg: #f6f6f6 !default; // 滚动条背景色
 $scroll-thumb: #999 !default; // 滚动条滑块色
