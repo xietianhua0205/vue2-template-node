@@ -13,8 +13,6 @@ import config from './config'
 
 Vue.prototype.$config = config
 
-config.isDev = !!window.electron || config.isDev
-
 customElement(config.element)
 
 Vue.config.productionTip = false
