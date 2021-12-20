@@ -24,7 +24,7 @@
 - 3、使用config.xls导入索引模式
     - ![模式](模式.png)
 - 4、数据说明：
-    - `id`必须和本产品/项目的`APPName`相同
+    - `id`必须和本产品/项目的`package.json`中的`name`值相同
     - `config`是和`public/config`中相同结构的配置字符串
     - `style`支持css字符串
     - ![image](数据.png)

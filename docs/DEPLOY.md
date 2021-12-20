@@ -5,16 +5,16 @@
 - 登录nacos:`http://ip:8848/nacos`
     - 默认账号密码：`nacos/nacos`
 - 更改kggateway配置：
-    - `front.proxy.projects`中添加`vue2-template`
-    - `front.proxy.ignores`中请确保不存在`vue2-template`
+    - `front.proxy.projects`中添加`${APPName}`
+    - `front.proxy.ignores`中请确保不存在`${APPName}`
     - 如图：![kggateway配置](kggateway_config.jpg)
 
 
 #### nginx配置
 - 在8080端口的配置中添加下列代码，需要登录拦截的地址在这个端口下配置
 ```
-location /vue2-template {
-    try_files $uri $uri/ /vue2-template/index.html;
+location /${APPName} {
+    try_files $uri $uri/ /${APPName}/index.html;
     index index.html;
 }
 ```

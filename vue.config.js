@@ -12,7 +12,17 @@ module.exports = {
   devServer: {
     proxy
   },
-
+  css: {
+    loaderOptions: {
+      // scss: {
+      //   // 全局导入，但会在scss样式中引起无法正确定位变量的警告
+      //   prependData: '@import "~@/assets/styles/variables-custom";'
+      // },
+      sass: {
+        implementation: require('sass')
+      }
+    }
+  },
   chainWebpack: config => {
     // // 移除 prefetch 插件
     // config.plugins.delete('prefetch')

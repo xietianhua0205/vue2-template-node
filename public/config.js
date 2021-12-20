@@ -180,7 +180,7 @@
    */
   window.APP_CONFIG = {
     CUSTOM_LOGIN: false,
-    APPName: 'vue2-template',
+    APPName: 'plantdata',
     primaryColor: window.APP_PRIMARY_COLOR,
     logo: '',
     logoDisabled: false,
