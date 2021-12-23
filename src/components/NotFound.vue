@@ -4,6 +4,7 @@
     <div class="notFoundSide">
       <p class="title_big">哎呀！出错啦！</p>
       <p class="title_middle">您正在查找的页面不存在！</p>
+      <div class="message">{{ message }}</div>
       <router-link class="back_index" to="/" replace>返回首页</router-link>
     </div>
   </div>
@@ -12,7 +13,29 @@
 <script>
 
 export default {
-  name: 'NotFound'
+  name: 'NotFound',
+  data () {
+    return {
+      message: '',
+      second: 5
+    }
+  },
+  created () {
+    this.countDown()
+  },
+  methods: {
+    countDown () {
+      setTimeout(() => {
+        this.message = `系统将在${this.second}秒后跳转到首页`
+        this.second--
+        if (this.second < 0) {
+          this.$router.replace('/')
+        } else {
+          this.countDown()
+        }
+      }, 1000)
+    }
+  }
 }
 </script>
 
@@ -35,6 +58,7 @@ export default {
     letter-spacing: 2px;
     line-height: 1;
     padding-left: 80px;
+    color: #595959;
 
     .title_big {
       font-size: 36px;
@@ -43,6 +67,10 @@ export default {
     .title_middle {
       margin-top: 20px;
       font-size: 24px;
+    }
+
+    .message {
+      font-size: 12px;
     }
 
     .back_index {
