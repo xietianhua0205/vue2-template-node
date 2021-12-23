@@ -17,7 +17,14 @@ export default {
   data () {
     return {
       message: '',
-      second: 5
+      second: 5,
+      timeout: null
+    }
+  },
+  beforeDestroy () {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+      this.timeout = null
     }
   },
   created () {
@@ -25,7 +32,7 @@ export default {
   },
   methods: {
     countDown () {
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.message = `系统将在${this.second}秒后跳转到首页`
         this.second--
         if (this.second < 0) {

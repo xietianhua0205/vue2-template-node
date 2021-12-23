@@ -6,8 +6,10 @@ const config = require('./profile')
 //   proxy[key].target = 'http://' + DOMAIN + ':' + PORT
 // }
 
+const publicPath = '/' + config.base + '/'
+
 module.exports = {
-  publicPath: '/' + config.base + '/',
+  publicPath,
   assetsDir: 'static',
   devServer: {
     proxy
@@ -24,6 +26,16 @@ module.exports = {
     }
   },
   chainWebpack: config => {
+    // 以下修复更换主题色引起的文件路径错误
+    ['css', 'scss', 'sass', 'less'].forEach(rule => {
+      const cssRule = config.module.rule(rule);
+      ['vue-modules', 'vue', 'normal-modules', 'normal'].forEach(item => {
+        cssRule.oneOf(item).use('extract-css-loader').tap(options => {
+          options.publicPath = publicPath
+          return options
+        })
+      })
+    })
     // // 移除 prefetch 插件
     // config.plugins.delete('prefetch')
 
