@@ -26,7 +26,7 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV === 'production') {
       // 以下修复更换主题色引起的文件路径错误
       ['css', 'scss', 'sass', 'less'].forEach(rule => {
         const cssRule = config.module.rule(rule);
