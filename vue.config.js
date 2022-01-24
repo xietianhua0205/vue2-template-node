@@ -9,8 +9,8 @@ const config = require('./profile')
 
 const publicPath = '/' + config.base + '/'
 const primaryColor = process.env.VUE_APP_PRIMARY_COLOR = '#00b38a'
-const theme = process.env.VUE_APP_THEME = 'dark' // 'default'
-process.env.VUE_APP_LAYOUT = 'left' // 'default'
+const theme = process.env.VUE_APP_THEME = 'default'
+process.env.VUE_APP_LAYOUT = 'default'
 
 module.exports = {
   publicPath,
@@ -30,11 +30,11 @@ module.exports = {
           } = loaderContext
           const relativePath = path.relative(rootContext, resourcePath)
           if (relativePath === 'src\\assets\\styles\\common.scss') {
-            return `@import "~@/assets/styles/themes/${theme}/common";
-            $--color-primary: ${primaryColor};`
+            return `$--color-primary: ${primaryColor};
+            @import "~@/assets/styles/themes/${theme}/common";`
           } else {
-            return `@import "~@/assets/styles/themes/${theme}/variables-custom";
-            $--color-primary: ${primaryColor};`
+            return `$--color-primary: ${primaryColor};
+            @import "~@/assets/styles/themes/${theme}/variables-custom";`
           }
         }
       },
