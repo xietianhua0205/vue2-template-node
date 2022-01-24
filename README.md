@@ -14,8 +14,6 @@
 
 #### 脚本说明
 - serve 启动开发
-- serve-layout-left 启动左侧布局调试
-- serve-layout-top 启动顶部布局调试
 - build 打包发布
 - build-report 打包并生成分析报告
 - getToken 手动获取plantdata产品用户token
@@ -70,7 +68,7 @@
     - $--font-size-large: 18px
 
 - variables-defined.scss
-    - $--color-primary scss代码中使用的主题色
+    - $--color-primary scss代码中使用的主题色，直接修改无效，如需修改在vue.config.js中配置
     - 其他见文件中的内容注释
     
 - variables-custom.scss
@@ -86,7 +84,7 @@
     - 其他见文件中的内容
 
 - graph.less
-    - @color-primary less代码中使用的主题色
+    - @color-primary less代码中使用的主题色，直接修改无效，如需修改在vue.config.js中配置
     - 其他见文件中的内容注释
 
 #### 内置组件说明 (src/components)

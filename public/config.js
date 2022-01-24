@@ -1,12 +1,17 @@
 // 由于本js不会经过babel转义，所有的语法都需要使用兼容性最好的语法，const，let等避免使用
 (function () {
+  var theme = window.APP_THEME || 'default'
+  var layout = window.APP_LAYOUT || 'default'
+  /**
+   * 必须和样式中的主题色保持一致，否则可能出现主题色部分替换失败的问题
+   */
+  window.APP_PRIMARY_COLOR = window.APP_PRIMARY_COLOR || '#00b38a'
   var themeMap = {
-    light: {},
+    default: {},
     dark: {}
   }
-  var theme = 'light'
   var hideOnlyChild = true
-  var layoutMap = window.APP_LAYOUT_MAP = {
+  var layoutMap = {
     default: {
       navProps: {
         hideOnlyChild: hideOnlyChild,
@@ -169,11 +174,6 @@
       }
     }
   }
-  var layout = 'default'
-  /**
-   * 必须和样式中的主题色保持一致，否则可能出现主题色部分替换失败的问题
-   */
-  window.APP_PRIMARY_COLOR = '#00b38a'
   /**
    * 无特殊需求，不要直接使用window.APP_CONFIG, 使用vue对象中的$config,或者Vue.prototype.$config代替,
    * Vue.prototype.$config考虑后续克隆一份window.APP_CONFIG，而不直接使用该引用，以免合并动态配置后，丢失原始数据

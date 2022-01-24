@@ -20,6 +20,9 @@ export default {
       // readFromSomeWhere().then((color) => {
       //   this.updateThemeColor(color)
       // })
+      if (this.$config.primaryColor !== window.APP_PRIMARY_COLOR) {
+        this.updateThemeColor(this.$config.primaryColor)
+      }
       this.inited = true
     }
   },

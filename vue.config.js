@@ -1,4 +1,5 @@
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const path = require('path')
 const proxy = require('./build/proxy')
 const config = require('./profile')
 // const { DOMAIN, PORT } = require('./server/config')
@@ -7,21 +8,54 @@ const config = require('./profile')
 // }
 
 const publicPath = '/' + config.base + '/'
+const primaryColor = process.env.VUE_APP_PRIMARY_COLOR = '#00b38a'
+const theme = process.env.VUE_APP_THEME = 'dark' // 'default'
+process.env.VUE_APP_LAYOUT = 'left' // 'default'
 
 module.exports = {
   publicPath,
+  outputDir: 'dist/' + config.base,
   assetsDir: 'static',
   devServer: {
     proxy
   },
   css: {
     loaderOptions: {
-      // scss: {
-      //   // 全局导入，但会在scss样式中引起无法正确定位变量的警告
-      //   prependData: '@import "~@/assets/styles/variables-custom";'
-      // },
+      scss: {
+        // 全局导入，但会在scss样式中引起无法正确定位变量的警告
+        prependData: (loaderContext) => {
+          const {
+            resourcePath,
+            rootContext
+          } = loaderContext
+          const relativePath = path.relative(rootContext, resourcePath)
+          if (relativePath === 'src\\assets\\styles\\common.scss') {
+            return `@import "~@/assets/styles/themes/${theme}/common";
+            $--color-primary: ${primaryColor};`
+          } else {
+            return `@import "~@/assets/styles/themes/${theme}/variables-custom";
+            $--color-primary: ${primaryColor};`
+          }
+        }
+      },
       sass: {
         implementation: require('sass')
+      },
+      less: {
+        additionalData: (content, loaderContext) => {
+          const {
+            resourcePath,
+            rootContext
+          } = loaderContext
+          const relativePath = path.relative(rootContext, resourcePath)
+          if (relativePath === 'src\\assets\\styles\\graph.less') {
+            return `@import "~@/assets/styles/themes/${theme}/graph";
+            @color-primary: ${primaryColor};`
+          } else {
+            return content + `
+            @color-primary: ${primaryColor};`
+          }
+        }
       }
     }
   },

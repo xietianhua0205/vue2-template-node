@@ -6,6 +6,7 @@ const cp = require('child_process')
 let version = ''
 let source = ''
 
+const pkg = require('../package.json')
 let infoData = require('./info.json')
 const date = new Date()
 infoData.publishTime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
@@ -16,7 +17,7 @@ infoData.version = version
 infoData.source = source
 infoData = JSON.stringify(infoData, null, 4)
 
-fs.writeFileSync(path.resolve(__dirname, '../dist/static/info.json'), infoData)
+fs.writeFileSync(path.resolve(__dirname, '../dist/' + pkg.name + '/static/info.json'), infoData)
 console.log('info.json更新成功！')
 
 function getCurrentVersion () {
