@@ -10,7 +10,7 @@
 <!--      breadcrumb (breadcrumb)-->
 <!--    </template>-->
     <template slot="page-title">
-      title (page-title)
+      title (page-title){{currentMenuGet().name}}
     </template>
     <template slot="header-extra">
       extra (header-extra)
@@ -68,6 +68,7 @@ export default {
   components: {
     PageContent
   },
+  inject: ['currentMenuGet'],
   data () {
     return {}
   }
