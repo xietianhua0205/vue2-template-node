@@ -198,6 +198,10 @@ export default {
     color: $color-regular;
   }
 
+  &:focus {
+    background-color: unset;
+  }
+
   &:not(.is-disabled):hover {
     background-color: $background;
     color: $color-primary;
