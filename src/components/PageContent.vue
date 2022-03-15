@@ -1,7 +1,9 @@
 <template>
-  <el-container class="body-container">
+  <el-container
+    :class="{'body-container-margin': !noMargin, 'body-container-no-header': noHeader}"
+    class="body-container">
     <slot name="body">
-      <el-header class="body-header">
+      <el-header class="body-header" v-if="!noHeader">
         <slot name="header">
           <div class="body-header-left">
             <div class="body-breadcrumb">
@@ -31,7 +33,7 @@
         <div class="body-main-left">
           <slot name="main-left"></slot>
         </div>
-        <div class="body-main-gap"></div>
+        <div class="body-main-gap" v-if="!noMainGap"></div>
         <div class="body-main-right">
           <slot name="main-right">
             <div class="body-main-top">
@@ -77,10 +79,32 @@
 
 export default {
   name: 'PageContent',
+  props: {
+    noMainGap: {
+      type: Boolean,
+      default: false
+    },
+    noMargin: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       tableHeight: null,
       tableHeightListener: null
+    }
+  },
+  computed: {
+    noHeader () {
+      return !this.$slots.header &&
+        !this.$slots.breadcrumb &&
+        !this.$slots['page-title'] &&
+        !this.$slots['header-extra'] &&
+        !this.$slots['header-left'] &&
+        !this.$slots['header-center'] &&
+        !this.$slots['header-right'] &&
+        !this.$slots['header-right-extra']
     }
   },
   beforeDestroy () {
@@ -128,7 +152,27 @@ export default {
 @import "~@/assets/styles/variables-custom";
 
 .body-container {
-  margin: $body-margin;
+  margin: 0;
+
+  &.body-container-margin{
+    .body-main {
+      margin: $body-main-gap $body-main-margin $body-main-margin;
+      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
+    }
+  }
+
+  &.body-container-no-header{
+    .body-main {
+      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
+    }
+  }
+
+  &.body-container-margin.body-container-no-header{
+    .body-main{
+      margin: $body-main-gap $body-main-margin $body-main-margin;
+      height: calc(100% - #{$body-main-gap} - #{$body-main-margin});
+    }
+  }
 
   .body-header {
     display: flex;
@@ -175,9 +219,8 @@ export default {
     padding: 0;
     display: flex;
     flex-direction: row;
-    margin: $body-main-gap $body-main-margin $body-main-margin;
     overflow: visible;
-    height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
+    height: calc(100% - #{$body-header-height});
 
     .body-main-left {
       flex: 0 0 auto;

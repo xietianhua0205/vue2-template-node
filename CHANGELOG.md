@@ -1,5 +1,11 @@
 # 模板更新日志
 
+
+## [2.2.3] （2022-03-15）
+#### feat
+- page-content 支持无header内容自动隐藏
+- page-content 添加noMainGap、noMargin配置项
+
 ## [2.2.2] （2022-02-22）
 #### feat
 - 404页支持自动跳转首页
