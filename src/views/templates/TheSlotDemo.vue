@@ -39,8 +39,10 @@
     <template slot="main-top-right">
       table-tool (main-top-right)
     </template>
-    <template slot="main-table">
-      table (main-table)
+    <template #main-table="scope" >
+      <el-table
+        empty-text="table (main-table)"
+        :height="scope.height"></el-table>
     </template>
 <!--    <template slot="main-bottom">-->
 <!--      bottom (main-bottom)-->

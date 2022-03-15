@@ -122,26 +122,12 @@ export default {
   methods: {
     calcTableHeight () {
       if (this.$refs.tableSlot) {
-        const style = window.getComputedStyle(this.$refs.tableSlot)
-        const margin = this.$config.tableMargin
-        let h = 0
-        if (margin) {
-          if (margin instanceof Array) {
-            switch (margin.length) {
-              case 1:
-              case 2:
-                h = parseInt(margin[0]) * 2
-                break
-              case 3:
-              case 4:
-                h = parseInt(margin[0]) + parseInt(margin[2])
-                break
-            }
-          } else {
-            h = parseInt(margin) * 2
-          }
-        }
-        this.tableHeight = parseInt(style.height) - h
+        const $tableSlot = this.$refs.tableSlot
+        const style = window.getComputedStyle($tableSlot)
+        const tableStyle = window.getComputedStyle($tableSlot.querySelector('*'))
+        this.tableHeight = parseInt(style.height, 10) -
+          parseInt(tableStyle?.marginTop || 0, 10) -
+          parseInt(tableStyle?.marginBottom || 0, 10)
       }
     }
   }

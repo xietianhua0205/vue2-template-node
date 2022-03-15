@@ -5,6 +5,7 @@
 #### feat
 - page-content 支持无header内容自动隐藏
 - page-content 添加noMainGap、noMargin配置项
+- page-content 更新tableHeight计算方式，移除全局配置项中tableMargin参数
 
 ## [2.2.2] （2022-02-22）
 #### feat
