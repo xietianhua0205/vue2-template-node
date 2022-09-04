@@ -5,6 +5,7 @@ import { createRouteGuard, router } from './router'
 import ElementUI from 'element-ui'
 import { createAxios } from './axios'
 import { addDirectives } from './directives'
+import '@plantdata/pd'
 
 import './assets/styles/common.scss'
 import './assets/icon/iconfont.css'

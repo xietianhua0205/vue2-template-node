@@ -179,7 +179,7 @@
    * Vue.prototype.$config考虑后续克隆一份window.APP_CONFIG，而不直接使用该引用，以免合并动态配置后，丢失原始数据
    */
   window.APP_CONFIG = {
-    CUSTOM_LOGIN: false,
+    // CUSTOM_LOGIN: false, 未找到使用
     APPName: 'plantdata',
     primaryColor: window.APP_PRIMARY_COLOR,
     logo: '',

@@ -12,4 +12,12 @@ function listToTree (arr, pId = 0, valueKey = 'value', labelKey = 'label', pIdKe
   return list
 }
 
-export { listToTree }
+function getStyle (el, name) {
+  if (window.getComputedStyle) {
+    return window.getComputedStyle(el, null)[name]
+  } else {
+    return el.currentStyle[name]
+  }
+}
+
+export { listToTree, getStyle }

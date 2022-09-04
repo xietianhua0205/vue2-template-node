@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
@@ -14,6 +14,7 @@
     "server": "nodemon --watch build --watch server/data server/server.js"
   },
   "dependencies": {
+    "@plantdata/pd": "^1.0.0",
     "@plantdata/reactive-menu-item": "^0.0.53",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
