@@ -24,14 +24,14 @@ export default {
         data: [],
         editData: null,
         loading: false,
-        total: 0
+        total: 0,
+        inited: true
       }
     }
   },
   methods: {
-    deleteResultHandler () {
-      this.$message.success('删除成功')
-      if (this.tableData.data.length === 1 && this.query.pageNo > 1) {
+    deleteResultHandler (length = 1) {
+      if (this.tableData.data.length === length && this.query.pageNo > 1) {
         this.query.pageNo--
       }
       this.updatePageURL()
@@ -47,6 +47,9 @@ export default {
       this.updatePageURL()
     },
     handleRouteChange () {
+      if (!this.tableData.inited) {
+        return
+      }
       this.getTableData()
     },
     handleSizeChange (val) {

@@ -1,5 +1,10 @@
 # 模板更新日志
 
+## [2.2.5] （2022-09-06）
+#### feat
+- TheSlotDemo.vue 增加标准table页面示例
+- 增加无需token启动脚本
+
 ## [2.2.4] （2022-09-04）
 #### feat
 - src/utils/common.js中增加getStyle
