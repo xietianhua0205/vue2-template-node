@@ -7,6 +7,7 @@ export default {
     }
   },
   watch: {
+    // 监听路由变化，解析url，生成query数据，并调用handleRouteChange（一般用来获取列表数据）
     $route: {
       immediate: true,
       handler () {
@@ -42,10 +43,11 @@ export default {
   methods: {
     handleRouteChange () {
     },
+    // 刷新当前页
     refresh () {
-      // this.getTableData()
       this.updatePageURL(true)
     },
+    // 通过query数据生成新的url,并跳转
     updatePageURL (isReplace) {
       const settings = this.query.default
       const query = Object.assign({}, this.$route.query)

@@ -1,3 +1,5 @@
+// 配置说明参考node_modules/@plantdata/reactive-menu-item/interface.ts
+// 导航使用参考node_modules/@plantdata/reactive-menu-item/README.md
 export default [
   {
     id: 1,
