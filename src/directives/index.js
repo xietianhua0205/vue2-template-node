@@ -21,7 +21,7 @@ export function addDirectives (Vue) {
       const text = el.innerHTML.trim()
       let kw = binding.value
       if (kw && text) {
-        '.[]^*+?{}()|$'.split('').map((o) => {
+        '.[]^*+?{}()|$'.split('').forEach((o) => {
           kw = kw.replace(o, '\\' + o)
         })
         kw = kw.replace('\\', '\\\\')
