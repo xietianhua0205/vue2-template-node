@@ -1,7 +1,7 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
-const infoData = require('./info.json')
+const infoData = require(path.resolve(__dirname, 'info.json'))
 const cp = require('child_process')
 const date = new Date()
 const timestamp = date.getTime()

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const ip = require('ip')
 const path = require('path')
 const cp = require('child_process')
@@ -6,8 +6,8 @@ const cp = require('child_process')
 let version = ''
 let source = ''
 
-const pkg = require('../package.json')
-const infoData = require('./info.json')
+const pkg = require(path.resolve(__dirname, '../package.json'))
+const infoData = require(path.resolve(__dirname, 'info.json'))
 const date = new Date()
 infoData.publishTime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
 

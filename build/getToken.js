@@ -1,5 +1,5 @@
 const request = require('request')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const profile = require('../profile')
 const chalk = require('chalk')

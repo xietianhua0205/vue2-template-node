@@ -1,4 +1,5 @@
-const profile = require('../profile')
+const path = require('path')
+const profile = require(path.resolve(__dirname, '../profile'))
 
 const baseURL = profile.baseURL
 const baseMapURL = 'http://192.169.4.71' // 地图相关静态资源服务器，地图相关项目部署时需从该地址获取资源

@@ -13,10 +13,12 @@
 - 详见[启用KG-SEARCH管理动态配置说明.md](docs/CONFIG.md)
 
 #### 脚本说明
-- serve 启动开发
+- serve 启动开发，待获取plantdata token脚本
+- start 启动开发，跳过获取plantdata token脚本
 - build 打包发布
+- build-stuido 打包并生成上传到studio的压缩包
 - build-report 打包并生成分析报告
-- getToken 手动获取plantdata产品用户token
+- get-token 手动获取plantdata产品用户token
 - count-code 代码量统计
 - lint 代码格式校验
 - lintfix 带自动修复的代码格式校验

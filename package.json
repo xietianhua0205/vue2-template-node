@@ -1,11 +1,12 @@
 {
   "name": "vue2-template",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build && node build/infoCopy.js",
+    "build-studio": "npm run build && node build/buildZip.js",
     "build-report": "vue-cli-service build --report",
     "lint": "vue-cli-service lint",
     "count-code": "node build/count ./src vue js less scss ts",
