@@ -15,6 +15,7 @@ function getUser () {
     try {
       return JSON.parse(str)
     } catch (e) {
+      // eslint-disable-next-line
       console.error(e)
     }
   }

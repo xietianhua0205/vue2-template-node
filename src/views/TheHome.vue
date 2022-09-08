@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { ReactiveMenuMixin } from '@plantdata/reactive-menu-item/src/mixins/reactive-menu'
+import { reactiveMenuMixin } from '@plantdata/reactive-menu-item/src/mixins/reactive-menu'
 import ReactiveMenuItem from '@plantdata/reactive-menu-item'
 import PasswordReset from '@/components/PasswordReset'
 import ThePage from '@/components/ThePage'
@@ -103,7 +103,7 @@ export default {
     PasswordReset,
     ThePage
   },
-  mixins: [ReactiveMenuMixin],
+  mixins: [reactiveMenuMixin],
   data () {
     if (!this.$config.slot.navSecondary) {
       menuDataAll.forEach(m => {

@@ -171,7 +171,7 @@ export default {
     FilterItem,
     PageContent
   },
-  // ReactiveMenuMixin中提供的provide
+  // reactiveMenuMixin中提供的provide
   // currentMenuGet为当前选中的导航
   // currentMenuParentsGet为选中导航的链路，从src/menu.js中配置的第一层数据，到当前导航的祖、爷、父包括当前导航的数组，实际使用时可根据具体情况裁切
   // 其他provide可查看node_modules/@plantdata/reactive-menu-item/src/mixins/reactive-menu.js
@@ -221,6 +221,7 @@ export default {
     getTableData () {
       this.tableData.data = []
       this.tableData.loading = true
+      // eslint-disable-next-line
       console.log(this.query)
       return new Promise((resolve) => {
         setTimeout(() => {

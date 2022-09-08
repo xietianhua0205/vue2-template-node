@@ -77,6 +77,7 @@ export default {
                         }
                         resolve(config)
                       } catch (e) {
+                        // eslint-disable-next-line
                         console.error('配置解析失败')
                       }
                     }

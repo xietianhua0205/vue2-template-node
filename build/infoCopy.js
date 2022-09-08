@@ -7,7 +7,7 @@ let version = ''
 let source = ''
 
 const pkg = require('../package.json')
-let infoData = require('./info.json')
+const infoData = require('./info.json')
 const date = new Date()
 infoData.publishTime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
 
@@ -15,19 +15,35 @@ infoData.author = ip.address().split('.')
 getCurrentVersion()
 infoData.version = version
 infoData.source = source
-infoData = JSON.stringify(infoData, null, 4)
 
-fs.writeFileSync(path.resolve(__dirname, '../dist/' + pkg.name + '/static/info.json'), infoData)
+try {
+  const remoteNames = cp.execSync('git remote', { cwd: '.' }).toString().trim().split(/\s/)
+  if (remoteNames?.length) {
+    const remoteUrlList = []
+    remoteNames.forEach((remoteName) => {
+      remoteUrlList.push(cp.execSync(`git config --get remote.${remoteName}.url`, { cwd: '.' })?.toString()?.trim()?.split('/')?.slice(3)?.join('/')?.replace('.git', ''))
+    })
+    infoData.remote = remoteUrlList.join(',')
+  }
+} catch (e) {
+  console.log('找不到git信息')
+}
+
+fs.writeFileSync(path.resolve(__dirname, '../dist/' + pkg.name + '/static/info.json'), JSON.stringify(infoData, null, 4))
 console.log('info.json更新成功！')
 
 function getCurrentVersion () {
-  const data = fs.readFileSync(path.join(__dirname, '..', '.git', 'HEAD')).toString().trim()
-  if (data.includes('ref: refs/heads/')) {
-    version = data.replace('ref: refs/heads/', '').trim().split('/')[0].trim()
-    source = 'branch'
-  } else {
-    version = getCurrentTag()
-    source = 'tag'
+  try {
+    const data = fs.readFileSync(path.join(__dirname, '..', '.git', 'HEAD')).toString().trim()
+    if (data.includes('ref: refs/heads/')) {
+      version = data.replace('ref: refs/heads/', '').trim().split('/')[0].trim()
+      source = 'branch'
+    } else {
+      version = getCurrentTag()
+      source = 'tag'
+    }
+  } catch (e) {
+    console.log('找不到git信息')
   }
 }
 
