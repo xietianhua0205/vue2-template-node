@@ -174,6 +174,31 @@
       }
     }
   }
+  var verifyConfig = {
+    switch: {
+      length: true,
+      specialCharacter: true
+    },
+    map: {
+      verifyDataDemo: { // 建议使用组件名称
+        fieldOne: { // 建议使用字段名
+          max: 20, // 最大长度或数字的最大值
+          min: 10, // 最小长度或数字的最小值
+          sc: /\./ // 不可出现的特殊字符,不写会用defaultSpecialCharacter，false时不校验特殊字符
+        },
+        fieldTwo: {
+          max: 20,
+          min: 10
+        },
+        form: {
+          testField: { // 可根据实际情况再嵌套
+            max: 50
+          }
+        }
+      }
+    },
+    defaultSpecialCharacter: new RegExp('^([Nn][Uu][Ll][Ll])+$|[`\\\\（）\\(\\)~！@#$^&*=|{}\\[\\]<>《》/~@#￥&*——|{}【】%……;+\\-："；\'，。？、·!０１２３４５６７８９.:_ ]')
+  }
   /**
    * 无特殊需求，不要直接使用window.APP_CONFIG, 使用vue对象中的$config,或者Vue.prototype.$config代替,
    * Vue.prototype.$config考虑后续克隆一份window.APP_CONFIG，而不直接使用该引用，以免合并动态配置后，丢失原始数据
@@ -187,6 +212,7 @@
     configNsId: null,
     configBaseURL: '',
     theme: theme,
+    verifyConfig: verifyConfig,
     layout: layout,
     navProps: layoutMap[layout].navProps,
     slot: layoutMap[layout].slot,

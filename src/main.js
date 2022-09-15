@@ -11,6 +11,7 @@ import './assets/styles/common.scss'
 import './assets/icon/iconfont.css'
 import customElement from './element-custom'
 import config from './config'
+import { getMaxlengthByKey, setCommonConfig } from '@/utils/verify-data'
 
 Vue.prototype.$config = config
 
@@ -31,5 +32,8 @@ const app = new Vue({
 createRouteGuard(config)
 
 Vue.prototype.$axios = createAxios(app, config)
+
+setCommonConfig(config.verifyConfig)
+Vue.prototype.$getMaxlengthByKey = getMaxlengthByKey
 
 app.$mount('#app')

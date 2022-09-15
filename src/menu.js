@@ -32,6 +32,24 @@ export default [
             query: []
           }
         }
+      },
+      {
+        id: 12,
+        pid: 1,
+        name: '校验模板',
+        enable: true,
+        checked: true,
+        type: 'menu',
+        order: 1,
+        config: {
+          isDefault: true,
+          icon: 'ic-system',
+          route: {
+            name: 'verify',
+            params: [],
+            query: []
+          }
+        }
       }
     ]
   }

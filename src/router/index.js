@@ -29,6 +29,11 @@ const routes = [
         path: 'slot',
         name: 'slot',
         component: () => import('@/views/templates/TheSlotDemo.vue')
+      },
+      {
+        path: 'verify',
+        name: 'verify',
+        component: () => import('@/views/templates/TheVerifyDataDemo.vue')
       }
     ]
   },
