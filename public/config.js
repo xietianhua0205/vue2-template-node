@@ -225,6 +225,7 @@
     kgName: 's60zc4ni_graph_default',
     APK: 'c6046efc0f4741ad84aed43d3f8c964f',
     isDev: false,
-    needLogin: false
+    needLogin: false,
+    titleAutoUpdate: true
   }
 })()

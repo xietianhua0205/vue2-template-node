@@ -131,8 +131,27 @@ export default {
   created () {
     this.init()
   },
-  watch: {},
+  mounted () {
+    if (this.$config.titleAutoUpdate) {
+      this.updatePageTitle()
+    }
+  },
+  watch: {
+    $route: {
+      deep: true,
+      handler () {
+        if (this.$config.titleAutoUpdate) {
+          this.updatePageTitle()
+        }
+      }
+    }
+  },
   methods: {
+    updatePageTitle () {
+      setTimeout(() => {
+        document.title = this.currentMenu.name
+      }, 100)
+    },
     goMoreMenu (v) {
       if (v === 'logout') {
         this.logout()
@@ -259,7 +278,8 @@ export default {
       border-bottom: 0;
     }
   }
-  &.hide-only-child>li:only-child {
+
+  &.hide-only-child > li:only-child {
     display: none;
   }
 }
