@@ -1,12 +1,13 @@
-const { DOMAIN, PORT } = require('./config')
 const app = require('express')()
 const fs = require('fs-extra')
+const qs = require('qs')
 const http = require('http')
 const path = require('path')
 const zlib = require('zlib')
 const request = require('request')
-const proxy = require('../build/proxy')
 // const httpProxy = require('http-proxy-middleware')
+const { DOMAIN, PORT } = require(path.resolve(__dirname, 'config'))
+const proxy = require(path.resolve(__dirname, '../build/proxy'))
 
 const httpServer = http.createServer(app)
 
@@ -27,16 +28,24 @@ app.all('*', function (req, res, next) {
 for (const key in proxy) {
   app.use(key, (req, res) => {
     const url = proxy[key].target + req.originalUrl
-    if (req.headers.accept.startsWith('application/json')) {
+    if (req.headers.accept.indexOf('application/json') >= 0 || req.headers.accept.indexOf('*/*') >= 0) {
       const dataPath = path.resolve(__dirname) + '/data' + req.originalUrl.split('?')[0] + '.json'
+      const md5Str = qs.parse(req.originalUrl.split('?')[1]).md5Str
       const reqLocalData = () => {
         try {
-          const data = fs.readFileSync(dataPath)
-          const json = {
-            errCode: 200,
-            data: JSON.parse(data)
+          const data = fs.readJsonSync(dataPath)
+          if (data && data[md5Str]) {
+            const json = {
+              errCode: 200,
+              data: data[md5Str]
+            }
+            res.status(200).send(JSON.stringify(json))
+          } else {
+            res.status(200).send(JSON.stringify({
+              errCode: 500,
+              message: '找不到数据'
+            }))
           }
-          res.status(200).send(JSON.stringify(json))
         } catch (e) {
           res.status(200).send(JSON.stringify({
             errCode: 500,
@@ -58,7 +67,13 @@ for (const key in proxy) {
                 res.status(200).send(body)
                 if (body && !fs.existsSync(dataPath)) {
                   fs.mkdirpSync(path.dirname(dataPath))
-                  fs.writeJson(dataPath, JSON.parse(body).data)
+                  let data = {}
+                  try {
+                    data = fs.readFileSync(dataPath)
+                  } catch (e) {
+                  }
+                  data[md5Str] = JSON.parse(body).data
+                  fs.writeJson(dataPath, data)
                 }
               }
               if (response.headers['content-encoding'] === 'gzip') {

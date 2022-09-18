@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
@@ -13,7 +13,8 @@
     "get-token": "node build/getToken.js",
     "lintfix": "eslint --ext .js,.ts,.vue \"src\" --fix",
     "prepare": "husky install",
-    "server": "nodemon --watch build --watch server/data server/server.js"
+    "local-server": "nodemon --watch build --watch server/data server/server.js",
+    "local-start": "set START_TYPE=local && vue-cli-service serve"
   },
   "dependencies": {
     "@plantdata/pd": "^1.0.0",

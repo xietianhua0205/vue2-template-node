@@ -1,13 +1,16 @@
 import Axios from 'axios'
 // import qs from 'qs'
 import { getToken } from '@/utils/token'
+import { buildLocalServerQueryMd5Str } from '@/utils/common'
 
 export function createAxios (app, config) {
   if (config.isDev) {
     config.token = getToken()
     if (!config.token) {
       import('../build/token.json').then((e) => {
-        config.token = 'bearer ' + e.token
+        if (e.token) {
+          config.token = 'bearer ' + e.token
+        }
       })
     }
   }
@@ -20,7 +23,9 @@ export function createAxios (app, config) {
 
   axios.interceptors.request.use(function (settings) {
     if (config.token && !exUrl.find(url => url === settings.url)) {
-      settings.headers.authorization = settings.headers.authorization || config.token
+      if (config.token) {
+        settings.headers.authorization = settings.headers.authorization || config.token
+      }
     }
     // if (settings.url.startsWith('/plantdata-sdk')) {
     //   settings.baseURL = ''
@@ -38,6 +43,14 @@ export function createAxios (app, config) {
     //   settings.params = settings.params || {}
     //   settings.params.kgName = settings.params.kgName || config.kgName
     // }
+    if (config.isDev) {
+      settings.params.md5Str = buildLocalServerQueryMd5Str(settings.url, settings.params, settings.data, settings.method)
+      const USE_LOCAL_DATA = app.$route.query.USE_LOCAL_DATA
+      if (USE_LOCAL_DATA) {
+        settings.params = settings.params || {}
+        settings.params.USE_LOCAL_DATA = USE_LOCAL_DATA
+      }
+    }
     return settings
   }, function (error) {
     return Promise.reject(error)
