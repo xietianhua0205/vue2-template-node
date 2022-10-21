@@ -17,8 +17,8 @@ export function addDirectives (Vue) {
   })
 
   Vue.directive('highlight', {
-    inserted: function (el, binding) {
-      const text = el.innerHTML.trim()
+    update: function (el, binding, vnode) {
+      const text = vnode.children[0].text
       let kw = binding.value
       if (kw && text) {
         '.[]^*+?{}()|$'.split('').forEach((o) => {
