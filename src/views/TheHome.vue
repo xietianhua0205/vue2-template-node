@@ -114,7 +114,12 @@ export default {
       menuDataAll,
       selfJump: true,
       resetPwdDialog: false,
-      user: null
+      user: null,
+      reactiveMenuConfig: {
+        debounceOnRouteChange: !this.$config.menuInHeader,
+        currentMenuParentsKey: 'currentMenuParents',
+        currentMenuKey: ''
+      }
     }
   },
   computed: {

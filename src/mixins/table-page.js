@@ -74,6 +74,17 @@ export default {
     // 筛选项发生变化时调用，会请求筛选后的第一页数据（前提是在getTableData方法中用了query的参数，筛选项绑定query的参数）
     search () {
       this.handlePageChange(1)
+    },
+    // 清空query的搜索
+    resetSearch () {
+      const query = Object.assign({}, this.$route.query)
+      for (const key of Object.keys(this.query.default)) {
+        delete query[key]
+      }
+      query._t = new Date().getTime()
+      this.$router.push({
+        query
+      })
     }
   }
 }

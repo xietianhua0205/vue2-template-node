@@ -52,6 +52,8 @@
       <!-- TODO 此处演示，refresh方法是TablePageMixin中定义的,重新获取数据-->
       <el-link type="primary" @click="refresh"><i class="ic-refresh"></i></el-link>
       <el-divider direction="vertical"/>
+      <el-button type="primary" @click="resetSearch">清空筛选</el-button>
+      <el-divider direction="vertical"/>
       <el-button type="danger" :disabled="!tableData.selection.length">批量删除</el-button>
     </template>
     <template #main-table="scope">

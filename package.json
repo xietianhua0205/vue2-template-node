@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
@@ -20,11 +20,12 @@
   },
   "dependencies": {
     "@plantdata/pd": "^1.0.0",
-    "@plantdata/reactive-menu-item": "^0.0.53",
+    "@plantdata/reactive-menu-item": "0.0.58",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
     "element-ui": "2.15.7",
+    "js-base64": "^3.7.2",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "qs": "^6.10.1",

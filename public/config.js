@@ -176,6 +176,7 @@
   }
   var verifyConfig = {
     switch: {
+      completeness: false,
       length: true,
       specialCharacter: true
     },
@@ -213,15 +214,12 @@
     configBaseURL: '',
     theme: theme,
     verifyConfig: verifyConfig,
+    logParamInHeader: false,
     layout: layout,
     navProps: layoutMap[layout].navProps,
     slot: layoutMap[layout].slot,
     pageSlot: layoutMap[layout].pageSlot,
     element: layoutMap[layout].element,
-    inputCharacterLimit: {
-      name: 50,
-      info: 255
-    },
     kgName: 's60zc4ni_graph_default',
     APK: 'c6046efc0f4741ad84aed43d3f8c964f',
     isDev: false,

@@ -2,6 +2,7 @@ import Axios from 'axios'
 // import qs from 'qs'
 import { getToken } from '@/utils/token'
 import { buildLocalServerQueryMd5Str } from '@/utils/common'
+import { setCompletenessHeader, setLogHeader } from '@/utils/build-headers'
 
 export function createAxios (app, config) {
   if (config.isDev) {
@@ -52,6 +53,12 @@ export function createAxios (app, config) {
         settings.params = settings.params || {}
         settings.params.USE_LOCAL_DATA = USE_LOCAL_DATA
       }
+    }
+    if (config.verifyConfig.switch.completeness) {
+      setCompletenessHeader(settings.headers, settings)
+    }
+    if (config.logParamInHeader) {
+      setLogHeader(settings.headers, settings)
     }
     return settings
   }, function (error) {
