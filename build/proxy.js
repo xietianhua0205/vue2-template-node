@@ -18,10 +18,10 @@ module.exports = {
     target: baseURL // SDK v2的代理地址
   },
   '^/group1': {
-    target: baseURL // KGMS中图谱的代理地址
+    target: baseURL // KGMS中多媒体资源的代理地址（旧版）
   },
   '^/minio': {
-    target: baseURL // KGMS中图谱的代理地址
+    target: baseURL // KGMS中多媒体资源的代理地址（新版）
   },
   '^/cesium': {
     target: baseMapURL // cesium库资源的代理地址

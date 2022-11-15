@@ -12,7 +12,7 @@ if (process.env.START_TYPE?.trim() === 'local') {
 const publicPath = '/' + config.base + '/'
 const primaryColor = process.env.VUE_APP_PRIMARY_COLOR = '#00b38a'
 const theme = process.env.VUE_APP_THEME = 'default'
-process.env.VUE_APP_LAYOUT = 'default'
+process.env.VUE_APP_LAYOUT = 'top'
 
 module.exports = {
   publicPath,
