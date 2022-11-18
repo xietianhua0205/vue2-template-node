@@ -1,5 +1,4 @@
-// import moment from 'moment'
-import * as moment from 'dayjs'
+import * as dayjs from 'dayjs'
 
 export function addDirectives (Vue) {
   Vue.directive('dateFormat', {
@@ -12,7 +11,7 @@ export function addDirectives (Vue) {
       } else if (binding.value) {
         format = binding.value
       }
-      el.innerHTML = valStr ? moment(valStr).format(format) : ''
+      el.innerHTML = valStr ? dayjs(valStr).format(format) : ''
     }
   })
 

@@ -7,9 +7,9 @@ export default {
       query: { // query中的参数，
         default: { // 参数的定义，禁止直接使用this.query.default.xx，使用this.query.xx；转换的方法在QueryPageMixin中
           pageNo: {
-            value: 1,
-            type: 'number',
-            map: 'p'
+            value: 1, // 默认值
+            type: 'number', // 值类型 number,string,json
+            map: 'p' // 参数缩写
           },
           pageSize: {
             value: 20,

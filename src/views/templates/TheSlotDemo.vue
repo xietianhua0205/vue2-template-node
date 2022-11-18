@@ -37,7 +37,7 @@
     <!--    <template slot="main-top">-->
     <!--      top (main-top)-->
     <!--    </template>-->
-    <template slot="main-top-left">
+    <template :slot="slotFilter">
       <filter-item label="关键词">
         <el-input
           size="small"
@@ -48,7 +48,7 @@
         <!-- TODO search方法是TablePageMixin中定义的,一般在参数发生变化时使用，会请求新参数的第一页数据-->
       </filter-item>
     </template>
-    <template slot="main-top-right">
+    <template :slot="slotToolbar">
       <!-- TODO 此处演示，refresh方法是TablePageMixin中定义的,重新获取数据-->
       <el-link type="primary" @click="refresh"><i class="ic-refresh"></i></el-link>
       <el-divider direction="vertical"/>
@@ -93,7 +93,7 @@
     <template slot="main-bottom-left">
       option (main-bottom-left)
     </template>
-    <template slot="main-bottom-center">
+    <template :slot="slotPagination">
       <!-- TODO 分页一般情况下直接复制这一段就好了，不用额外操作-->
       <el-pagination
         @current-change="handlePageChange"
@@ -104,9 +104,9 @@
         :total="tableData.total"
       ></el-pagination>
     </template>
-    <template slot="main-bottom-right">
-      pagination (main-bottom-right)
-    </template>
+<!--    <template slot="main-bottom-right">-->
+<!--      pagination (main-bottom-right)-->
+<!--    </template>-->
     <!--        <template slot="footer">-->
     <!--          footer (footer)-->
     <!--        </template>-->
@@ -116,6 +116,7 @@
 <script>
 import PageContent from '@/components/PageContent'
 import TablePageMixin from '@/mixins/table-page'
+import SlotMixin from '@/mixins/slot'
 import FilterItem from '@/components/FilterItem'
 
 // TODO 模拟的假数据
@@ -168,7 +169,7 @@ const remoteData = [
 
 export default {
   name: 'TheSlotDemo',
-  mixins: [TablePageMixin],
+  mixins: [TablePageMixin, SlotMixin],
   components: {
     FilterItem,
     PageContent

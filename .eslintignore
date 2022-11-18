@@ -2,3 +2,5 @@ node_modules
 src/assets
 src/icons
 src/utils/login.js
+public
+build
