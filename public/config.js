@@ -214,7 +214,7 @@
     configBaseURL: '',
     theme: theme,
     verifyConfig: verifyConfig,
-    logParamInHeader: false,
+    logParamInHeader: true,
     layout: layout,
     navProps: layoutMap[layout].navProps,
     slot: layoutMap[layout].slot,
