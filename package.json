@@ -72,8 +72,8 @@
     "zlib": "^1.0.5"
   },
   "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "npm run eslint"
+    "**/*.{js,vue}": [
+      "npm run lint"
     ]
   },
   "config": {

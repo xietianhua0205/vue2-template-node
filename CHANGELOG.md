@@ -3,6 +3,7 @@
 ## [2.3.4] （2022-11-18）
 #### fix
 - commit message的校验导致的版本更新自动commit失效的bug
+- lint-staged执行脚本错误
 
 ## [2.3.3] （2022-11-8）
 #### feat
