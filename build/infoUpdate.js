@@ -13,7 +13,7 @@ if (timestamp - (infoData.timestamp || 0) > 10 * 1000) {
   fs.writeFileSync(p, JSON.stringify(infoData, null, 4))
   console.log('版本号更新成功！')
 
-  const lastTagCommand = `git commit ${p} -m update:${infoData.versionInternal}`
+  const lastTagCommand = `git commit ${p} -m build:${infoData.versionInternal}`
   return cp.execSync(lastTagCommand, { cwd: '.' }).toString().trim()
 } else {
   console.log('重复commit')
