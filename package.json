@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
-    "start": "vue-cli-service serve",
+    "start": "node build/cleanToken.js && vue-cli-service serve",
     "build": "vue-cli-service build && node build/infoCopy.js",
     "build-studio": "npm run build && node build/buildZip.js",
     "build-report": "vue-cli-service build --report",
