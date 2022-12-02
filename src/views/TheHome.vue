@@ -1,5 +1,5 @@
 <template>
-  <the-page v-if="isLogin || !$config.needLogin">
+  <the-page v-if="isLogin || !$config.needLogin" :hide-head="hideHead">
     <template slot="header-left">
       <div class="logo-container" @click="goHome">
         <template v-if="$config.logoDisabled !== true">
@@ -20,6 +20,22 @@
           v-for="item of menuDataAllOrder"
           :key="item.id"
           :data="item">
+          <template v-slot:menuItem="data">
+            <template v-if="data.config.icon">
+              <img v-if="isImageUrl(data.config.icon)" :src="data.config.icon" :alt="data.name"
+                   class="reactive-menu-item-icon"/>
+              <i v-else :class="data.config.icon" class="reactive-menu-item-icon"></i>
+            </template>
+            {{ data.name }}
+          </template>
+          <template v-slot:submenu="data">
+            <template v-if="data.config.icon">
+              <img v-if="isImageUrl(data.config.icon)" :src="data.config.icon" :alt="data.name"
+                   class="reactive-menu-item-icon"/>
+              <i v-else :class="data.config.icon" class="reactive-menu-item-icon"></i>
+            </template>
+            {{ data.name }}
+          </template>
         </reactive-menu-item>
       </el-menu>
     </template>
@@ -50,36 +66,42 @@
     <template :slot="$config.slot.navSecondary" v-if="$config.slot.navSecondary">
       <el-menu
         :collapse="false"
-        v-if="menuDataFilter.length"
+        v-if="secondaryNavMenus.length"
         :mode="$config.slot.navSecondary ==='header-secondary' ? 'horizontal' : 'vertical'"
         :class="{'nav-border': $config.navProps.border,
-         'the-top-secondary-nav': $config.slot.navSecondary ==='header-secondary',
-         'the-left-nav': $config.slot.navSecondary === 'main-left' || $config.slot.navSecondary === 'header-right-start'}"
+       'the-top-secondary-nav': $config.slot.navSecondary ==='header-secondary',
+       'the-left-nav': $config.slot.navSecondary === 'main-left' || $config.slot.navSecondary === 'header-right-start'}"
         :default-openeds="$config.slot.navSecondary === 'header-secondary' ? [] : defaultOpeneds"
         :default-active="activeIndex">
         <reactive-menu-item
-          v-for="item of menuDataFilter"
+          v-for="item of secondaryNavMenus"
           :key="item.id"
           :data="item">
+          <template v-slot:menuItem="data">
+            <template v-if="data.config.icon">
+              <img v-if="isImageUrl(data.config.icon)" :src="data.config.icon" :alt="data.name"
+                   class="reactive-menu-item-icon"/>
+              <i v-else :class="data.config.icon" class="reactive-menu-item-icon"></i>
+            </template>
+            {{ data.name }}
+          </template>
+          <template v-slot:submenu="data">
+            <template v-if="data.config.icon">
+              <img v-if="isImageUrl(data.config.icon)" :src="data.config.icon" :alt="data.name"
+                   class="reactive-menu-item-icon"/>
+              <i v-else :class="data.config.icon" class="reactive-menu-item-icon"></i>
+            </template>
+            {{ data.name }}
+          </template>
         </reactive-menu-item>
       </el-menu>
     </template>
-    <!--        <template slot="main-left">-->
-    <!--          <el-menu-->
-    <!--            class="the-left-nav"-->
-    <!--            :class="{'nav-border': $config.navProps.border}"-->
-    <!--            :default-openeds="defaultOpeneds"-->
-    <!--            :default-active="activeIndex">-->
-    <!--            <reactive-menu-item-->
-    <!--              v-for="item of menuDataFilter"-->
-    <!--              :key="item.id"-->
-    <!--              :data="item">-->
-    <!--            </reactive-menu-item>-->
-    <!--          </el-menu>-->
-    <!--        </template>-->
-    <template slot="main-right">
+    <template slot="main-right" v-if="menuDataAll.length">
       <router-view class="page-main-right" v-if="user || !$config.needLogin"/>
       <div v-else></div>
+    </template>
+    <template slot="main-right" v-else>
+      <el-empty class="no-menus" description="没有配置任何菜单项"></el-empty>
     </template>
     <!--    <template slot="footer">-->
     <!--      footer (footer)-->
@@ -93,7 +115,6 @@ import ReactiveMenuItem from '@plantdata/reactive-menu-item'
 import PasswordReset from '@/components/PasswordReset'
 import ThePage from '@/components/ThePage'
 import { clearUser, setUser } from '@/utils/user'
-import menuDataAll from '@/menu'
 import { clearToken } from '@/utils/token'
 
 export default {
@@ -105,18 +126,14 @@ export default {
   },
   mixins: [reactiveMenuMixin],
   data () {
-    if (!this.$config.slot.navSecondary) {
-      menuDataAll.forEach(m => {
-        m.config.boundary = false
-      })
-    }
+    this.updateMenuBoundary()
     return {
-      menuDataAll,
+      menuDataAll: this.$config.menus,
       selfJump: true,
       resetPwdDialog: false,
       user: null,
       reactiveMenuConfig: {
-        debounceOnRouteChange: !this.$config.menuInHeader,
+        debounceOnRouteChange: !this.$config.logParamInHeader,
         currentMenuParentsKey: 'currentMenuParents',
         currentMenuKey: ''
       }
@@ -129,8 +146,16 @@ export default {
     nickName () {
       return this.user?.realname || '未登录'
     },
+    hideHead () {
+      return this.$route.params.hideHead !== undefined
+    },
     userId () {
       return this.user?.id
+    },
+    secondaryNavMenus () {
+      const hideOnlyChild = this.$config.navProps.hideOnlyChild
+      const showSub = this.$config.slot.navPrimary || (hideOnlyChild && this.menuDataAllOrder.length < 2)
+      return showSub ? this.menuDataFilter : this.menuDataAllOrder
     }
   },
   created () {
@@ -152,9 +177,19 @@ export default {
     }
   },
   methods: {
+    updateMenuBoundary () {
+      if (!this.$config.slot.navSecondary || !this.$config.slot.navPrimary) {
+        this.$config.menus.forEach(m => {
+          m.config.boundary = false
+        })
+      }
+    },
+    isImageUrl (icon) {
+      return icon.startsWith('http') || icon.startsWith('data:image/')
+    },
     updatePageTitle () {
       setTimeout(() => {
-        document.title = this.currentMenu.name
+        document.title = this.currentMenu?.name || 'loading...'
       }, 100)
     },
     goMoreMenu (v) {
@@ -406,5 +441,18 @@ export default {
       transform: rotate(-90deg);
     }
   }
+}
+
+.reactive-menu-item-icon {
+  width: 16px;
+  height: 16px;
+}
+
+img.reactive-menu-item-icon {
+  vertical-align: -2px;
+}
+
+.no-menus {
+  width: 100%;
 }
 </style>

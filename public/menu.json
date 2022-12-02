@@ -1,0 +1,29 @@
+[
+  {
+    "label": "内容模板介绍",
+    "value": "",
+    "icon": "ic-zsjm-gndy",
+    "children": [
+      {
+        "label": "插槽模板",
+        "value": "/home/hideHead/slot",
+        "type": "menu",
+        "isDefault": true,
+        "icon": "ic-system",
+        "target": "_self",
+        "boundary": false,
+        "isHref": false
+      },
+      {
+        "label": "校验模板",
+        "value": "/home/hideHead/verify",
+        "icon": "ic-system"
+      },
+      {
+        "label": "动态模板",
+        "value": "/home/hideHead/dynamic/:kgName/:APK/:hello?w",
+        "icon": "ic-system"
+      }
+    ]
+  }
+]

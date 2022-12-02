@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import NotFound from '@/components/NotFound'
 import { clearUser } from '@/utils/user'
+import menusConfig from '../../public/menu.json'
 
 function isNavAllow (nav) {
   return true
@@ -20,7 +21,7 @@ const routes = [
     component: () => import('@/views/TheLogin.vue')
   },
   {
-    path: '/home',
+    path: '/home/:hideHead?',
     name: 'home',
     component: () => import('@/views/TheHome.vue'),
     redirect: { name: 'slot' },
@@ -34,6 +35,11 @@ const routes = [
         path: 'verify',
         name: 'verify',
         component: () => import('@/views/templates/TheVerifyDataDemo.vue')
+      },
+      {
+        path: 'dynamic/:kgName/:APK/:hello',
+        name: 'dynamic',
+        component: () => import('@/views/templates/TheDynamicDemo.vue')
       }
     ]
   },
@@ -50,8 +56,45 @@ const router = new Router({
   routes
 })
 
-function createRouteGuard (config) {
+function calcRouteValue (route, menus) {
+  for (const item of menus) {
+    const reg = route.matched[route.matched.length - 1].regex
+    if (new RegExp(reg).test(item.value)) {
+      return item.value
+    } else if (item.children) {
+      const value = calcRouteValue(route, item.children)
+      if (value) {
+        return value
+      }
+    }
+  }
+}
+
+function emitRouteChange (to, from, app) {
+  const fromValue = calcRouteValue(from, menusConfig)
+  const routeValue = calcRouteValue(to, menusConfig)
+  if (fromValue !== routeValue) {
+    const origin = window.location.origin
+    let base = router.options.base
+    if (!base.startsWith('/')) {
+      base = '/' + base
+    }
+    if (base.endsWith('/') && routeValue.startsWith('/')) {
+      base = base.substring(0, base.length - 1)
+    } else if (!base.endsWith('/') && !routeValue.startsWith('/')) {
+      base = base + '/'
+    }
+    app.postMessage({
+      route: routeValue,
+      base,
+      origin
+    }, undefined, 'emitRouteChange')
+  }
+}
+
+function createRouteGuard (config, app) {
   router.beforeEach((to, from, next) => {
+    emitRouteChange(to, from, app)
     if (to.name === 'login') {
       clearUser()
       if (config.isDev) {

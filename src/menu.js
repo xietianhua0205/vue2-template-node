@@ -40,13 +40,44 @@ export default [
         enable: true,
         checked: true,
         type: 'menu',
-        order: 1,
+        order: 2,
         config: {
           isDefault: true,
           icon: 'ic-system',
           route: {
             name: 'verify',
             params: [],
+            query: []
+          }
+        }
+      },
+      {
+        id: 13,
+        pid: 1,
+        name: '动态路由模板',
+        enable: true,
+        checked: true,
+        type: 'menu',
+        order: 3,
+        config: {
+          isDefault: true,
+          icon: 'ic-system',
+          route: {
+            name: 'dynamic',
+            params: [
+              {
+                key: 'hello',
+                value: ''
+              },
+              {
+                key: 'kgName',
+                value: ''
+              },
+              {
+                key: 'APK',
+                value: ''
+              }
+            ],
             query: []
           }
         }

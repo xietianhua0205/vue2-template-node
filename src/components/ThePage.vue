@@ -1,6 +1,6 @@
 <template>
   <el-container class="page-container" :class="'the-theme-' + $config.theme + ' the-layout-' + $config.layout">
-    <el-header class="page-header">
+    <el-header class="page-header" v-if="headVisible">
       <slot name="header">
         <div class="page-header-left">
           <slot name="header-left"></slot>
@@ -20,12 +20,12 @@
         </div>
       </slot>
     </el-header>
-    <el-header class="page-header-secondary">
+    <el-header class="page-header-secondary" v-if="headVisible">
       <slot name="header-secondary"></slot>
     </el-header>
     <el-main class="page-main">
       <slot name="main">
-        <div class="page-main-left">
+        <div class="page-main-left" v-if="headVisible">
           <slot name="main-left"></slot>
         </div>
         <slot name="main-right">
@@ -41,8 +41,25 @@
 
 <script>
 
+import { getKeyPrefix } from '@/utils/localStorage'
+
 export default {
-  name: 'ThePage'
+  name: 'ThePage',
+  props: {
+    hideHead: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    headVisible () {
+      const hideHead = sessionStorage.getItem(getKeyPrefix() + 'hideHead')
+      return !(hideHead === 'true' || this.hideHead)
+    }
+  },
+  created () {
+    sessionStorage.setItem(getKeyPrefix() + 'hideHead', this.hideHead.toString())
+  }
 }
 </script>
 

@@ -76,8 +76,13 @@
           prop="name"
           label="name">
         </el-table-column>
-        <el-table-column label="操作" width="100">
+        <el-table-column label="操作" width="160">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="$router.push({name: 'verify'})">编辑
+            </el-button>
             <el-button
               size="mini"
               type="danger"

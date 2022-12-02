@@ -216,6 +216,7 @@
     verifyConfig: verifyConfig,
     logParamInHeader: true,
     layout: layout,
+    layoutMap: layoutMap,
     navProps: layoutMap[layout].navProps,
     slot: layoutMap[layout].slot,
     pageSlot: layoutMap[layout].pageSlot,
@@ -224,6 +225,8 @@
     APK: 'c6046efc0f4741ad84aed43d3f8c964f',
     isDev: false,
     needLogin: false,
-    titleAutoUpdate: true
+    titleAutoUpdate: true,
+    targetOrigin: window.location.origin
+    // targetOrigin: '*'
   }
 })()

@@ -16,4 +16,4 @@ function removeItem (key) {
   localStorage.removeItem(getKeyPrefix() + key)
 }
 
-export { setItem, getItem, removeItem }
+export { getKeyPrefix, setItem, getItem, removeItem }

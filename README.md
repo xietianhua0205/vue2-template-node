@@ -12,6 +12,9 @@
 #### 启用KG-SEARCH管理动态配置说明
 - 详见[启用KG-SEARCH管理动态配置说明.md](docs/CONFIG.md)
 
+#### 支持单页编排配置
+- 详见[支持单页编排配置.md](./docs/支持单页编排配置.md)
+
 #### 脚本说明
 - serve 启动开发，待获取plantdata token脚本
 - start 启动开发，跳过获取plantdata token脚本
@@ -147,12 +150,15 @@
     - 动态修改主题色的工具类
 - user.js
     - 存储在localStorage中的用户信息辅助工具类
+- route.js
+    - 动态替换路由参数的工具类
     
 #### 内置页面 (src/views) 
 - TheHome.vue 应用框架模板，支持动态菜单、重置密码、获取用户信息等内容
 - TheLogin.vue 内置的登录页面，需按需设置登录接口，接入sso时不需要这个页面
 - templates/TheSlotDemo.vue 应用内容模板的案例、内含部分插槽效果示例
 - templates/TheVerifyDataDemo.vue 应用内容模板的案例、内含数据校验示例
+- templates/TheDynamicDemo.vue 单页编排时的动态路由示例
 
 #### 其他文件说明
 - src/config.js 初始化配置
