@@ -1,6 +1,6 @@
 import { getItem } from '@/utils/localStorage'
 
-export function updateRouter (app, paramsMap, queryMap) {
+export function updateRouter (app, paramsMap = {}, queryMap = {}) {
   // const pathname = window.location.pathname.substring(process.env.BASE_URL.length)
   const pathname = app.$route.path
   const fullPath = app.$route.fullPath

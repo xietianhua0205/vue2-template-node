@@ -84,7 +84,11 @@ function emitRouteChange (to, from, app) {
     } else if (!base.endsWith('/') && !routeValue.startsWith('/')) {
       base = base + '/'
     }
-    app.postMessage({
+    app.$postMessage({
+      params: {
+        params: to.params,
+        query: to.query
+      },
       route: routeValue,
       base,
       origin

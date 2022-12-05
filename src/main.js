@@ -36,7 +36,7 @@ Vue.prototype.$axios = createAxios(app, config)
 setCommonConfig(config.verifyConfig)
 Vue.prototype.$getMaxlengthByKey = getMaxlengthByKey
 
-Vue.prototype.postMessage = (data, path = config.APPName, type = 'emitRouteParams') => {
+Vue.prototype.$postMessage = (data, path = config.APPName, type = 'emitRouteParams') => {
   if (window.parent) {
     window.parent.postMessage({
       type,
@@ -48,12 +48,12 @@ Vue.prototype.postMessage = (data, path = config.APPName, type = 'emitRouteParam
 
 app.$mount('#app')
 
-app.postMessage({
+app.$postMessage({
   kgName: config.kgName, // 发送配置的参数
   APK: config.APK,
   w: 1920 // 发送固定值的参数
 })
 
-app.postMessage({
+app.$postMessage({
   hello: 'lx' // 发送全局的参数
 }, '')
