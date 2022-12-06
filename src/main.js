@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-import { createRouteGuard, router } from './router'
+import { createRouteGuard, router, emitRouteChange } from './router'
 import ElementUI from 'element-ui'
 import { createAxios } from './axios'
 import { addDirectives } from './directives'
@@ -45,6 +45,28 @@ Vue.prototype.$postMessage = (data, path = config.APPName, type = 'emitRoutePara
     }, config.targetOrigin)
   }
 }
+
+const openNewWindowEventTimeout = {}
+
+Vue.prototype.$openInNewWindow = (to, current, append) => {
+  const r = router.resolve(Object.assign({ params: { hideHead: 'hideHead' } }, to), current, append)
+  emitRouteChange(r.route, undefined, app, 'emitOpenNewWindow')
+  openNewWindowEventTimeout[r.route.fullPath] = setTimeout(() => {
+    window.open(router.resolve(to, current, append).href, '_blank')
+  }, 100)
+}
+
+window.addEventListener('message', (e) => {
+  const {
+    data,
+    source
+  } = e
+  if (source === window.parent) {
+    if (data.type === 'openNewWindowSuccess') {
+      clearTimeout(openNewWindowEventTimeout[data.data.fullPath])
+    }
+  }
+})
 
 app.$mount('#app')
 

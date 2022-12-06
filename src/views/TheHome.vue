@@ -398,6 +398,7 @@ export default {
   display: flex;
   align-items: center;
   height: $page-head-height;
+  white-space: nowrap;
 
   &:hover {
     background: $page-head-background-light;

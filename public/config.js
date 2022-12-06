@@ -223,10 +223,12 @@
     element: layoutMap[layout].element,
     kgName: 's60zc4ni_graph_default',
     APK: 'c6046efc0f4741ad84aed43d3f8c964f',
-    isDev: false,
+    // isDev: false,
+    localServer: false,
     needLogin: false,
     titleAutoUpdate: true,
-    targetOrigin: window.location.origin
-    // targetOrigin: '*'
+    targetOrigin: window.location.origin,
+    // targetOrigin: '*',
+    emitRouteChange: true
   }
 })()

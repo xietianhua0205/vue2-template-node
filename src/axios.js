@@ -45,7 +45,7 @@ export function createAxios (app, config) {
     //   settings.params = settings.params || {}
     //   settings.params.kgName = settings.params.kgName || config.kgName
     // }
-    if (config.isDev) {
+    if (config.isDev && config.localServer) {
       settings.params = settings.params || {}
       settings.params.md5Str = buildLocalServerQueryMd5Str(settings.url, settings.params, settings.data, settings.method)
       const USE_LOCAL_DATA = app.$route.query.USE_LOCAL_DATA

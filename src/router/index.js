@@ -56,7 +56,7 @@ const router = new Router({
   routes
 })
 
-function calcRouteValue (route, menus) {
+function calcRouteValue (route, menus = menusConfig) {
   for (const item of menus) {
     const reg = route.matched[route.matched.length - 1].regex
     if (new RegExp(reg).test(item.value)) {
@@ -70,9 +70,9 @@ function calcRouteValue (route, menus) {
   }
 }
 
-function emitRouteChange (to, from, app) {
-  const fromValue = calcRouteValue(from, menusConfig)
-  const routeValue = calcRouteValue(to, menusConfig)
+function emitRouteChange (to, from, app, eventType = 'emitRouteChange') {
+  const fromValue = from ? calcRouteValue(from) : undefined
+  const routeValue = calcRouteValue(to)
   if (fromValue !== routeValue) {
     const origin = window.location.origin
     let base = router.options.base
@@ -89,16 +89,19 @@ function emitRouteChange (to, from, app) {
         params: to.params,
         query: to.query
       },
+      fullPath: to.fullPath,
       route: routeValue,
       base,
       origin
-    }, undefined, 'emitRouteChange')
+    }, undefined, eventType)
   }
 }
 
 function createRouteGuard (config, app) {
   router.beforeEach((to, from, next) => {
-    emitRouteChange(to, from, app)
+    if (config.emitRouteChange) {
+      emitRouteChange(to, from, app)
+    }
     if (to.name === 'login') {
       clearUser()
       if (config.isDev) {
@@ -127,4 +130,4 @@ function createRouteGuard (config, app) {
   })
 }
 
-export { router, createRouteGuard }
+export { router, createRouteGuard, emitRouteChange }
