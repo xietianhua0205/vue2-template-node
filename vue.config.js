@@ -3,7 +3,9 @@ const path = require('path')
 const proxy = require('./build/proxy')
 const config = require('./profile')
 
-if (process.env.START_TYPE?.trim() === 'local') {
+const startType = process.env.START_TYPE?.trim()
+
+if (startType === 'local') {
   const { DOMAIN, PORT } = require('./server/config')
   for (const key in proxy) {
     proxy[key].target = 'http://' + DOMAIN + ':' + PORT
@@ -13,6 +15,7 @@ const publicPath = '/' + config.base + '/'
 const primaryColor = process.env.VUE_APP_PRIMARY_COLOR = '#00b38a'
 const theme = process.env.VUE_APP_THEME = 'default'
 process.env.VUE_APP_LAYOUT = 'default'
+process.env.VUE_APP_START_TYPE = startType
 
 module.exports = {
   publicPath,

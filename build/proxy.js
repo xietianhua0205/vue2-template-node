@@ -6,7 +6,8 @@ const baseMapURL = 'http://192.169.4.71' // 地图相关静态资源服务器，
 
 module.exports = {
   '^/api': {
-    target: baseURL // 接口的一般代理地址
+    target: baseURL, // 接口的一般代理地址
+    changeOrigin: true
   },
   '^/oauth/token': {
     target: baseURL // 获取PLANTDATA用户认证TOKEN的代理地址

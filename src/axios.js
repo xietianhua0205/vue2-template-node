@@ -24,10 +24,8 @@ export function createAxios (app, config) {
 
   axios.interceptors.request.use(function (settings) {
     if (config.token && !exUrl.find(url => url === settings.url)) {
-      if (config.token) {
-        settings.headers = settings.headers || {}
-        settings.headers.authorization = settings.headers.authorization || config.token
-      }
+      settings.headers = settings.headers || {}
+      settings.headers.authorization = settings.headers.authorization || config.token
     }
     // if (settings.url.startsWith('/plantdata-sdk')) {
     //   settings.baseURL = ''
@@ -45,7 +43,7 @@ export function createAxios (app, config) {
     //   settings.params = settings.params || {}
     //   settings.params.kgName = settings.params.kgName || config.kgName
     // }
-    if (config.isDev && config.localServer) {
+    if (process.env.VUE_APP_START_TYPE === 'local') {
       settings.params = settings.params || {}
       settings.params.md5Str = buildLocalServerQueryMd5Str(settings.url, settings.params, settings.data, settings.method)
       const USE_LOCAL_DATA = app.$route.query.USE_LOCAL_DATA
