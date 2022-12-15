@@ -34,10 +34,10 @@
           v-model="form.confirmPassword"></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer">
+    <template #footer>
       <el-button @click.native="closeDialog">取消</el-button>
       <el-button @click.native="submit" type="primary">确定</el-button>
-    </div>
+    </template>
   </el-dialog>
 </template>
 

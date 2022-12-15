@@ -1,6 +1,7 @@
 import { Base64 } from 'js-base64'
 import { getRandomString, signature } from './sm3'
 import qs from 'qs'
+import { buildLocalServerQueryMd5Str } from '@/utils/common'
 
 function setCompletenessHeader (headers, axiosSettings) {
   try {
@@ -39,4 +40,14 @@ function setLogHeader (headers, axiosSettings) {
   }
 }
 
-export { setLogHeader, setCompletenessHeader }
+function updateLocalServerParams (app, axiosSettings) {
+  axiosSettings.params = axiosSettings.params || {}
+  axiosSettings.params.md5Str = buildLocalServerQueryMd5Str(axiosSettings.url, axiosSettings.params, axiosSettings.data, axiosSettings.method)
+  const USE_LOCAL_DATA = app.$route.query.USE_LOCAL_DATA
+  if (USE_LOCAL_DATA) {
+    axiosSettings.params = axiosSettings.params || {}
+    axiosSettings.params.USE_LOCAL_DATA = USE_LOCAL_DATA
+  }
+}
+
+export { setLogHeader, setCompletenessHeader, updateLocalServerParams }

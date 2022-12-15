@@ -1,43 +1,43 @@
 <template>
   <page-content>
-    <!--    <template slot="body">-->
+    <!--    <template #body>-->
     <!--      body (body)-->
     <!--    </template>-->
-    <!--    <template slot="header">-->
+    <!--    <template #header>-->
     <!--      header (header)-->
     <!--    </template>-->
-    <template slot="breadcrumb">
+    <template #breadcrumb>
       <el-breadcrumb separator="/">
         <el-breadcrumb-item v-for="item of currentMenuParentsGet()" :key="item.id">
           {{ item.name }}
         </el-breadcrumb-item>
       </el-breadcrumb>
     </template>
-    <!--    <template slot="page-title">-->
+    <!--    <template #page-title>-->
     <!--      {{currentMenuGet().name}} (page-title)-->
     <!--    </template>-->
-    <template slot="header-extra">
+    <template #header-extra>
       extra (header-extra)
     </template>
-    <template slot="header-left">
+    <template #header-left>
       filter (header-left)
     </template>
-    <template slot="header-center">
+    <template #header-center>
       article-title (header-center)
     </template>
-    <template slot="header-right">
+    <template #header-right>
       toolbar (header-right)
     </template>
-    <template slot="main-left">
+    <template #main-left>
       tree (main-left)
     </template>
-    <!--    <template slot="main-right">-->
+    <!--    <template #main-right>-->
     <!--      main-right (main-right)-->
     <!--    </template>-->
-    <!--    <template slot="main-top">-->
+    <!--    <template #main-top>-->
     <!--      top (main-top)-->
     <!--    </template>-->
-    <template :slot="slotFilter">
+    <template #[slotFilter]>
       <filter-item label="关键词">
         <el-input
           size="small"
@@ -48,7 +48,7 @@
         <!-- TODO search方法是TablePageMixin中定义的,一般在参数发生变化时使用，会请求新参数的第一页数据-->
       </filter-item>
     </template>
-    <template :slot="slotToolbar">
+    <template #[slotToolbar]>
       <!-- TODO 此处演示，refresh方法是TablePageMixin中定义的,重新获取数据-->
       <el-link type="primary" @click="refresh"><i class="ic-refresh"></i></el-link>
       <el-divider direction="vertical"/>
@@ -92,13 +92,13 @@
         </el-table-column>
       </el-table>
     </template>
-    <!--    <template slot="main-bottom">-->
+    <!--    <template #main-bottom>-->
     <!--      bottom (main-bottom)-->
     <!--    </template>-->
-    <template slot="main-bottom-left">
+    <template #main-bottom-left>
       option (main-bottom-left)
     </template>
-    <template :slot="slotPagination">
+    <template #[slotPagination]>
       <!-- TODO 分页一般情况下直接复制这一段就好了，不用额外操作-->
       <el-pagination
         @current-change="handlePageChange"
@@ -109,10 +109,10 @@
         :total="tableData.total"
       ></el-pagination>
     </template>
-<!--    <template slot="main-bottom-right">-->
+<!--    <template #main-bottom-right>-->
 <!--      pagination (main-bottom-right)-->
 <!--    </template>-->
-    <!--        <template slot="footer">-->
+    <!--        <template #footer>-->
     <!--          footer (footer)-->
     <!--        </template>-->
   </page-content>

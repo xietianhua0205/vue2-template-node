@@ -1,6 +1,6 @@
 <template>
   <the-page v-if="isLogin || !$config.needLogin" :hide-head="hideHead">
-    <template slot="header-left">
+    <template #header-left>
       <div class="logo-container" @click="goHome">
         <template v-if="$config.logoDisabled !== true">
           <img :src="$config.logo" :alt="$config.APPName" v-if="$config.logo">
@@ -8,8 +8,8 @@
         </template>
       </div>
     </template>
-    <template :slot="$config.layout === 'left' ? 'header-right-end' : 'header-right-start'"></template>
-    <template :slot="$config.slot.navPrimary" v-if="$config.slot.navPrimary">
+    <template #[headerPlaceholderSlot]></template>
+    <template #[$config.slot.navPrimary] v-if="$config.slot.navPrimary">
       <el-menu
         class="the-top-nav"
         mode="horizontal"
@@ -39,20 +39,22 @@
         </reactive-menu-item>
       </el-menu>
     </template>
-    <template slot="header-right-end">
+    <template #header-right-end-extra>
       <el-dropdown @command="goMoreMenu" v-if="$config.needLogin || user">
         <div class="head-wrap-button">
           <span>{{ nickName }}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </div>
-        <el-dropdown-menu class="head-wrap-menu" :class="'the-layout-' + $config.layout" slot="dropdown">
-          <el-dropdown-item command="pwd">
-            <span>修改密码</span>
-          </el-dropdown-item>
-          <el-dropdown-item command="logout">
-            <span>退出登录</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
+        <template #dropdown>
+          <el-dropdown-menu class="head-wrap-menu" :class="'the-layout-' + $config.layout">
+            <el-dropdown-item command="pwd">
+              <span>修改密码</span>
+            </el-dropdown-item>
+            <el-dropdown-item command="logout">
+              <span>退出登录</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
       <password-reset
         @success="resetPwdSuccess"
@@ -60,10 +62,10 @@
         ref="pwd">
       </password-reset>
     </template>
-    <!--    <template slot="main">-->
+    <!--    <template #main>-->
     <!--      main (main)-->
     <!--    </template>-->
-    <template :slot="$config.slot.navSecondary" v-if="$config.slot.navSecondary">
+    <template #[$config.slot.navSecondary] v-if="$config.slot.navSecondary">
       <el-menu
         :collapse="false"
         v-if="secondaryNavMenus.length"
@@ -96,14 +98,14 @@
         </reactive-menu-item>
       </el-menu>
     </template>
-    <template slot="main-right" v-if="menuDataAll.length">
+    <template #main-right v-if="menuDataAll.length">
       <router-view class="page-main-right" v-if="user || !$config.needLogin"/>
       <div v-else></div>
     </template>
-    <template slot="main-right" v-else>
+    <template #main-right v-else>
       <el-empty class="no-menus" description="没有配置任何菜单项"></el-empty>
     </template>
-    <!--    <template slot="footer">-->
+    <!--    <template #footer>-->
     <!--      footer (footer)-->
     <!--    </template>-->
   </the-page>
@@ -140,6 +142,9 @@ export default {
     }
   },
   computed: {
+    headerPlaceholderSlot () {
+      return this.$config.layout === 'left' ? 'header-right-end' : 'header-right-start'
+    },
     isLogin () {
       return this.user
     },

@@ -10,11 +10,11 @@
       </div>
       <el-input v-model="confirmTitle" :size="$config.element.form.size"></el-input>
     </div>
-    <div slot="footer">
+    <template #footer>
       <el-button @click="closeDialog">取消</el-button>
       <el-button type="primary" @click.native="handleDelete" :disabled="title !== confirmTitle">确定
       </el-button>
-    </div>
+    </template>
   </el-dialog>
 </template>
 

@@ -1,8 +1,7 @@
 import Axios from 'axios'
 // import qs from 'qs'
 import { getToken } from '@/utils/token'
-import { buildLocalServerQueryMd5Str } from '@/utils/common'
-import { setCompletenessHeader, setLogHeader } from '@/utils/build-headers'
+import { setCompletenessHeader, setLogHeader, updateLocalServerParams } from '@/utils/update-request'
 
 export function createAxios (app, config) {
   if (config.isDev) {
@@ -27,30 +26,8 @@ export function createAxios (app, config) {
       settings.headers = settings.headers || {}
       settings.headers.authorization = settings.headers.authorization || config.token
     }
-    // if (settings.url.startsWith('/plantdata-sdk')) {
-    //   settings.baseURL = ''
-    //   if (settings.method === 'post') {
-    //     const keys = Object.keys(settings.data)
-    //     for (const key of keys) {
-    //       if (settings.data[key] instanceof Array) {
-    //         settings.data[key] = JSON.stringify(settings.data[key])
-    //       }
-    //     }
-    //     settings.data = qs.stringify(settings.data) // 转为formdata数据格式
-    //   }
-    //   settings.headers = settings.headers || {}
-    //   settings.headers.APK = settings.headers.APK || config.APK
-    //   settings.params = settings.params || {}
-    //   settings.params.kgName = settings.params.kgName || config.kgName
-    // }
     if (process.env.VUE_APP_START_TYPE === 'local') {
-      settings.params = settings.params || {}
-      settings.params.md5Str = buildLocalServerQueryMd5Str(settings.url, settings.params, settings.data, settings.method)
-      const USE_LOCAL_DATA = app.$route.query.USE_LOCAL_DATA
-      if (USE_LOCAL_DATA) {
-        settings.params = settings.params || {}
-        settings.params.USE_LOCAL_DATA = USE_LOCAL_DATA
-      }
+      updateLocalServerParams(app, settings)
     }
     if (config.verifyConfig.switch.completeness) {
       setCompletenessHeader(settings.headers, settings)

@@ -15,6 +15,7 @@
             </div>
             <div class="page-header-right-end">
               <slot name="header-right-end"></slot>
+              <slot name="header-right-end-extra"></slot>
             </div>
           </slot>
         </div>

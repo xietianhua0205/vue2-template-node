@@ -1,6 +1,6 @@
 <template>
 <page-content>
-  <template slot="page-title">
+  <template #page-title>
     {{currentMenuGet() ? currentMenuGet().name : ''}}
   </template>
   <template #main-table>
