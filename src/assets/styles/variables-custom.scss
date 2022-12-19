@@ -1,13 +1,11 @@
 @use "sass:math";
-@import "themes/default/variables-custom";
-//@import "themes/dark/variables-custom";
 
-//$page-head-background: $--color-primary; // 布局为top模式时开启
-//$page-head-background-light: rgba(255, 255, 255, .1); // 布局为top模式时开启
-//$page-head-color-icon: invert($--color-primary); // 布局为top模式时开启
+// $page-head-background: $--color-primary; // 布局为top模式时开启
+// $page-head-background-light: rgba(255, 255, 255, .1); // 布局为top模式时开启
+// $page-head-color-icon: invert($--color-primary); // 布局为top模式时开启
 
 @mixin scroll($bg: $scroll-bg, $thumb: $scroll-thumb, $btn: $scroll-btn, $size: 8px) {
-  scrollbar-3dlight-color: $bg;
+  scrollbar-3dlight-color: $bg; /* stylelint-disable-line property-no-unknown */
   scrollbar-highlight-color: $bg;
   scrollbar-face-color: $thumb;
   scrollbar-arrow-color: $btn;
@@ -16,101 +14,113 @@
   scrollbar-base-color: $bg;
   scrollbar-track-color: $bg;
   overflow: auto;
+
   &::-webkit-scrollbar {
     width: $size;
     height: $size;
     background: transparent;
   }
+
   &::-webkit-scrollbar-button {
-    background-color: $btn;
     display: none;
+    background-color: $btn;
   }
+
   &::-webkit-scrollbar-track {
     background: $bg;
     border-radius: math.div($size, 2);
   }
+
   &::-webkit-scrollbar-track-piece {
     background: $bg;
     border-radius: math.div($size, 2);
   }
+
   &::-webkit-scrollbar-thumb {
     background: $thumb;
     border-radius: math.div($size, 2);
   }
+
   &::-webkit-scrollbar-corner {
     background: $bg;
   }
+
   &::-webkit-resizer {
     background: $bg;
   }
 }
 
 @mixin placeholder($color: #ccc) {
-  &::-moz-placeholder {
+  &::-moz-placeholder { /* stylelint-disable-line selector-no-vendor-prefix */
     color: $color;
     opacity: 1;
   }
-  &:-ms-input-placeholder {
+
+  &:-ms-input-placeholder { /* stylelint-disable-line selector-no-vendor-prefix */
     color: $color;
   }
-  &::-webkit-input-placeholder {
+
+  &::-webkit-input-placeholder { /* stylelint-disable-line selector-no-vendor-prefix */
     color: $color;
   }
 }
 
 @mixin line-hidden {
-  word-break: keep-all;
-  white-space: nowrap;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block
+  word-break: keep-all;
+  white-space: nowrap;
 }
 
 /* 仅适用-webkit- 内核浏览器  */
 @mixin wrap($row) {
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: $row;
   -webkit-box-orient: vertical;
 }
 
 /* mixin for multiline */
 @mixin multiline-ellipsis($lineCount: 2, $lineHeight: 1.2em, $bgColor: white) {
-  overflow: hidden;
   position: relative;
-  line-height: $lineHeight;
   max-height: $lineHeight * $lineCount;
-  text-align: justify;
-  margin-right: -1em;
   padding-right: 1em;
-  &:before {
-    content: '...';
+  margin-right: -1em;
+  overflow: hidden;
+  line-height: $lineHeight;
+  text-align: justify;
+
+  &::before {
     position: absolute;
     right: 0;
     bottom: 0;
+    content: "...";
   }
-  &:after {
-    content: '';
+
+  &::after {
     position: absolute;
     right: 0;
     width: 1em;
     height: 1em;
     margin-top: 0.2em;
+    content: "";
     background: $bgColor;
   }
 }
 
 @mixin multiline-hidden($count: 2) {
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: $count;
 }
 
 @mixin text-gradient($start: $--color-primary, $end: #fff, $direction: bottom) {
-  background-image: -webkit-linear-gradient($direction, $start, $end);
-  -webkit-background-clip: text;
+  background-image: linear-gradient($direction, $start, $end);
+  -webkit-background-clip: text; /* stylelint-disable-line property-no-vendor-prefix */
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }

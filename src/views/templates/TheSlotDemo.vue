@@ -47,6 +47,20 @@
           @clear="search"></el-input>
         <!-- TODO search方法是TablePageMixin中定义的,一般在参数发生变化时使用，会请求新参数的第一页数据-->
       </filter-item>
+      <filter-item label="日期">
+        <el-date-picker
+          v-model="query.date"
+          type="daterange"
+          size="small"
+          clearable
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          value-format="yyyy-MM-dd"
+          @change="search"
+          @clear="search">
+        </el-date-picker>
+      </filter-item>
     </template>
     <template #[slotToolbar]>
       <!-- TODO 此处演示，refresh方法是TablePageMixin中定义的,重新获取数据-->
@@ -75,6 +89,10 @@
         <el-table-column
           prop="name"
           label="name">
+        </el-table-column>
+        <el-table-column
+          prop="date"
+          label="date">
         </el-table-column>
         <el-table-column label="操作" width="160">
           <template slot-scope="scope">
@@ -109,9 +127,9 @@
         :total="tableData.total"
       ></el-pagination>
     </template>
-<!--    <template #main-bottom-right>-->
-<!--      pagination (main-bottom-right)-->
-<!--    </template>-->
+    <!--    <template #main-bottom-right>-->
+    <!--      pagination (main-bottom-right)-->
+    <!--    </template>-->
     <!--        <template #footer>-->
     <!--          footer (footer)-->
     <!--        </template>-->
@@ -123,54 +141,17 @@ import PageContent from '@/components/PageContent'
 import TablePageMixin from '@/mixins/table-page'
 import SlotMixin from '@/mixins/slot'
 import FilterItem from '@/components/FilterItem'
+import dayjs from 'dayjs'
 
 // TODO 模拟的假数据
-const remoteData = [
-  {
-    id: 1,
-    name: 'a'
-  },
-  {
-    id: 2,
-    name: 'b'
-  },
-  {
-    id: 3,
-    name: 'c'
-  },
-  {
-    id: 4,
-    name: 'd'
-  },
-  {
-    id: 5,
-    name: 'e'
-  },
-  {
-    id: 6,
-    name: 'f'
-  },
-  {
-    id: 7,
-    name: 'g'
-  },
-  {
-    id: 8,
-    name: 'h'
-  },
-  {
-    id: 9,
-    name: 'i'
-  },
-  {
-    id: 10,
-    name: 'j'
-  },
-  {
-    id: 11,
-    name: 'k'
-  }
-]
+const remoteData = []
+for (let i = 0; i < 11; i++) {
+  remoteData.push({
+    id: i,
+    name: 'abcdefghijklmn'[i],
+    date: dayjs('2022-12-19').add(i, 'yMd'[i % 3]).format('YYYY-MM-DD')
+  })
+}
 
 export default {
   name: 'TheSlotDemo',
@@ -191,10 +172,10 @@ export default {
           pageSize: { // 自动生产query.pageSize
             value: 10 // 此处演示覆盖默认的值
           },
-          customParams: { // 此处演示添加自定义的参数
+          date: { // 此处演示添加自定义的参数
             type: 'json', // 类型可选json、string、number
             value: '[]', // 默认值
-            map: 'cp' // url中参数名的简写，非必填
+            map: 'd' // url中参数名的简写，非必填
           }
         }
       },
@@ -233,7 +214,11 @@ export default {
       console.log(this.query)
       return new Promise((resolve) => {
         setTimeout(() => {
-          this.tableData.data = remoteData.filter(o => o.name.includes(this.query.kw)).slice((this.query.pageNo - 1) * this.query.pageSize, this.query.pageNo * this.query.pageSize)
+          const [from, to] = this.query.date || []
+          this.tableData.data = remoteData.filter(o => {
+            return o.name.includes(this.query.kw) && (!from || o.date >= from) && (!to || o.date <= to)
+          })
+            .slice((this.query.pageNo - 1) * this.query.pageSize, this.query.pageNo * this.query.pageSize)
           this.tableData.total = remoteData.length
           resolve()
         }, 1000)

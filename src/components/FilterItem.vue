@@ -33,43 +33,43 @@ export default {
   }
 
   .page-filter-item-label {
+    position: relative;
+    display: flex;
     flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
     width: 80px;
+    font-size: $--font-size-base;
+    color: $--color-text-secondary;
+    background: $--color-white;
     border: $divider;
     border-right: none;
     border-radius: 0;
-    position: relative;
-    font-size: $--font-size-base;
-    color: $--color-text-secondary;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: $--color-white;
 
     .page-filter-item-title {
       @include line-hidden;
-      text-align: center;
+
       width: 100%;
+      text-align: center;
     }
 
-    &:after {
-      content: "";
+    &::after {
       position: absolute;
-      height: 16px;
-      width: 1px;
-      background: $--background-color-base;
       top: 0;
-      bottom: 0;
-      margin: auto 0;
       right: 0;
+      bottom: 0;
+      width: 1px;
+      height: 16px;
+      margin: auto 0;
+      content: "";
+      background: $--background-color-base;
     }
-
   }
 
-  ::v-deep .el-input__inner {
-    border-radius: 0;
-    border-left: none;
+  ::v-deep .el-input__inner { /* stylelint-disable-line selector-class-pattern */
     border-color: $--border-color-base !important;
+    border-left: none;
+    border-radius: 0;
 
     &:focus {
       border-color: $--border-color-base;

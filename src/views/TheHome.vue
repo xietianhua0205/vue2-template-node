@@ -254,9 +254,9 @@ export default {
 @import "~@/assets/styles/variables-custom";
 
 @mixin menu-item-title($color-primary, $color-regular, $background, $height) {
-  color: $color-regular;
   height: $height;
   line-height: $height;
+  color: $color-regular;
 
   i {
     color: $color-regular;
@@ -267,8 +267,8 @@ export default {
   }
 
   &:not(.is-disabled):hover {
-    background-color: $background;
     color: $color-primary;
+    background-color: $background;
 
     i {
       color: $color-primary;
@@ -280,8 +280,8 @@ export default {
   @include menu-item-title($color-primary, $color-regular, $background, $height);
 
   &.is-active {
-    background-color: $background;
     color: $color-primary;
+    background-color: $background;
 
     i {
       color: $color-primary;
@@ -299,7 +299,7 @@ export default {
   .el-submenu {
     background: transparent;
 
-    .el-submenu__title {
+    .el-submenu__title { /* stylelint-disable-line selector-class-pattern */
       @include menu-item-title($color-primary, $color-regular, $background, $height);
     }
 
@@ -313,9 +313,32 @@ export default {
   }
 }
 
-.the-top-nav.el-menu--horizontal {
+.el-menu--horizontal .el-menu .el-menu-item.is-active { /* stylelint-disable-line selector-class-pattern */
+  color: $page-head-secondary-color-primary;
+
+  i {
+    color: $page-head-secondary-color-primary;
+  }
+}
+
+.the-left-nav {
+  border-right: 0;
+
+  /* stylelint-disable-next-line max-line-length */
+  @include default-nav($page-left-color-primary, $page-left-color-regular, $page-left-background-light, $page-left-menu-height);
+
+  &.nav-border {
+    .el-menu-item.is-active,
+    .el-submenu .el-menu-item.is-active {
+      border-right: 4px solid $--color-primary;
+    }
+  }
+}
+
+.the-top-nav.el-menu--horizontal { /* stylelint-disable-line selector-class-pattern */
   border-bottom: 0;
 
+  /* stylelint-disable-next-line max-line-length */
   @include default-nav($page-head-color-primary, $page-head-color-regular, $page-head-background-light, $page-head-height);
 
   &:not(.nav-border) {
@@ -329,48 +352,29 @@ export default {
   }
 }
 
-.the-top-secondary-nav.el-menu--horizontal {
+.the-top-secondary-nav.el-menu--horizontal { /* stylelint-disable-line selector-class-pattern */
   border-bottom: 0;
 
   @include default-nav($page-head-secondary-color-primary, $page-head-secondary-color-regular,
-    $page-head-secondary-background, $page-head-secondary-height);
+  $page-head-secondary-background, $page-head-secondary-height);
 
-  &:not(.nav-border) {
-    & > .el-menu-item.is-active, & > .el-submenu.is-active .el-submenu__title {
-      border-bottom: 0;
-    }
-  }
-
-  & > .el-submenu.is-active .el-submenu__title {
+  & > .el-submenu.is-active .el-submenu__title { /* stylelint-disable-line selector-class-pattern */
     color: $page-head-secondary-color-primary;
 
     i {
       color: $page-head-secondary-color-primary;
     }
   }
-}
 
-.el-menu--horizontal .el-menu .el-menu-item.is-active {
-  color: $page-head-secondary-color-primary;
-
-  i {
-    color: $page-head-secondary-color-primary;
-  }
-}
-
-.the-left-nav {
-  border-right: 0;
-
-  @include default-nav($page-left-color-primary, $page-left-color-regular, $page-left-background-light, $page-left-menu-height);
-
-  &.nav-border {
-    .el-menu-item.is-active, .el-submenu .el-menu-item.is-active {
-      border-right: 4px solid $--color-primary;
+  &:not(.nav-border) {
+    & > .el-menu-item.is-active,
+    & > .el-submenu.is-active .el-submenu__title { /* stylelint-disable-line selector-class-pattern */
+      border-bottom: 0;
     }
   }
 }
 
-.the-layout-left .el-menu--horizontal > .el-submenu {
+.the-layout-left .el-menu--horizontal > .el-submenu { /* stylelint-disable-line selector-class-pattern */
   float: none;
 }
 </style>
@@ -389,21 +393,21 @@ export default {
   cursor: pointer;
 
   img {
-    //filter: invert(100%)
+    // filter: invert(100%)
     max-width: 100%;
     max-height: 100%;
   }
 }
 
 .head-wrap-button {
-  text-align: center;
-  padding: 0 $gap;
-  cursor: pointer;
-  color: $page-head-color-primary;
   display: flex;
   align-items: center;
   height: $page-head-height;
+  padding: 0 $gap;
+  color: $page-head-color-primary;
+  text-align: center;
   white-space: nowrap;
+  cursor: pointer;
 
   &:hover {
     background: $page-head-background-light;
@@ -411,29 +415,31 @@ export default {
 }
 
 .head-wrap-menu {
-  background-color: $page-left-background;
-  margin: 0;
-  border-radius: 0;
-  border: 0;
   width: 100px;
-  //left: auto!important;
-  //right: 0;
+  margin: 0;
+  background-color: $page-left-background;
+  border: 0;
+  border-radius: 0;
+
+  // left: auto!important;
+  // right: 0;
   &.the-layout-left {
-    left: $page-left-width !important;
-    bottom: 0;
     top: auto !important;
+    bottom: 0;
+    left: $page-left-width !important;
   }
 
   ::v-deep {
-    .el-dropdown-menu__item {
+    .el-dropdown-menu__item { /* stylelint-disable-line selector-class-pattern */
       color: $page-head-color-primary;
 
-      &:not(.is-disabled):hover, &:focus {
+      &:focus,
+      &:not(.is-disabled):hover {
         background: $page-head-background-light;
       }
     }
 
-    .popper__arrow {
+    .popper__arrow { /* stylelint-disable-line selector-class-pattern */
       display: none;
     }
   }

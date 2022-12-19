@@ -59,9 +59,9 @@ export default {
 }
 
 .title {
+  padding: 2px 4px;
   color: $--color-danger;
   background: $--color-danger-lighter;
-  padding: 2px 4px;
   border-radius: $--border-radius-base;
 }
 </style>

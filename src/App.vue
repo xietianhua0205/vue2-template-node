@@ -18,7 +18,9 @@ export default {
 <style lang="scss">
 @import "~@/assets/styles/variables-custom";
 
-html, body, #app {
+html,
+body,
+#app {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -27,8 +29,8 @@ html, body, #app {
 body {
   min-width: $page-min-width;
   overflow: auto;
-  color: $--color-text-regular;
   font-size: $--font-size-base;
+  color: $--color-text-regular;
 }
 
 #app {
@@ -36,7 +38,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *:after, *:before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 </style>

@@ -1,4 +1,5 @@
 @import "variables-custom";
+@import "~element-ui/packages/theme-chalk/src/index";
 
 .flex-1 {
   flex: 1;
@@ -13,14 +14,14 @@
   margin: 8px auto 0;
 
   i {
+    margin-bottom: 8px;
     font-size: 64px;
     color: $--border-color-base;
-    margin-bottom: 8px;
   }
 
   a {
-    cursor: pointer;
     color: $--color-primary;
+    cursor: pointer;
   }
 
   span {
@@ -45,13 +46,13 @@
   color: $--color-primary;
 }
 
-.el-dialog__wrapper {
+.el-dialog__wrapper { /* stylelint-disable-line selector-class-pattern */
   .el-dialog {
-    .el-dialog__body {
+    .el-dialog__body { /* stylelint-disable-line selector-class-pattern */
       padding: $gap $gap-mini * 5 $gap-large;
     }
 
-    .el-dialog__footer {
+    .el-dialog__footer { /* stylelint-disable-line selector-class-pattern */
       display: flex;
       align-items: center;
       justify-content: flex-end;

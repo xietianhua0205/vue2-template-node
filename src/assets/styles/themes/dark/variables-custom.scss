@@ -1,51 +1,55 @@
 @use "sass:math";
+@use "sass:color";
 @import "./variables-defined";
 
-//$divider: 1px solid $--border-color-base !default;
+// $divider: 1px solid $--border-color-base !default;
 
 $default-card-background: #000 !default;
-//$default-card-box-shadow: 0 1px 2px $--border-color-base !default;
 
-//$gap: 16px !default;
-//$gap-xl: $gap * 2 !default;
-//$gap-large: $gap * 1.5 !default;
-//$gap-middle: $gap !default;
-//$gap-small: math.div($gap, 2) !default;
-//$gap-mini: math.div($gap, 4) !default;
+// $default-card-box-shadow: 0 1px 2px $--border-color-base !default;
+
+// $gap: 16px !default;
+// $gap-xl: $gap * 2 !default;
+// $gap-large: $gap * 1.5 !default;
+// $gap-middle: $gap !default;
+// $gap-small: math.div($gap, 2) !default;
+// $gap-mini: math.div($gap, 4) !default;
 
 $scroll-bg: #434343 !default;
 $scroll-thumb: #8c8c8c !default;
 $scroll-btn: #8c8c8c !default;
 
-//$page-min-width: 1400px !default;
+// $page-min-width: 1400px !default;
 $page-background: #1f1f1f !default;
 
-//$page-head-height: 48px !default;
+// $page-head-height: 48px !default;
 $page-head-background: #000 !default;
-$page-head-background-light: mix($--color-black, $page-head-background, 10%) !default;
-//$page-head-box-shadow: 0 1px 2px $--border-color-base !default;
-//$page-head-color-icon: $--color-primary !default;
-//$page-head-color-primary: #fff !default;
-//$page-head-color-regular: #d9d9d9 !default;
+$page-head-background-light: color.mix($--color-black, $page-head-background, 10%) !default;
 
-//$page-head-secondary-height: 40px !default;
+// $page-head-box-shadow: 0 1px 2px $--border-color-base !default;
+// $page-head-color-icon: $--color-primary !default;
+// $page-head-color-primary: #fff !default;
+// $page-head-color-regular: #d9d9d9 !default;
+
+// $page-head-secondary-height: 40px !default;
 $page-head-secondary-background: #000 !default;
-//$page-head-secondary-box-shadow: 0 1px 2px $--border-color-base !default;
-//$page-head-secondary-color-primary: $--color-primary !default;
-//$page-head-secondary-color-regular: $--color-text-regular !default;
 
-//$page-left-width: 178px !default;
+// $page-head-secondary-box-shadow: 0 1px 2px $--border-color-base !default;
+// $page-head-secondary-color-primary: $--color-primary !default;
+// $page-head-secondary-color-regular: $--color-text-regular !default;
+
+// $page-left-width: 178px !default;
 $page-left-background: #000 !default;
-$page-left-background-light: mix($--color-black, $page-left-background, 10%) !default;
-//$page-left-box-shadow: 1px 0 2px $--border-color-base !default;
-//$page-left-menu-height: 50px !default;
-//$page-left-color-primary: $page-head-color-primary !default;
-//$page-left-color-regular: $page-head-color-regular !default;
+$page-left-background-light: color.mix($--color-black, $page-left-background, 10%) !default;
 
-//$body-margin: 0 !default;
-//$body-header-height: 48px !default;
-//$body-main-margin: 16px !default;
-//$body-main-gap: 16px !default;
+// $page-left-box-shadow: 1px 0 2px $--border-color-base !default;
+// $page-left-menu-height: 50px !default;
+// $page-left-color-primary: $page-head-color-primary !default;
+// $page-left-color-regular: $page-head-color-regular !default;
+
+// $body-margin: 0 !default;
+// $body-header-height: 48px !default;
+// $body-main-margin: 16px !default;
+// $body-main-gap: 16px !default;
 
 @import "../default/variables-custom";
-

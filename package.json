@@ -1,6 +1,6 @@
 {
   "name": "vue2-template",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "private": true,
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
@@ -9,6 +9,10 @@
     "build-studio": "npm run build && node build/buildZip.js",
     "build-report": "vue-cli-service build --report",
     "lint": "vue-cli-service lint",
+    "lint:scss": "stylelint src/**/*.{html,vue,css,sass,scss}",
+    "lint:less": "stylelint src/**/*.less --config .stylelintrc-less.js",
+    "lint:style": "npm run lint:scss && npm run lint:less",
+    "lintfix:style": "npm run lint:scss -- --fix && npm run lint:less -- --fix",
     "count-code": "node build/count ./src vue js less scss ts",
     "get-token": "node build/getToken.js",
     "lintfix": "eslint --ext .js,.ts,.vue \"src\" --fix",
@@ -66,15 +70,33 @@
     "lint-staged": "^13.0.3",
     "monaco-editor-webpack-plugin": "^4.1.2",
     "nodemon": "^2.0.7",
+    "postcss": "^8.4.20",
+    "postcss-html": "^1.5.0",
+    "postcss-less": "^6.0.0",
+    "postcss-scss": "^4.0.6",
     "request": "^2.88.2",
     "sass": "^1.45.0",
     "sass-loader": "^8.0.2",
+    "stylelint": "^14.16.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recommended": "^9.0.0",
+    "stylelint-config-recommended-less": "^1.0.4",
+    "stylelint-config-recommended-scss": "^8.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-config-standard-vue": "^1.0.0",
+    "stylelint-less": "^1.0.6",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^4.3.0",
     "vue-cli-plugin-lodash": "~0.1.4",
     "vue-template-compiler": "~2.6.11",
     "zlib": "^1.0.5"
   },
   "lint-staged": {
-    "**/*.{js,vue}": [
+    "{src,public}**/*.{js,vue}": [
       "npm run lint"
     ]
   },

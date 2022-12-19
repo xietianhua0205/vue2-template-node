@@ -69,53 +69,53 @@ export default {
 
 .page-container {
   min-width: $page-min-width;
-  background: $page-background;
   height: 100%;
+  background: $page-background;
 
   .page-header {
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-    background: $page-head-background;
-    height: $page-head-height !important;
-    box-shadow: $page-head-box-shadow;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: row;
+    height: $page-head-height !important;
+    padding: 0;
+    background: $page-head-background;
+    box-shadow: $page-head-box-shadow;
 
     .page-header-left {
-      width: $page-left-width;
-      height: $page-head-height;
+      flex: 0 0 auto;
       align-items: center;
       justify-content: center;
-      flex: 0 0 auto;
+      width: $page-left-width;
+      height: $page-head-height;
     }
 
     .page-header-right {
-      flex: 1;
       display: flex;
+      flex: 1;
       justify-content: flex-end;
 
       .page-header-right-start {
-        flex: 1;
         display: flex;
+        flex: 1;
         justify-content: flex-start;
       }
 
       .page-header-right-end {
-        flex: 0 0 auto;
         display: flex;
+        flex: 0 0 auto;
         justify-content: flex-end;
       }
     }
 
     .page-header-center {
       position: absolute;
-      width: 100%;
-      pointer-events: none;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
 
       & > * {
         pointer-events: auto;
@@ -124,13 +124,13 @@ export default {
   }
 
   .page-header-secondary {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: $page-head-secondary-height !important;
     background: $page-head-secondary-background;
     box-shadow: $page-head-box-shadow;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     &:empty {
       display: none;
@@ -142,18 +142,19 @@ export default {
   }
 
   .page-main {
-    padding: 0;
     display: flex;
     flex-direction: row;
+    padding: 0;
 
     .page-main-left {
-      width: $page-left-width;
-      background: $page-left-background;
-      box-shadow: $page-left-box-shadow;
       z-index: 1;
       flex: 0 0 auto;
+      width: $page-left-width;
       height: 100%;
       overflow: auto;
+      background: $page-left-background;
+      box-shadow: $page-left-box-shadow;
+
       @include scroll($size: 0);
 
       &:empty {
@@ -175,11 +176,13 @@ export default {
     flex-direction: row;
 
     .page-header {
-      width: $page-left-width;
       flex-direction: column;
+      width: $page-left-width;
       height: 100% !important;
 
-      .page-header-right, .page-header-right-start, .page-header-right-end {
+      .page-header-right,
+      .page-header-right-start,
+      .page-header-right-end {
         flex-direction: column;
       }
     }

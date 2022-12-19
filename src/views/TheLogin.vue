@@ -121,26 +121,26 @@ export default {
   height: 100%;
 
   .main {
+    position: relative;
     width: 100%;
     height: 100%;
-    background: url(../assets/images/banner-bg.png) no-repeat;
-    background-size: cover;
     overflow: hidden;
-    position: relative;
+    background: url("../assets/images/banner-bg.png") no-repeat;
+    background-size: cover;
 
     .gray-box {
-      width: 1192px;
-      height: 528px;
-      background: url("../assets/images/login-mask-bg.png") no-repeat;
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      color: #ffffff;
-      padding-left: 102px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      width: 1192px;
+      height: 528px;
+      padding-left: 102px;
+      color: #fff;
+      background: url("../assets/images/login-mask-bg.png") no-repeat;
+      transform: translateX(-50%) translateY(-50%);
 
       div {
         font-size: 32px;
@@ -151,33 +151,33 @@ export default {
       }
 
       p {
-        font-size: 18px;
         margin-top: 26px;
+        font-size: 18px;
       }
     }
 
     .white-box {
-      width: 580px;
-      height: 571px;
-      background-color: $--color-white;
       position: absolute;
       top: 50%;
       left: 50%;
+      width: 580px;
+      height: 571px;
+      background-color: $--color-white;
       transform: translateX(-86px) translateY(-50%);
 
       .login-box {
-        color: $--color-text-primary;
         padding: 64px 102px;
+        color: $--color-text-primary;
 
         .line {
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          justify-content: space-between;
 
           div {
             font-size: 32px;
-            color: $--color-primary;
             font-weight: bold;
+            color: $--color-primary;
           }
         }
 
@@ -191,8 +191,8 @@ export default {
 
         .login-btn {
           width: 100%;
-          margin-top: 40px;
           height: 48px;
+          margin-top: 40px;
           font-size: 18px;
         }
 
@@ -207,24 +207,24 @@ export default {
 
 <style lang='scss'>
 .login-container {
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus {
-    box-shadow: 0 0 0 60px #ffffff inset; //设置底色
-    -webkit-text-fill-color: #333333; //文字颜色，会覆盖color
-  }
-
   input {
     border: none;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
   }
 
-  .el-form-item.is-success .el-input__inner {
-    border-color: #cccccc;
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    box-shadow: 0 0 0 60px #fff inset; // 设置底色
+    -webkit-text-fill-color: #333; // 文字颜色，会覆盖color
   }
 
-  .el-form-item__label {
+  .el-form-item.is-success .el-input__inner { /* stylelint-disable-line selector-class-pattern */
+    border-color: #ccc;
+  }
+
+  .el-form-item__label { /* stylelint-disable-line selector-class-pattern */
     &::before {
       content: "" !important;
     }

@@ -5,7 +5,9 @@ const infoData = require(path.resolve(__dirname, 'info.json'))
 const cp = require('child_process')
 const date = new Date()
 const timestamp = date.getTime()
-if (timestamp - (infoData.timestamp || 0) > 10 * 1000) {
+const delta = timestamp - (infoData.timestamp || 0)
+if (delta > 60 * 1000) {
+  console.log('距离上次提交间隔：', delta, 'ms！')
   infoData.updateTime = date.toLocaleDateString() + '-' + date.toLocaleTimeString()
   infoData.timestamp = timestamp
   infoData.versionInternal += 1

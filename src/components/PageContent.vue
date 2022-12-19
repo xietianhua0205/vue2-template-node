@@ -140,35 +140,15 @@ export default {
 .body-container {
   margin: 0;
 
-  &.body-container-margin{
-    .body-main {
-      margin: $body-main-gap $body-main-margin $body-main-margin;
-      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
-    }
-  }
-
-  &.body-container-no-header{
-    .body-main {
-      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
-    }
-  }
-
-  &.body-container-margin.body-container-no-header{
-    .body-main{
-      margin: $body-main-gap $body-main-margin $body-main-margin;
-      height: calc(100% - #{$body-main-gap} - #{$body-main-margin});
-    }
-  }
-
   .body-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: $body-header-height !important;
     padding: 0 16px;
     background: $default-card-background;
     box-shadow: $default-card-box-shadow;
-    height: $body-header-height !important;
-    justify-content: space-between;
-    align-items: center;
 
     &:empty {
       display: none;
@@ -177,11 +157,12 @@ export default {
     .body-header-left {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: flex-start;
       white-space: nowrap;
 
-      .body-breadcrumb:not(:empty), .body-header-extra:not(:empty) {
+      .body-breadcrumb:not(:empty),
+      .body-header-extra:not(:empty) {
         margin-right: $gap;
       }
 
@@ -195,18 +176,22 @@ export default {
     .body-header-right {
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
       align-items: center;
+      justify-content: flex-end;
       white-space: nowrap;
     }
   }
 
   .body-main {
-    padding: 0;
     display: flex;
     flex-direction: row;
-    overflow: visible;
     height: calc(100% - #{$body-header-height});
+    padding: 0;
+    overflow: visible;
+
+    .body-main-gap {
+      width: $body-main-gap;
+    }
 
     .body-main-left {
       flex: 0 0 auto;
@@ -222,93 +207,108 @@ export default {
       }
     }
 
-    .body-main-gap {
-      width: $body-main-gap;
-    }
-
     .body-main-right {
-      flex: 1;
-      background: $default-card-background;
-      box-shadow: $default-card-box-shadow;
       display: flex;
+      flex: 1;
       flex-direction: column;
       max-width: 100%;
       overflow: hidden;
+      background: $default-card-background;
+      box-shadow: $default-card-box-shadow;
 
       .body-main-top {
-        flex: 0 0 auto;
-        border-bottom: $divider;
         display: flex;
-        justify-content: space-between;
+        flex: 0 0 auto;
         align-items: center;
+        justify-content: space-between;
         padding: 0 $gap;
         margin-top: -1px;
+        border-bottom: $divider;
 
-        &-left, &-center, &-right {
-          height: 56px;
-          flex: 1;
+        &-left,
+        &-center,
+        &-right {
           display: flex;
+          flex: 1;
           align-items: center;
+          height: 56px;
+        }
+
+        &-left {
+          justify-content: flex-start;
+
+          & > .el-input {
+            width: 250px;
+          }
 
           &:empty {
             display: none;
           }
         }
 
-        &-left {
-          justify-content: flex-start;
-        }
-
         &-center {
           justify-content: center;
+
+          &:empty {
+            display: none;
+          }
         }
 
         &-right {
           justify-content: flex-end;
-        }
-      }
 
-      .body-main-top-left {
-        & > .el-input {
-          width: 250px;
+          &:empty {
+            display: none;
+          }
         }
       }
 
       .body-main-center {
         flex: 1;
+
         @include scroll;
       }
 
       .body-main-bottom {
-        flex: 0 0 auto;
-        border-top: $divider;
         display: flex;
-        justify-content: space-between;
+        flex: 0 0 auto;
         align-items: center;
+        justify-content: space-between;
         padding: 0 $gap;
         margin-bottom: -1px;
+        border-top: $divider;
 
-        &-left, &-center, &-right {
-          height: 40px;
-          flex: 1;
+        &-left,
+        &-center,
+        &-right {
           display: flex;
+          flex: 1;
           align-items: center;
+          height: 40px;
+        }
+
+        &-left {
+          justify-content: flex-start;
 
           &:empty {
             display: none;
           }
         }
 
-        &-left {
-          justify-content: flex-start;
-        }
-
         &-center {
           justify-content: center;
+
+          &:empty {
+            display: none;
+          }
         }
 
         &-right {
           justify-content: flex-end;
+
+          &:empty {
+            display: none;
+          }
         }
       }
     }
@@ -317,11 +317,31 @@ export default {
   .body-footer:empty {
     display: none;
   }
+
+  &.body-container-margin {
+    .body-main {
+      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
+      margin: $body-main-gap $body-main-margin $body-main-margin;
+    }
+  }
+
+  &.body-container-no-header {
+    .body-main {
+      height: calc(100% - #{$body-header-height} - #{$body-main-gap} - #{$body-main-margin});
+    }
+  }
+
+  &.body-container-margin.body-container-no-header {
+    .body-main {
+      height: calc(100% - #{$body-main-gap} - #{$body-main-margin});
+      margin: $body-main-gap $body-main-margin $body-main-margin;
+    }
+  }
 }
 
 #app > .body-container {
-  margin: 0;
   height: 100%;
+  margin: 0;
 }
 
 </style>

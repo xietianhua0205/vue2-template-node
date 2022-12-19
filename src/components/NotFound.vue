@@ -1,11 +1,11 @@
 <template>
-  <div class="image_content">
-    <img class="notFoundImage" src="../assets/images/404.png">
-    <div class="notFoundSide">
-      <p class="title_big">哎呀！出错啦！</p>
-      <p class="title_middle">您正在查找的页面不存在！</p>
+  <div class="image-content">
+    <img class="not-found-image" src="../assets/images/404.png">
+    <div class="not-found-side">
+      <p class="title-big">哎呀！出错啦！</p>
+      <p class="title-middle">您正在查找的页面不存在！</p>
       <div class="message">{{ message }}</div>
-      <router-link class="back_index" to="/" replace>返回首页</router-link>
+      <router-link class="back-index" to="/" replace>返回首页</router-link>
     </div>
   </div>
 </template>
@@ -49,29 +49,29 @@ export default {
 <style scoped lang="scss">
 @import "~@/assets/styles/variables-custom";
 
-.image_content {
+.image-content {
   display: flex;
   align-items: center;
-  user-select: none;
   height: 100%;
+  user-select: none;
 
-  .notFoundImage {
+  .not-found-image {
     display: block;
     -webkit-user-drag: none;
   }
 
-  .notFoundSide {
-    font-size: 24px;
-    letter-spacing: 2px;
-    line-height: 1;
+  .not-found-side {
     padding-left: 80px;
+    font-size: 24px;
+    line-height: 1;
     color: #595959;
+    letter-spacing: 2px;
 
-    .title_big {
+    .title-big {
       font-size: 36px;
     }
 
-    .title_middle {
+    .title-middle {
       margin-top: 20px;
       font-size: 24px;
     }
@@ -80,17 +80,17 @@ export default {
       font-size: 12px;
     }
 
-    .back_index {
+    .back-index {
       display: inline-block;
-      text-align: center;
-      margin: 68px 0;
-      border-radius: 4px;
-      background-color: $--color-primary;
-      box-shadow: 0 15px 30px rgba(65, 151, 250, 0.5);
       width: 132px;
-      line-height: 40px;
+      margin: 68px 0;
       font-size: 16px;
+      line-height: 40px;
       color: #fff;
+      text-align: center;
+      background-color: $--color-primary;
+      border-radius: 4px;
+      box-shadow: 0 15px 30px rgb(65 151 250 / 50%);
     }
   }
 }

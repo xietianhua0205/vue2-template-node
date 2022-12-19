@@ -1,18 +1,17 @@
+/* stylelint-disable scss/dollar-variable-pattern */
 $--color-text-primary: #fff !default;
 $--color-text-regular: #f0f0f0 !default;
 $--color-text-secondary: #d9d9d9 !default;
 $--color-text-placeholder: #8c8c8c !default;
-
 $--border-color-base: #434343 !default;
 $--border-color-light: $--border-color-base !default;
 $--border-color-lighter: $--border-color-light !default;
 $--border-color-extra-light: $--border-color-lighter !default;
-
 $--icon-color: #595959;
 $--color-white: #000 !default;
 $--color-black: #fff !default;
 $--background-color-base: #262626 !default;
-
 $--datepicker-inner-border-color: $--border-color-base;
+/* stylelint-enable */
 
 @import "../default/variables-defined";
