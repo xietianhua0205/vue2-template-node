@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "npm run get-token && vue-cli-service serve",
     "start": "node build/cleanToken.js && vue-cli-service serve",
+    "start-node-server": "nodemon node-express-news/app.js",
     "build": "vue-cli-service build && node build/infoCopy.js",
     "build-studio": "npm run build && node build/buildZip.js",
     "build-report": "vue-cli-service build --report",
@@ -37,7 +38,9 @@
     "js-base64": "^3.7.2",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
+    "mysql": "^2.18.1",
     "qs": "^6.10.1",
+    "svg-captcha": "^1.4.0",
     "vue": "~2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"

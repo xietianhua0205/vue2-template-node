@@ -1,9 +1,14 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const path = require('path')
+const indexRouter = require('./routes/index')
+const passportRouter = require('./routes/passport')
+
+
 const cookieParser = require('cookie-parser')
 const cookieSession = require('cookie-session')
 
+// 封装成函数的做法
 // const appConfig = function (app) {
 //   // cookie 注册
 //   app.use(cookieParser())
@@ -44,6 +49,10 @@ class AppConfig {
       keys: ['$sdafasfdasfasre*&^^^&&&'],
       maxAge: 1000 * 60 * 60 * 24 * 2 // 设置过期时间为两天
     }))
+
+    // 设置路由(注册路由)
+    this.app.use(indexRouter)
+    this.app.use(passportRouter)
 
     // 获取post请求参数配置
     this.app.use(bodyParser.urlencoded({ extended: false }))

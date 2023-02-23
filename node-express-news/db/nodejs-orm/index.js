@@ -4,8 +4,8 @@ let orm_config = {
     host: 'localhost',//数据库地址
     port:'3306',
     user: 'root',//用户名，没有可不填
-    password: '',//密码，没有可不填
-    database: 'qianduan_test'//数据库名称
+    password: '123456',//密码，没有可不填
+    database: 'news'//数据库名称
 }
 
 let options = {};
@@ -45,7 +45,7 @@ Model.prototype.find = function (options, callback) {
             return this;
         })
     } else {
-        
+
         var str = '';
         if (!callback) {
             str = `select * from ${this.name}`;
@@ -67,7 +67,7 @@ Model.prototype.find = function (options, callback) {
 /**
 * @description: 分页查询
 * @param {Object} options :   { where:查询条件, number: 当前页数 , count : 每页数量 }
-* @return: 
+* @return:
 */
 Model.prototype.limit = function (options, callback) {
     var str = '';
@@ -135,7 +135,7 @@ Model.prototype.insertObj = function (obj, callback) {
 /**
 * @description: 更新数据
 * @param {Object} option：可选参数 更新条件
-* @param {Object} obj： 修改后的数据 
+* @param {Object} obj： 修改后的数据
 * @param {Function} callback :（req,results）=>{}
 */
 Model.prototype.update = function (option, obj, callback) {
@@ -199,8 +199,8 @@ Model.prototype.sql = function (str, callback) {
 
 /**
 * @description: 删除model表格 （慎用！）
-* @param {type} 
-* @return: 
+* @param {type}
+* @return:
 */
 Model.prototype.drop = function (callback) {
     connection.query(`DROP TABLE ${this.name}`, (error, results, fields) => {
@@ -294,10 +294,10 @@ let orm = {
     * @description:连接数据库
     * @param {String} host: 主机名 默认localhost
     * @param {Number} port: 端口号 默认3306
-    * @param {String} user: 用户名 
-    * @param {String} password: 密码 
+    * @param {String} user: 用户名
+    * @param {String} password: 密码
     * @param {String} database: 数据库名称 默认og
-    * @return: 
+    * @return:
     */
     connect: function ({ host = 'localhost', port = 3306, user = '', password = '', database = 'og' }) {
         databaseName = database;//全局存储当前数据库名称
