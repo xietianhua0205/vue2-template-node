@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const indexRouter = require('./routes/index')
 const passportRouter = require('./routes/passport')
+const common = require('./utils/common')
 
 
 const cookieParser = require('cookie-parser')
@@ -51,8 +52,8 @@ class AppConfig {
     }))
 
     // 设置路由(注册路由)
-    this.app.use(indexRouter)
-    this.app.use(passportRouter)
+    this.app.use(common.csrfProject,indexRouter)
+    this.app.use(common.csrfProject,passportRouter)
 
     // 获取post请求参数配置
     this.app.use(bodyParser.urlencoded({ extended: false }))

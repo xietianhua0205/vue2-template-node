@@ -113,10 +113,11 @@ $(function() {
       type: 'post',
       data: JSON.stringify(params),
       contentType: 'application/json',
+      headers:{'X-CSRFToken':getCookie('csrf_token')},
       success: function(resp) {
         if(resp.errno == '0'){
           alert("登录成功")
-          // window.location.reload()
+          window.location.reload()
         }else{
           alert(resp.errmsg);
         }
@@ -194,7 +195,7 @@ $(function() {
         type:'post',
         data:JSON.stringify(params),
         contentType:'application/json',
-        //headers:{'X-CSRFToken':getCookie('csrf_token')},
+        headers:{'X-CSRFToken':getCookie('csrf_token')},
         success: function (resp) {
             console.log("回调成功了");
             //判断是否注册成功
@@ -214,14 +215,14 @@ $(function() {
 //退出登陆
 function logout () {
 
-  // $.ajax({
-  //     url:'/passport/logout',
-  //     type:'post',
-  //     //headers:{'X-CSRFToken':getCookie('csrf_token')},
-  //     success:function (resp) {
-  //         window.location.reload()
-  //     }
-  // })
+  $.ajax({
+      url:'/passport/logout',
+      type:'post',
+      headers:{'X-CSRFToken':getCookie('csrf_token')},
+      success:function (resp) {
+          window.location.reload()
+      }
+  })
 
 }
 

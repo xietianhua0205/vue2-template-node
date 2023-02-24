@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const handleDB = require('../db/handleDB')
 const Captcha = require("../utils/captcha/index") // 引入captcha的工具
+const md5 = require('md5')
 
 router.get('/passport/image_code/:randomNum', (req, res) => {
   let captchaObj = new Captcha();
@@ -59,6 +60,8 @@ router.post('/passport/register', (req, res) => {
         })
         return
       } else {
+        // 双重 MD5 加盐 加密
+
         const result = await handleDB(res, 'info_user', 'insert', '用户信息插入数据出错', {
           username,
           nick_name: username,
@@ -94,8 +97,8 @@ router.post('/passport/login', (req, res) => {
         })
       }
       // 查询数据库 用户名 和 密码进行校验
-      let result = await handleDB(res, 'info_user', 'find', '用户表数据库查询出错', `username="${ username }"`)
-      if (result.length > 0) {
+       let result = await handleDB(res, 'info_user', 'find', '用户表数据库查询出错', `username="${ username }"`)
+       if (result.length > 0) {
         // 将用户信息按照需求返回给前端显示
         if(result[0].password_hash === password){
           // 将登录者的信息保存
@@ -111,13 +114,20 @@ router.post('/passport/login', (req, res) => {
           })
         }
       }
-      res.send({
+       res.send({
         errmsg: "用户不存在"
       })
     })()
   })
 
 
+})
+
+// 退出登录
+router.post('/passport/logout',(req,res)=>{
+  console.log('退出登录')
+  delete req.session['user_id']
+  res.send({errno:'0', errmsg:'退出登录成功'})
 })
 
 
