@@ -7,6 +7,7 @@ const router = express.Router();
 const handleDB = require('../db/handleDB')
 const Captcha = require("../utils/captcha/index") // 引入captcha的工具
 const md5 = require('md5')
+const { password_salt } = require("../keys")
 
 router.get('/passport/image_code/:randomNum', (req, res) => {
   let captchaObj = new Captcha();
@@ -16,7 +17,6 @@ router.get('/passport/image_code/:randomNum', (req, res) => {
 
   // 配合 img标签的src属性请求来展示验证图片的时候，需要设置响应头
   res.setHeader('Content-Type', 'image/svg+xml');
-  console.log(req.session)
   res.send(captcha.data)
 })
 
@@ -53,7 +53,6 @@ router.post('/passport/register', (req, res) => {
       }
 
       const userArr = await handleDB(res, 'info_user', 'find', 'info_user数据库查询出错', `username="${ username }"`)
-      console.log(userArr)
       if (userArr.length > 0) {
         res.send({
           errmsg: '用户名已注册'
@@ -61,11 +60,11 @@ router.post('/passport/register', (req, res) => {
         return
       } else {
         // 双重 MD5 加盐 加密
-
+        let ret = md5(md5(password)) + password_salt // 这一串随机数字就是加盐
         const result = await handleDB(res, 'info_user', 'insert', '用户信息插入数据出错', {
           username,
           nick_name: username,
-          password_hash: password
+          password_hash: ret
         })
         // 保持登录状态
         req.session['user_id'] = result.insertId
@@ -97,10 +96,10 @@ router.post('/passport/login', (req, res) => {
         })
       }
       // 查询数据库 用户名 和 密码进行校验
-       let result = await handleDB(res, 'info_user', 'find', '用户表数据库查询出错', `username="${ username }"`)
-       if (result.length > 0) {
+      let result = await handleDB(res, 'info_user', 'find', '用户表数据库查询出错', `username="${ username }"`)
+      if (result.length > 0) {
         // 将用户信息按照需求返回给前端显示
-        if(result[0].password_hash === password){
+        if (result[0].password_hash === md5(md5(password)) + password_salt) {
           // 将登录者的信息保存
           req.session['user_id'] = result[0].id
           return res.send({
@@ -108,13 +107,13 @@ router.post('/passport/login', (req, res) => {
             errmsg: "登录成功",
             userMSg: result[0]
           })
-        }else{
+        } else {
           return res.send({
             errmsg: "用户名或密码不正确",
           })
         }
       }
-       res.send({
+      res.send({
         errmsg: "用户不存在"
       })
     })()
@@ -124,10 +123,9 @@ router.post('/passport/login', (req, res) => {
 })
 
 // 退出登录
-router.post('/passport/logout',(req,res)=>{
-  console.log('退出登录')
+router.post('/passport/logout', (req, res) => {
   delete req.session['user_id']
-  res.send({errno:'0', errmsg:'退出登录成功'})
+  res.send({ errno: '0', errmsg: '退出登录成功' })
 })
 
 

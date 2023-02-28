@@ -3,11 +3,15 @@ const express = require('express')
 const path = require('path')
 const indexRouter = require('./routes/index')
 const passportRouter = require('./routes/passport')
+const detailRouter = require('./routes/detail')
 const common = require('./utils/common')
+
+const { session_keys } = require('./keys')
 
 
 const cookieParser = require('cookie-parser')
 const cookieSession = require('cookie-session')
+const { getUserLogin } = require("./utils/common");
 
 // 封装成函数的做法
 // const appConfig = function (app) {
@@ -47,13 +51,9 @@ class AppConfig {
     // session 注册
     this.app.use(cookieSession({
       name: 'my_session',
-      keys: ['$sdafasfdasfasre*&^^^&&&'],
+      keys: [session_keys],
       maxAge: 1000 * 60 * 60 * 24 * 2 // 设置过期时间为两天
     }))
-
-    // 设置路由(注册路由)
-    this.app.use(common.csrfProject,indexRouter)
-    this.app.use(common.csrfProject,passportRouter)
 
     // 获取post请求参数配置
     this.app.use(bodyParser.urlencoded({ extended: false }))
@@ -71,6 +71,26 @@ class AppConfig {
     this.app.set('views', path.join(__dirname, 'views', 'news'))
     // 4.设置引擎的后缀为html
     this.app.set('view engine', 'html')
+
+
+    // 设置路由(注册路由)
+    this.app.use(common.csrfProject, indexRouter)
+    this.app.use(common.csrfProject, passportRouter)
+    this.app.use(common.csrfProject, detailRouter)
+
+    // 在路由注册页面设置 404
+    this.app.use((req, res) => {
+      (async function() {
+        let result = await getUserLogin(req, res)
+        let data = {
+          user_info: result[0] ? {
+            nick_name: result[0].nick_name,
+            avatar_url: result[0].avatar_url
+          } : false
+        }
+        res.render('404', data)
+      })()
+    })
   }
 }
 
