@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script type="text/html" id="list1">
+    <div class="reply_text_con fl">
+        <div class="user_name2">{{ $value.commenter.nick_name }} @ {{ $value.parent.user.nick_name }}</div>
+        <div class="reply_text">
+            {{ $value.content }}
+        </div>
+    </div>
+    <div class="comment_time fl">{{ $value.create_time | dateFormat }}</div>
+    <a href="javascript:;" class="comment_up  fr">赞</a>
+    <a href="javascript:;" class="comment_reply fr">回复</a>
+    <from class="reply_form fl" data-commentid="{{ $value.id }}" data-newsid="{{ $value.news_id }}">
+        <textarea class="reply_input"></textarea>
+        <input type="submit" name="" value="回复" class="reply_sub fr">
+        <input type="reset" name="" value="取消" class="reply_cancel fr">
+    </from>
+</script>
+</body>
+</html>
