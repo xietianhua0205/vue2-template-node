@@ -80,16 +80,7 @@ class AppConfig {
 
     // 在路由注册页面设置 404
     this.app.use((req, res) => {
-      (async function() {
-        let result = await getUserLogin(req, res)
-        let data = {
-          user_info: result[0] ? {
-            nick_name: result[0].nick_name,
-            avatar_url: result[0].avatar_url
-          } : false
-        }
-        res.render('404', data)
-      })()
+      common.abort404(req,res)
     })
   }
 }

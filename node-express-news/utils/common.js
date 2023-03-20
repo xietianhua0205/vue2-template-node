@@ -35,19 +35,85 @@ function dateFormat (value) {
   return times
 }
 
-async function getUserLogin (req,res) {
+async function getUserLogin (req, res) {
   // 拿到session中的user_id，判断用户是否登录
   let user_id = req.session['user_id'];
   // 查询数据库，再拿到数据库中id的用户信息
   let result = []
-  if(user_id){
-    result = await handleDB(res,'info_user','find','info_user数据库查询出错',`id=${user_id}`)
+  if (user_id) {
+    result = await handleDB(res, 'info_user', 'find', 'info_user数据库查询出错', `id=${ user_id }`)
   }
-  return  result
+  return result
+}
+
+async function abort404 (req, res) {
+    let result = await getUserLogin(req, res)
+    let data = {
+      user_info: result[0] ? {
+        nick_name: result[0].nick_name,
+        avatar_url: result[0].avatar_url
+      } : false
+    }
+    res.render('404', data)
+}
+
+function dealWidthTreeData (temp, node, finallyArr) { // 这个方法能将某一条线给收起来
+  if(!temp.length){
+    return []
+  }
+  let tempNode = node;
+  // 寻找当前节点的最下层节点
+  if (!node.isHandle) {
+    for (let i = 0; i < temp.length; i++) {
+      const subNode = temp[i]
+      if (subNode.parent_id && subNode.parent_id === tempNode.id) {
+        tempNode = subNode
+        i = 0
+      }
+    }
+  }
+  // 标记节点
+  tempNode.isHandle = true
+  if (tempNode.parent_id) { // 如果存在父级节点
+    const filterItem = temp.find((t) => {
+      return t.id === tempNode.parent_id
+    })
+    if (filterItem.isHandle) { // 说明当前节点是之前遗漏的节点
+      filterItem.children.push(tempNode)
+      for (let i = 0; i < temp.length; i++) {
+        if (!temp[i].isHandle) {
+          dealWidthTreeData(temp, temp[i], finallyArr)
+          break
+        }
+      }
+    } else {
+      filterItem.isHandle = true
+      if (filterItem) {
+        if (filterItem.children) {
+          filterItem.children.push(tempNode)
+        } else {
+          filterItem.children = []
+          filterItem.children.push(tempNode)
+        }
+        dealWidthTreeData(temp, filterItem, finallyArr)
+      }
+    }
+  } else {
+    finallyArr.push(node)
+    for (let i = 0; i < temp.length; i++) {
+      if (!temp[i].isHandle) {
+        dealWidthTreeData(temp, temp[i], finallyArr)
+        break
+      }
+    }
+  }
+  return finallyArr
 }
 
 module.exports = {
   csrfProject,
   dateFormat,
-  getUserLogin
+  getUserLogin,
+  abort404,
+  dealWidthTreeData
 }
